@@ -1,0 +1,366 @@
+/*
+ The structure inside this css file splits it up in different level of element depth, and a different parent for
+ element on the same depth also get separated, comments are used as a separator.
+
+ All % values should either be directly clear from the context, or otherwise those in a calc method follow a format.
+ This format explain the value inside the (x / y) part, the y represents the size of the parent and x the size of the
+ element that you are giving the size to, both x and y should represent viewport sizes until the min-size defined.
+ The usage of calc for font sizes is different, here the (x / y) part is a scaler from 100%, (4 / 3) for instance means
+ we scale the font size by 1.33.
+
+ The order of the css rules follows the following scheme, this list only contains commonly used rules:
+ position, z-index, float, top, left, bottom, right, (min-/max-)width, (min-/max-)height, margin(-*), padding(-*),
+ display, justify-content, align-items, pointer-events, (-webkit-)user-select, overflow(-*), cursor, background(-*),
+ color(-*), opacity, box-sizing, border-radius, border(-*), border-color (when separate from border), font(-*), *
+ */
+
+.Sidebar, .Location, .TUDelft-logo {
+    position: relative;
+    float: left;
+    height: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Sidebar:hover, .Location:hover, .TUDelft-logo:hover {
+    cursor: pointer;
+}
+
+.Searchbar {
+    margin-left: var(--search-bar-margin);
+    position: relative;
+    float: left;
+    height: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100%;
+}
+
+/* Search bar button */
+.Searchbar > .leaflet-control-geosearch .leaflet-bar-part {
+    background-color: #7cd9ff;
+}
+
+/* Form to enter location */
+.Searchbar > .leaflet-control-geosearch form {
+    width: 200px;
+    max-width: calc((0.75 * (100vw - var(--top-bar-search-space))) / 1.3);
+}
+.Searchbar > .leaflet-control-geosearch > form > input.glass {
+    min-width: 0;
+}
+
+.Searchbar > .leaflet-control-geosearch.active form input{
+    font-size: 16px;
+}
+
+.Sidebar-shown {
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    width: 25%;
+    height: var(--sidebar-height);
+    background-color: var(--sidebar-color);
+}
+
+/* ==================== depth level divider ==================== */
+
+.Sidebar-icon, .Location-icon, .TUDelft-logo-icon {
+    position: absolute;
+}
+
+.TUDelft-logo-icon {
+    width: 60%;
+    height: 60%;
+    -webkit-user-select: none !important;
+    user-select: none;
+}
+
+/* -------- level part divider -------- */
+
+.Sidebar-items {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: var(--sidebar-color);
+    list-style: none;
+}
+
+/* ==================== depth level divider ==================== */
+
+.Sidebar-items > li {
+    position: relative;
+    height: var(--sidebar-item-height);
+    display: flex;
+    align-items: center;
+    background-color: var(--sidebar-color);
+    color: white;
+}
+
+.Sidebar-items > li:hover {
+    background-color: #3792cb;
+    cursor: pointer;
+}
+
+.Sidebar-items > .active-menu-item {
+    background-color: #3792cb;
+}
+
+.Sidebar-items > .sidebar-splitter, .Sidebar-items > .open-menu {
+    height: calc(100% - (6 * var(--sidebar-item-height)));
+}
+
+.Sidebar-items > .open-menu, .Sidebar-items > .open-menu:hover {
+    position: relative;
+    width: 100%;
+    display: block;
+    overflow: hidden auto;
+    cursor: auto;
+    background-color: var(--sidebar-color);
+    color: black;
+}
+
+#sidebar-splitter {
+    background-color: var(--sidebar-color);
+    cursor: auto;
+}
+
+/* ==================== depth level divider ==================== */
+
+.popup {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* ==================== depth level divider ==================== */
+
+.item-icon {
+    position: relative;
+    height: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-title {
+    color: white;
+    font-size: 100%;
+}
+
+#scientific-contributor {
+    float:left;
+    display:inline;
+    width: 45%;
+}
+
+#development-team {
+    float: left;
+    display:inline;
+    width: 45%;
+}
+
+/* -------- level part divider -------- */
+
+.popup-box {
+    position: relative;
+    background-color: white;
+    height: 85%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: solid gray;
+}
+
+/* ==================== depth level divider ==================== */
+
+.sidebar-element-icon {
+    position: absolute;
+}
+
+/* -------- level part divider -------- */
+
+.popup-content {
+    position: relative;
+    width: 90%;
+    height: 90%;
+}
+
+/* ==================== depth level divider ==================== */
+
+.popup-information {
+    position: relative;
+    width: 100%;
+    height: 93%;
+    color: black;
+    font-size: max(15px, calc(100vh / 32));
+    font-family: Arial;
+    overflow: auto;
+}
+
+/* -------- level part divider -------- */
+
+.popup-close {
+    position: relative;
+    width: 100%;
+    height: 7%;
+}
+
+/* ==================== depth level divider ==================== */
+
+#popup-text {
+    margin-bottom: 10px;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+/* -------- level part divider -------- */
+
+.close-button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-height: 28px;
+    height: 80%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #107fc4;
+    color: white;
+    border-radius: 5px;
+    border: 3px solid #107fc4;
+    font-size: max(15px, calc(100vh / 40));
+}
+
+.close-button:hover {
+    background-color: white;
+    color: blue;
+}
+
+/* ==================== depth level divider ==================== */
+
+.close-button p {
+    position: absolute;
+}
+
+/* -------- level part divider -------- */
+
+#popup-text ul{
+    list-style-type: none;
+}
+
+#popup-text li{
+    margin-bottom: 10px;
+}
+
+#popup-text h3, h4 {
+    font-weight: normal;
+    color:white;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#popup-text h3 span, h4 span{
+    background-color: #3A9BDC;
+    padding: 2px 5px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #AAAAAA;
+    border-radius: 2px;
+}
+
+/* ++++++++++++++++++++++++++++++++ media query divider ++++++++++++++++++++++++++++++++ */
+
+@media screen and (pointer: coarse) and (orientation: landscape) and (max-height: 1024px) {
+    /*
+     Fix the size of the searchbar by scaling it depending on the device used
+     */
+    .Searchbar {
+        transform: scale(1.6);
+    }
+}
+
+@media screen and (pointer: coarse) and (orientation: portrait) and (max-width: 1024px) {
+    /*
+     When on a tablet/ipad in portrait mode change the size of sidebar related parts
+     */
+    .Sidebar-shown {
+        width: 50%;
+    }
+
+    /*
+     Fix the size of the searchbar by scaling it depending on the device used
+     */
+    .Searchbar {
+        transform: scale(1.6);
+    }
+
+    /*
+     When on a mobile device in portrait mode change the size of sidebar related parts
+     */
+    .item-title {
+        font-size: 150%;
+    }
+
+    .Sidebar-items > li {
+        height: calc(1.5 * var(--sidebar-item-height));
+    }
+
+    .Sidebar-items > .sidebar-splitter, .Sidebar-items > .open-menu {
+        height: calc(100% - (6 * (1.5 * var(--sidebar-item-height))));
+    }
+}
+
+
+@media screen and (pointer: coarse) and (orientation: landscape) and (max-height: 480px) {
+    /*
+     Fix the size of the searchbar by scaling it depending on the device used
+     */
+    .Searchbar {
+        transform: scale(1);
+    }
+}
+
+
+@media screen and (pointer: coarse) and (orientation: portrait) and (max-width: 480px) {
+    /*
+     When on a phone in portrait mode and the width is very small (less than 480px)
+      change the size of sidebar related parts
+     */
+    .Sidebar-shown {
+        width: 75%;
+    }
+
+    /*
+     Fix the size of the searchbar by scaling it depending on the device used
+     */
+    .Searchbar {
+        transform: scale(1.3);
+    }
+}
+
+/*
+ When the width of the screen is less than 1080px (in any device), change layout of Contributors popup.
+ Instead of having scientific contributors and software development team next to each other, have them one
+ on top of the other.
+ */
+@media screen and (max-width: 1080px) {
+    #scientific-contributor {
+        width: 100%;
+    }
+
+    #development-team {
+        width: 100%;
+    }
+}

@@ -1,0 +1,264 @@
+/*
+ The structure inside this css file splits it up in different parts of the screen using comments as a separator.
+
+ All % values should either be directly clear from the context, or otherwise those in a calc method follow a format.
+ This format explain the value inside the (x / y) part, the y represents the size of the parent and x the size of the
+ element that you are giving the size to, both x and y should represent viewport sizes until the min-size defined.
+ The usage of calc for font sizes is different, here the (x / y) part is a scaler from 100%, (4 / 3) for instance means
+ we scale the font size by 1.33.
+
+ The order of the css rules follows the following scheme, this list only contains commonly used rules:
+ position, z-index, float, top, left, bottom, right, (min-/max-)width, (min-/max-)height, margin(-*), padding(-*),
+ display, justify-content, align-items, pointer-events, (-webkit-)user-select, overflow(-*), cursor, background(-*),
+ color(-*), opacity, box-sizing, border-radius, border(-*), border-color (when separate from border), font(-*), *
+ */
+
+/*
+ This creates 2 variables that separate the height that has enough width for the ratio to hold,
+ and the height that is left over.
+ This will be used to set the top and height for the screen parts down below.
+ */
+:root {
+    /* these values are set a screen width that is relatively wider than (4 : 3) for which the sizes are divided like this
+       for a width relatively smaller than (4 : 3) there is a media query to change the ratio's */
+    --out-ratio-height: 0%;
+    --in-ratio-height: 1%;
+    --font-height: max(12px, 2vh);
+
+    --sidebar-height: calc(93 * (100% / 7));
+    --sidebar-item-height: calc(100% * 0.07);
+    --sidebar-color: #2c3e50;
+
+    --top-bar-search-space: calc(max(168px, 28vh) + 16px);
+    --search-bar-margin: max(6px, 1vh);
+}
+
+/*
+ This removes all browsers margins and paddings that could shift things in the application
+ */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body, #main, #app {
+    width: 100%;
+    height: 100%;
+}
+
+#main {
+    position: relative;
+    min-width: 800px;
+    min-height: 600px;
+    font-size: var(--font-height);
+}
+
+#app {
+    position: relative;
+    font-size: 100%;
+}
+
+.ratioImage {
+    width: auto;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    -webkit-user-select: none !important;
+    user-select: none;
+    opacity: 0;
+}
+
+.hideElement {
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    overflow: hidden !important;
+}
+
+/* ==================== screen part divider ==================== */
+
+#loadingScreen {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    background-color: white;
+}
+
+#loadingScreen * {
+    position: relative;
+    width: 50vmin;
+    height: 50vmin;
+}
+
+/* ==================== screen part divider ==================== */
+
+#topBar {
+    position: absolute;
+    width: 100%;
+    height: calc(7 * var(--in-ratio-height));
+}
+
+.topBarContents {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #91BAD6;
+    font-size: 100%;
+}
+
+/* ==================== screen part divider ==================== */
+
+#map {
+    position: absolute;
+    z-index: 0;
+    top: calc(7 * var(--in-ratio-height));
+    width: 100%;
+    height: calc((68 * var(--in-ratio-height)) + var(--out-ratio-height));
+    -webkit-user-select: none !important;
+    user-select: none;
+}
+
+/* ==================== screen part divider ==================== */
+
+#information {
+    position: absolute;
+    z-index: 0;
+    top: calc((70 * var(--in-ratio-height)) + var(--out-ratio-height));
+    width: 100%;
+    height: calc(30 * var(--in-ratio-height));
+    pointer-events: none;
+}
+
+.informationContents {
+    position: relative;
+    width: calc(100% - 50px);
+    height: 100%;
+    font-family: Arial;
+    font-size: 100%;
+    margin: 0px 25px;
+}
+
+/* ==================== screen part divider ==================== */
+
+#popupContainer {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* ++++++++++++++++++++++++++++++++ media query divider ++++++++++++++++++++++++++++++++ */
+
+@media screen and (hover: hover) and (pointer: fine) and (max-aspect-ratio: 4/3) {
+    /* change the root variables to work for a screen width smaller than the size division ratio */
+    :root {
+        --min-safe-vw: max(8px, 1vw);
+        --min-safe-vh: max(6px, 1vh);
+
+        --out-ratio-height: max(0vh, calc(100 * (var(--min-safe-vh) - (var(--min-safe-vw) / (4 / 3)))));
+        --in-ratio-height: calc(var(--min-safe-vh) - (var(--out-ratio-height) / 100));
+        --font-height: max(12px, calc(2 * var(--in-ratio-height)));
+
+        --sidebar-height: calc((93 * var(--in-ratio-height)) + var(--out-ratio-height));
+        --sidebar-item-height: calc(0.07 * (var(--sidebar-height) - var(--out-ratio-height)));
+
+        --top-bar-search-space: calc((28 * var(--in-ratio-height)) + 16px);
+        --search-bar-margin: var(--in-ratio-height);
+    }
+}
+
+@media screen and (pointer: coarse) and (orientation: landscape)  {
+    :root {
+        --font-height: max(6px, 2vh);
+        --sidebar-height: calc(90 * (100% / 10));
+        --top-bar-search-space: calc(max(84px, 28vh) + 16px);
+        --search-bar-margin: max(3px, 1vh);
+    }
+
+    #main {
+        min-width: 400px;
+        min-height: 300px;
+    }
+}
+
+@media screen and (pointer: coarse) and (orientation: portrait)  {
+    :root {
+        --out-ratio-height: 25%;
+        --in-ratio-height: 0.75%;
+        --font-height: 1.5vh;
+
+        --sidebar-height: calc((90 + (25 / 0.75)) * (100% / 10));
+        --sidebar-item-height: calc((100% * (90 / (90 + (25 / 0.75)))) * 0.07);
+
+        --top-bar-search-space: calc((0.75 * max(89.26px, 28vh)) + 16px);
+        --search-bar-margin: max(3.2px, 0.75vh);
+    }
+
+    #main {
+        min-width: 320px;
+        min-height: 320px;
+    }
+}
+
+@media screen and (pointer: coarse)  {
+    #main {
+        overflow-x: hidden;
+    }
+
+    #topBar {
+        height: calc(10 * var(--in-ratio-height));
+    }
+
+    #map {
+        top: calc(10 * var(--in-ratio-height));
+        height: calc((61 * var(--in-ratio-height)) + var(--out-ratio-height));
+    }
+
+    #information {
+        height: calc(36 * var(--in-ratio-height));
+        top: calc((64 * var(--in-ratio-height)) + var(--out-ratio-height));
+    }
+
+    .informationContents {
+        width: calc(100% - 10px);
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+
+/* when someone want to see the site on a phone in landscape mode there are some adjustments
+ this is to ensure the map and information both have enough space
+ */
+@media screen and (pointer: coarse) and (orientation: landscape) and (max-height: 480px)  {
+    :root {
+        --sidebar-height: calc(88 * (100% / 12));
+    }
+
+    #topBar {
+        height: calc(12 * var(--in-ratio-height));
+    }
+
+    #map {
+        top: calc(12 * var(--in-ratio-height));
+        height: calc((57 * var(--in-ratio-height)) + var(--out-ratio-height));
+    }
+
+    #information {
+        height: calc(41 * var(--in-ratio-height));
+        top: calc((59 * var(--in-ratio-height)) + var(--out-ratio-height));
+    }
+}

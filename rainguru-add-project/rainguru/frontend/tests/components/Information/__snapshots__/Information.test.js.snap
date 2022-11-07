@@ -1,0 +1,789 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Information tests matches snapshot 1`] = `
+<div
+  className="informationContents"
+  data-testid="information"
+>
+  <div
+    className="animationContents"
+    data-testid="animationBarDiv"
+  >
+    <div
+      className="animationButtonDiv"
+      data-testid="animationButtonDiv"
+    >
+      <button
+        className="animationButton"
+        data-testid="slowDownButton"
+        id="slowDownButton"
+        onClick={[Function]}
+      >
+        <img
+          className="ratioImage"
+          src="../../../static/images/1x1.png"
+        />
+        <svg
+          className="button-icon"
+          fill="currentColor"
+          height="70%"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 512 512"
+          width="70%"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M35.9 249.3L244 129.1c5.4-3.1 12.3.6 12.3 6.7V251l211.3-121.9c5.4-3.1 12.3.6 12.3 6.7v240.3c0 6.1-6.9 9.8-12.3 6.7L256.4 261v115.2c0 6.1-6.9 9.8-12.3 6.7L35.9 262.7c-5.2-3-5.2-10.4 0-13.4z"
+          />
+        </svg>
+      </button>
+      <button
+        className="animationButton"
+        data-testid="backwardButton"
+        id="backwardButton"
+        onClick={[Function]}
+      >
+        <img
+          className="ratioImage"
+          src="../../../static/images/1x1.png"
+        />
+        <svg
+          className="button-icon"
+          fill="currentColor"
+          height="70%"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 256 512"
+          width="70%"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
+          />
+        </svg>
+      </button>
+      <button
+        className="animationButton"
+        data-testid="pauseResumeButton"
+        id="pauseResumeButton"
+        onClick={[Function]}
+      >
+        <img
+          className="ratioImage"
+          src="../../../static/images/1x1.png"
+        />
+        <svg
+          className="button-icon"
+          fill="currentColor"
+          height="70%"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 512 512"
+          width="70%"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M199.9 416h-63.8c-4.5 0-8.1-3.6-8.1-8V104c0-4.4 3.6-8 8.1-8h63.8c4.5 0 8.1 3.6 8.1 8v304c0 4.4-3.6 8-8.1 8zM375.9 416h-63.8c-4.5 0-8.1-3.6-8.1-8V104c0-4.4 3.6-8 8.1-8h63.8c4.5 0 8.1 3.6 8.1 8v304c0 4.4-3.6 8-8.1 8z"
+          />
+        </svg>
+      </button>
+      <button
+        className="animationButton"
+        data-testid="forwardButton"
+        id="forwardButton"
+        onClick={[Function]}
+      >
+        <img
+          className="ratioImage"
+          src="../../../static/images/1x1.png"
+        />
+        <svg
+          className="button-icon"
+          fill="currentColor"
+          height="70%"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 256 512"
+          width="70%"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+          />
+        </svg>
+      </button>
+      <button
+        className="animationButton"
+        data-testid="speedUpButton"
+        id="speedUpButton"
+        onClick={[Function]}
+      >
+        <img
+          className="ratioImage"
+          src="../../../static/images/1x1.png"
+        />
+        <svg
+          className="button-icon"
+          fill="currentColor"
+          height="70%"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 512 512"
+          width="70%"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M476.1 249.3L268 129.1c-5.4-3.1-12.3.6-12.3 6.7V251L44.3 129.1c-5.4-3.1-12.3.6-12.3 6.7v240.3c0 6.1 6.9 9.8 12.3 6.7L255.6 261v115.2c0 6.1 6.9 9.8 12.3 6.7L476 262.7c5.3-3 5.3-10.4.1-13.4z"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      className="dataBar"
+    >
+      <div
+        className="dataBarPart"
+        data-testid="speedValue"
+        id="speedValue"
+      >
+        Animation speed: 5
+      </div>
+      <div
+        className="dataBarPart"
+        data-testid="intervalInfo"
+        id="intervalInfo"
+      />
+      <div
+        className="dataBarPart"
+        data-testid="maxRain"
+        id="maxRain"
+      />
+    </div>
+    <div
+      className="scale-container"
+    >
+      <div
+        data-testid="max-scale"
+        id="max-scale"
+      />
+      <div
+        data-testid="mid-scale"
+        id="mid-scale"
+      />
+      <div
+        data-testid="min-scale"
+        id="min-scale"
+      >
+        0
+      </div>
+    </div>
+    <div
+      className="animationSliderDiv"
+    >
+      <hr
+        className="middle-line"
+      />
+      <span
+        className="MuiSlider-colorPrimary MuiSlider-sizeMedium MuiSlider-root MuiSlider-marked MuiSlider-trackFalse css-1aznpnh-MuiSlider-root"
+        data-testid="animationSlider"
+        defaultValue={0}
+        id="animationSlider"
+        onMouseDown={[Function]}
+      >
+        <span
+          className="MuiSlider-rail css-14pt78w-MuiSlider-rail"
+        />
+        <span
+          className="MuiSlider-track css-pm1ix7-MuiSlider-track"
+          style={
+            Object {
+              "left": "0%",
+              "width": "0%",
+            }
+          }
+        />
+        <span
+          className="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
+          data-index={0}
+          style={
+            Object {
+              "left": "0%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel MuiSlider-markLabelActive css-1eoe787-MuiSlider-markLabel"
+          data-index={0}
+          style={
+            Object {
+              "left": "0%",
+            }
+          }
+        />
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={1}
+          style={
+            Object {
+              "left": "5.2631578947368425%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={1}
+          style={
+            Object {
+              "left": "5.2631578947368425%",
+            }
+          }
+        >
+          23:55
+        </span>
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={2}
+          style={
+            Object {
+              "left": "10.526315789473685%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={2}
+          style={
+            Object {
+              "left": "10.526315789473685%",
+            }
+          }
+        />
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={3}
+          style={
+            Object {
+              "left": "15.789473684210526%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={3}
+          style={
+            Object {
+              "left": "15.789473684210526%",
+            }
+          }
+        >
+          0:05
+        </span>
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={4}
+          style={
+            Object {
+              "left": "21.05263157894737%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={4}
+          style={
+            Object {
+              "left": "21.05263157894737%",
+            }
+          }
+        />
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={5}
+          style={
+            Object {
+              "left": "26.31578947368421%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={5}
+          style={
+            Object {
+              "left": "26.31578947368421%",
+            }
+          }
+        >
+          0:15
+        </span>
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={6}
+          style={
+            Object {
+              "left": "31.57894736842105%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={6}
+          style={
+            Object {
+              "left": "31.57894736842105%",
+            }
+          }
+        />
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={7}
+          style={
+            Object {
+              "left": "36.8421052631579%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={7}
+          style={
+            Object {
+              "left": "36.8421052631579%",
+            }
+          }
+        >
+          0:25
+        </span>
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={8}
+          style={
+            Object {
+              "left": "42.10526315789474%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={8}
+          style={
+            Object {
+              "left": "42.10526315789474%",
+            }
+          }
+        />
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={9}
+          style={
+            Object {
+              "left": "47.36842105263158%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={9}
+          style={
+            Object {
+              "left": "47.36842105263158%",
+            }
+          }
+        >
+          0:35
+        </span>
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={10}
+          style={
+            Object {
+              "left": "52.63157894736842%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={10}
+          style={
+            Object {
+              "left": "52.63157894736842%",
+            }
+          }
+        />
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={11}
+          style={
+            Object {
+              "left": "57.89473684210526%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={11}
+          style={
+            Object {
+              "left": "57.89473684210526%",
+            }
+          }
+        >
+          0:45
+        </span>
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={12}
+          style={
+            Object {
+              "left": "63.1578947368421%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={12}
+          style={
+            Object {
+              "left": "63.1578947368421%",
+            }
+          }
+        />
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={13}
+          style={
+            Object {
+              "left": "68.42105263157895%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={13}
+          style={
+            Object {
+              "left": "68.42105263157895%",
+            }
+          }
+        >
+          0:55
+        </span>
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={14}
+          style={
+            Object {
+              "left": "73.6842105263158%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={14}
+          style={
+            Object {
+              "left": "73.6842105263158%",
+            }
+          }
+        />
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={15}
+          style={
+            Object {
+              "left": "78.94736842105263%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={15}
+          style={
+            Object {
+              "left": "78.94736842105263%",
+            }
+          }
+        >
+          1:05
+        </span>
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={16}
+          style={
+            Object {
+              "left": "84.21052631578948%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={16}
+          style={
+            Object {
+              "left": "84.21052631578948%",
+            }
+          }
+        />
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={17}
+          style={
+            Object {
+              "left": "89.47368421052632%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={17}
+          style={
+            Object {
+              "left": "89.47368421052632%",
+            }
+          }
+        >
+          1:15
+        </span>
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={18}
+          style={
+            Object {
+              "left": "94.73684210526316%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={18}
+          style={
+            Object {
+              "left": "94.73684210526316%",
+            }
+          }
+        />
+        <span
+          className="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+          data-index={19}
+          style={
+            Object {
+              "left": "100%",
+            }
+          }
+        />
+        <span
+          aria-hidden={true}
+          className="MuiSlider-markLabel css-yafthl-MuiSlider-markLabel"
+          data-index={19}
+          style={
+            Object {
+              "left": "100%",
+            }
+          }
+        />
+        <span
+          className="MuiSlider-thumbColorPrimary MuiSlider-thumbSizeMedium MuiSlider-thumb css-eg0mwd-MuiSlider-thumb"
+          data-index={0}
+          onMouseLeave={[Function]}
+          onMouseOver={[Function]}
+          style={
+            Object {
+              "left": "0%",
+              "pointerEvents": undefined,
+            }
+          }
+        >
+          <input
+            aria-label="Precipitation"
+            aria-orientation="horizontal"
+            aria-valuemax={19}
+            aria-valuemin={0}
+            aria-valuenow={0}
+            data-index={0}
+            disabled={false}
+            max={19}
+            min={0}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            step={1}
+            style={
+              Object {
+                "border": 0,
+                "clip": "rect(0 0 0 0)",
+                "direction": "ltr",
+                "height": "100%",
+                "margin": -1,
+                "overflow": "hidden",
+                "padding": 0,
+                "position": "absolute",
+                "whiteSpace": "nowrap",
+                "width": "100%",
+              }
+            }
+            type="range"
+            value={0}
+          />
+        </span>
+      </span>
+      <div
+        className="precipitationChart"
+        id="chartContainer"
+      >
+        <canvas
+          id="chart"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="legendContents"
+    data-testid="legend-box"
+  >
+    <div
+      className="legendTitle"
+    >
+      Precipitation [mm/h]
+    </div>
+    <div
+      className="legendContainer"
+    >
+      <div
+        className="legend"
+      >
+        <div
+          className="gradient-container"
+          id="gradient1container"
+        >
+          <div
+            className="gradient-part"
+            id="gradient1"
+          />
+          <div
+            className="legend-value"
+          >
+            <p>
+              0.1
+            </p>
+            <i>
+              light
+            </i>
+          </div>
+        </div>
+        <div
+          className="gradient-container"
+          id="gradient2container"
+        >
+          <div
+            className="gradient-part"
+            id="gradient2"
+          />
+        </div>
+        <div
+          className="gradient-container"
+          id="gradient3container"
+        >
+          <div
+            className="gradient-part"
+            id="gradient3"
+          />
+          <div
+            className="legend-value"
+          >
+            <p>
+              1
+            </p>
+            <i
+              className="innerRainDescription"
+            >
+              moderate
+            </i>
+          </div>
+        </div>
+        <div
+          className="gradient-container"
+          id="gradient4container"
+        >
+          <div
+            className="gradient-part"
+            id="gradient4"
+          />
+          <div
+            className="double-text-div"
+          >
+            <div
+              className="legend-value"
+              id="left-value"
+            >
+              <p>
+                10
+              </p>
+              <i
+                className="innerRainDescription"
+              >
+                heavy
+              </i>
+            </div>
+            <div
+              className="legend-value"
+              id="right-value"
+            >
+              <p>
+                &gt;100
+              </p>
+              <i>
+                extreme
+              </i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

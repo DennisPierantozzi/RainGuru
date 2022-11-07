@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading screen tests matches snapshot 1`] = `
+<div
+  data-testid="loadingScreen"
+  id="loadingScreen"
+>
+  <img
+    alt="Loading screen image 0"
+    src="../../static/images/loading1.png"
+  />
+</div>
+`;

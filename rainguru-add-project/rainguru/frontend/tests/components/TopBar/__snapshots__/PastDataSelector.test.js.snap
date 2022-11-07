@@ -1,0 +1,700 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PastDataSelector tests matches snapshot 1`] = `
+<div
+  className="pastDataSelectorContents"
+  data-testid="pastDataSelector"
+>
+  <p
+    className="past-data-menu-part"
+    id="past-data-explanation"
+  >
+    Currently showing:
+    <br />
+    <i
+      data-testid="currently-showing"
+      id="currently-showing"
+    >
+      Latest data
+    </i>
+  </p>
+  <hr
+    className="past-data-divider"
+  />
+  <div
+    className="past-data-menu-part"
+  >
+    <div
+      className="latest-data-chooser"
+    >
+      <p
+        className="latest-data-text"
+      >
+        Display the latest data:
+      </p>
+      <button
+        className="time-interval-loader"
+        data-testid="latest-loader"
+        id="latest-data-loader"
+        onClick={[Function]}
+      >
+        LOAD
+      </button>
+    </div>
+  </div>
+  <hr
+    className="past-data-divider"
+  />
+  <div
+    className="past-data-menu-part"
+  >
+    <p>
+      Predictions made at:
+    </p>
+    <div
+      className="time-interval-chooser"
+    >
+      <div
+        className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary time-interval-drop-down css-4u4t8f-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+        data-testid="predicted-drop-down"
+        onClick={[Function]}
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="predicted-drop-down"
+          className="MuiSelect-select MuiSelect-standard MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+          id="predicted-drop-down"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="notranslate"
+          >
+            ​
+          </span>
+        </div>
+        <input
+          aria-hidden={true}
+          className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          onAnimationStart={[Function]}
+          onChange={[Function]}
+          tabIndex={-1}
+          value=""
+        />
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconStandard css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+      </div>
+      <button
+        className="time-interval-loader"
+        data-testid="predicted-loader"
+        onClick={[Function]}
+      >
+        LOAD
+      </button>
+    </div>
+  </div>
+  <hr
+    className="past-data-divider"
+  />
+  <div
+    className="past-data-menu-part"
+  >
+    <p>
+      Observations from:
+    </p>
+    <div
+      className="time-interval-chooser"
+    >
+      <div
+        className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary time-interval-drop-down css-4u4t8f-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+        data-testid="observed-drop-down"
+        onClick={[Function]}
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="observed-drop-down"
+          className="MuiSelect-select MuiSelect-standard MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+          id="observed-drop-down"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="notranslate"
+          >
+            ​
+          </span>
+        </div>
+        <input
+          aria-hidden={true}
+          className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          onAnimationStart={[Function]}
+          onChange={[Function]}
+          tabIndex={-1}
+          value=""
+        />
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconStandard css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+      </div>
+      <button
+        className="time-interval-loader"
+        data-testid="observed-loader"
+        onClick={[Function]}
+      >
+        LOAD
+      </button>
+    </div>
+    <div
+      className="timestamp-observation-chooser-disabled"
+    >
+      <p
+        className="load-on"
+      >
+        Load on:
+      </p>
+      <div
+        className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary timestamp-drop-down css-4u4t8f-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+        data-testid="timestamp-observed-drop-down"
+        onClick={[Function]}
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="timestamp-observed-drop-down"
+          className="MuiSelect-select MuiSelect-standard MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+          id="timestamp-observed-drop-down"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="notranslate"
+          >
+            ​
+          </span>
+        </div>
+        <input
+          aria-hidden={true}
+          className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          onAnimationStart={[Function]}
+          onChange={[Function]}
+          tabIndex={-1}
+          value=""
+        />
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconStandard css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <hr
+    className="past-data-divider"
+  />
+</div>
+`;
+
+exports[`PastDataSelector tests matches snapshot with disabled buttons 1`] = `
+<div
+  className="pastDataSelectorContents"
+  data-testid="pastDataSelector"
+>
+  <p
+    className="past-data-menu-part"
+    id="past-data-explanation"
+  >
+    Currently showing:
+    <br />
+    <i
+      data-testid="currently-showing"
+      id="currently-showing"
+    >
+      Latest data
+    </i>
+  </p>
+  <hr
+    className="past-data-divider"
+  />
+  <div
+    className="past-data-menu-part"
+  >
+    <div
+      className="latest-data-chooser"
+    >
+      <p
+        className="latest-data-text"
+      >
+        Display the latest data:
+      </p>
+      <button
+        className="time-interval-loader disabled-time-interval-loader"
+        data-testid="latest-loader"
+        disabled={true}
+        id="latest-data-loader"
+        onClick={[Function]}
+      >
+        LOAD
+      </button>
+    </div>
+  </div>
+  <hr
+    className="past-data-divider"
+  />
+  <div
+    className="past-data-menu-part"
+  >
+    <p>
+      Predictions made at:
+    </p>
+    <div
+      className="time-interval-chooser"
+    >
+      <div
+        className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary time-interval-drop-down css-4u4t8f-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+        data-testid="predicted-drop-down"
+        onClick={[Function]}
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="predicted-drop-down"
+          className="MuiSelect-select MuiSelect-standard MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+          id="predicted-drop-down"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="notranslate"
+          >
+            ​
+          </span>
+        </div>
+        <input
+          aria-hidden={true}
+          className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          onAnimationStart={[Function]}
+          onChange={[Function]}
+          tabIndex={-1}
+          value=""
+        />
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconStandard css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+      </div>
+      <button
+        className="time-interval-loader disabled-time-interval-loader"
+        data-testid="predicted-loader"
+        disabled={true}
+        onClick={[Function]}
+      >
+        LOAD
+      </button>
+    </div>
+  </div>
+  <hr
+    className="past-data-divider"
+  />
+  <div
+    className="past-data-menu-part"
+  >
+    <p>
+      Observations from:
+    </p>
+    <div
+      className="time-interval-chooser"
+    >
+      <div
+        className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary time-interval-drop-down css-4u4t8f-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+        data-testid="observed-drop-down"
+        onClick={[Function]}
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="observed-drop-down"
+          className="MuiSelect-select MuiSelect-standard MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+          id="observed-drop-down"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="notranslate"
+          >
+            ​
+          </span>
+        </div>
+        <input
+          aria-hidden={true}
+          className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          onAnimationStart={[Function]}
+          onChange={[Function]}
+          tabIndex={-1}
+          value=""
+        />
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconStandard css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+      </div>
+      <button
+        className="time-interval-loader disabled-time-interval-loader"
+        data-testid="observed-loader"
+        disabled={true}
+        onClick={[Function]}
+      >
+        LOAD
+      </button>
+    </div>
+    <div
+      className="timestamp-observation-chooser-disabled"
+    >
+      <p
+        className="load-on"
+      >
+        Load on:
+      </p>
+      <div
+        className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary timestamp-drop-down css-4u4t8f-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+        data-testid="timestamp-observed-drop-down"
+        onClick={[Function]}
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="timestamp-observed-drop-down"
+          className="MuiSelect-select MuiSelect-standard MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+          id="timestamp-observed-drop-down"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="notranslate"
+          >
+            ​
+          </span>
+        </div>
+        <input
+          aria-hidden={true}
+          className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          onAnimationStart={[Function]}
+          onChange={[Function]}
+          tabIndex={-1}
+          value=""
+        />
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconStandard css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <hr
+    className="past-data-divider"
+  />
+</div>
+`;
+
+exports[`PastDataSelector tests matches snapshot with enabled observation timestamp selector 1`] = `
+<div
+  className="pastDataSelectorContents"
+  data-testid="pastDataSelector"
+>
+  <p
+    className="past-data-menu-part"
+    id="past-data-explanation"
+  >
+    Currently showing:
+    <br />
+    <i
+      data-testid="currently-showing"
+      id="currently-showing"
+    >
+      Latest data
+    </i>
+  </p>
+  <hr
+    className="past-data-divider"
+  />
+  <div
+    className="past-data-menu-part"
+  >
+    <div
+      className="latest-data-chooser"
+    >
+      <p
+        className="latest-data-text"
+      >
+        Display the latest data:
+      </p>
+      <button
+        className="time-interval-loader disabled-time-interval-loader"
+        data-testid="latest-loader"
+        disabled={true}
+        id="latest-data-loader"
+        onClick={[Function]}
+      >
+        LOAD
+      </button>
+    </div>
+  </div>
+  <hr
+    className="past-data-divider"
+  />
+  <div
+    className="past-data-menu-part"
+  >
+    <p>
+      Predictions made at:
+    </p>
+    <div
+      className="time-interval-chooser"
+    >
+      <div
+        className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary time-interval-drop-down css-4u4t8f-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+        data-testid="predicted-drop-down"
+        onClick={[Function]}
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="predicted-drop-down"
+          className="MuiSelect-select MuiSelect-standard MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+          id="predicted-drop-down"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="notranslate"
+          >
+            ​
+          </span>
+        </div>
+        <input
+          aria-hidden={true}
+          className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          onAnimationStart={[Function]}
+          onChange={[Function]}
+          tabIndex={-1}
+          value=""
+        />
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconStandard css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+      </div>
+      <button
+        className="time-interval-loader disabled-time-interval-loader"
+        data-testid="predicted-loader"
+        disabled={true}
+        onClick={[Function]}
+      >
+        LOAD
+      </button>
+    </div>
+  </div>
+  <hr
+    className="past-data-divider"
+  />
+  <div
+    className="past-data-menu-part"
+  >
+    <p>
+      Observations from:
+    </p>
+    <div
+      className="time-interval-chooser"
+    >
+      <div
+        className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary time-interval-drop-down css-4u4t8f-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+        data-testid="observed-drop-down"
+        onClick={[Function]}
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="observed-drop-down"
+          className="MuiSelect-select MuiSelect-standard MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+          id="observed-drop-down"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="notranslate"
+          >
+            ​
+          </span>
+        </div>
+        <input
+          aria-hidden={true}
+          className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          onAnimationStart={[Function]}
+          onChange={[Function]}
+          tabIndex={-1}
+          value={5}
+        />
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconStandard css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+      </div>
+      <button
+        className="time-interval-loader disabled-time-interval-loader"
+        data-testid="observed-loader"
+        disabled={true}
+        onClick={[Function]}
+      >
+        LOAD
+      </button>
+    </div>
+    <div
+      className="timestamp-observation-chooser"
+    >
+      <p
+        className="load-on"
+      >
+        Load on:
+      </p>
+      <div
+        className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary timestamp-drop-down css-4u4t8f-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+        data-testid="timestamp-observed-drop-down"
+        onClick={[Function]}
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-labelledby="timestamp-observed-drop-down"
+          className="MuiSelect-select MuiSelect-standard MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+          id="timestamp-observed-drop-down"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            className="notranslate"
+          >
+            ​
+          </span>
+        </div>
+        <input
+          aria-hidden={true}
+          className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          onAnimationStart={[Function]}
+          onChange={[Function]}
+          tabIndex={-1}
+          value=""
+        />
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconStandard css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <hr
+    className="past-data-divider"
+  />
+</div>
+`;

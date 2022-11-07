@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppInfoPopup tests matches snapshot 1`] = `
+<div
+  className="popup"
+  data-testid="AppInfoPopupContainer"
+  onClick={[Function]}
+>
+  <div
+    className="popup-box"
+    data-testid="AppInfoPopupBox"
+    onClick={[Function]}
+  >
+    <div
+      className="popup-content"
+    >
+      <div
+        className="popup-information"
+      >
+        hi
+      </div>
+      <div
+        className="popup-close"
+      >
+        <button
+          className="close-button"
+          data-testid="AppInfoCloseButton"
+          onClick={[Function]}
+        >
+          <img
+            className="ratioImage"
+            src="../../../static/images/3x1.png"
+          />
+          <p>
+            Close
+          </p>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

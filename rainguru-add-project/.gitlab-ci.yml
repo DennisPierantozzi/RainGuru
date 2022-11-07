@@ -1,0 +1,55 @@
+stages:
+    - build
+    - validate
+    - test
+
+services:
+    - postgres:10
+
+variables:
+    POSTGRES_DB: $POSTGRES_DB
+    POSTGRES_USER: $POSTGRES_USER
+    POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+
+build_django:
+    stage: build
+    image: nikac11/tu-delft-rainguru:v1.1
+    script: 
+        - cd rainguru
+        - python manage.py check
+
+validate_model:
+    stage: validate
+    image: nikac11/tu-delft-rainguru:v1.1
+    script:
+        - cd rainguru
+        - python manage.py test api.tests.prediction_model.model_integration_test -b
+
+test_django:
+    stage: test
+    image: nikac11/tu-delft-rainguru:v1.1
+    script: 
+        - cd rainguru
+        - python manage.py makemigrations
+        - python manage.py migrate
+        - python manage.py test -b
+
+build_react:
+    stage: build
+    image: node:16.15
+    script:
+        - cd rainguru/frontend
+        - npm install --legacy-peer-deps
+        - npm i react-leaflet leaflet
+        - npm run build
+
+
+test_react:
+    stage: test
+    image: node:16.15
+    script:
+        - cd rainguru/frontend
+        - npm install --legacy-peer-deps
+        - npm i react-leaflet leaflet
+        - npm run test
+

@@ -1,0 +1,7 @@
+/rainguru/api/prediction_model/all_data_balanced_loss_iteration100/logs/
+/rainguru/frontend/coverage/
+**/__pycache__/
+*.pyc
+*.h5
+*.png
+/rainguru/.env

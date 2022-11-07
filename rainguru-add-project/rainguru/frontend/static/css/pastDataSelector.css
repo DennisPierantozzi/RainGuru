@@ -1,0 +1,122 @@
+/*
+ The structure inside this css file splits it up in different level of element depth, and a different parent for
+ element on the same depth also get separated, comments are used as a separator.
+
+ All % values should either be directly clear from the context, or otherwise those in a calc method follow a format.
+ This format explain the value inside the (x / y) part, the y represents the size of the parent and x the size of the
+ element that you are giving the size to, both x and y should represent viewport sizes until the min-size defined.
+ The usage of calc for font sizes is different, here the (x / y) part is a scaler from 100%, (4 / 3) for instance means
+ we scale the font size by 1.33.
+
+ The order of the css rules follows the following scheme, this list only contains commonly used rules:
+ position, z-index, float, top, left, bottom, right, (min-/max-)width, (min-/max-)height, margin(-*), padding(-*),
+ display, justify-content, align-items, pointer-events, (-webkit-)user-select, overflow(-*), cursor, background(-*),
+ color(-*), opacity, box-sizing, border-radius, border(-*), border-color (when separate from border), font(-*), *
+ */
+
+.pastDataSelectorContents {
+    position: relative;
+    width: 100%;
+    background-color: white;
+    font-family: Arial;
+}
+
+/* ==================== depth level divider ==================== */
+
+.past-data-divider {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid lightgray;
+}
+
+.past-data-menu-part {
+    width: 90%;
+    padding: 10px 5%;
+}
+
+/* ==================== depth level divider ==================== */
+
+.latest-data-chooser {
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+
+/* -------- level part divider -------- */
+
+.time-interval-chooser {
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+
+.timestamp-observation-chooser, .timestamp-observation-chooser-disabled {
+    position: relative;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.timestamp-observation-chooser-disabled {
+    pointer-events: none;
+    color: lightgray;
+}
+
+/* ==================== depth level divider ==================== */
+
+.time-interval-drop-down {
+    position: relative;
+    width: 70%;
+}
+
+/* ++++ in-level part divider ++++ */
+
+.time-interval-loader {
+    position: relative;
+    left: 5%;
+    width: 25%;
+    -webkit-user-select: none !important;
+    user-select: none;
+    background-color: white;
+    color: lightskyblue;
+    border: solid 1px lightskyblue;
+}
+
+.time-interval-loader:hover {
+    cursor: pointer;
+}
+
+#latest-data-loader {
+    left: 0;
+    padding: 7px 0;
+}
+
+.disabled-time-interval-loader {
+    color: lightgray;
+    border: solid 1px lightgray;
+}
+
+/* ++++ in-level part divider ++++ */
+
+.latest-data-text {
+    position: relative;
+    width: 75%;
+    display: flex;
+    align-items: center;
+}
+
+/* -------- level part divider -------- */
+
+.load-on {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.timestamp-drop-down {
+    position: relative;
+    width: 100%;
+}
+
+.timestamp-observation-chooser-disabled .MuiSelect-icon {
+    color: lightgray;
+}

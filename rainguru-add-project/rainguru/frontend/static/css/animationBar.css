@@ -1,0 +1,276 @@
+/*
+ The structure inside this css file splits it up in different level of element depth, and a different parent for
+ element on the same depth also get separated, comments are used as a separator.
+
+ All % values should either be directly clear from the context, or otherwise those in a calc method follow a format.
+ This format explain the value inside the (x / y) part, the y represents the size of the parent and x the size of the
+ element that you are giving the size to, both x and y should represent viewport sizes until the min-size defined.
+ The usage of calc for font sizes is different, here the (x / y) part is a scaler from 100%, (4 / 3) for instance means
+ we scale the font size by 1.33.
+
+ The order of the css rules follows the following scheme, this list only contains commonly used rules:
+ position, z-index, float, top, left, bottom, right, (min-/max-)width, (min-/max-)height, margin(-*), padding(-*),
+ display, justify-content, align-items, pointer-events, (-webkit-)user-select, overflow(-*), cursor, background(-*),
+ color(-*), opacity, box-sizing, border-radius, border(-*), border-color (when separate from border), font(-*), *
+ */
+
+.animationContents {
+    position: relative;
+    width: 100%;
+    height: calc(100% * (16 / 30));
+}
+
+/* ==================== depth level divider ==================== */
+
+.animationButtonDiv {
+    position: relative;
+    height: calc(100% * (5 / 16));
+    display: flex;
+    justify-content: center;
+}
+
+.dataBar {
+    position: relative;
+    height: calc(100% * (3 / 16));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.scale-container {
+    position: relative;
+    float: left;
+    left: -20px;
+    width: 4%;
+    height: calc(100% * (8 / 16));
+    font-size: 80%;
+}
+
+#max-scale {
+    position:absolute;
+    top:0;
+    right:5px;
+ }
+
+#mid-scale {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
+}
+
+#min-scale {
+    position:absolute;
+    bottom:0;
+    right:5px;
+}
+
+.animationSliderDiv {
+    position: relative;
+    float: left;
+    left: -20px;
+    width: 96%;
+    height: calc(100% * (8 / 16));
+    pointer-events: auto;
+}
+
+.middle-line {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    border: none;
+    background-color: #1998de;
+    top: 50%;
+}
+
+/* ==================== depth level divider ==================== */
+
+.animationButton {
+    position: relative;
+    height: calc(100% * (3.75 / 5));
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    background-color: white;
+    box-sizing: border-box;
+    border: 1px solid lightgray;
+}
+
+.animationButton:hover {
+    cursor: pointer;
+}
+
+/* -------- level part divider -------- */
+
+.dataBarPart {
+    float: left;
+    width: calc(100% / 3);
+    margin-right: 5px;
+}
+
+#speedValue {
+    text-align: left;
+}
+
+#intervalInfo {
+    text-align: center;
+}
+
+#maxRain {
+    text-align: right;
+}
+
+/* -------- level part divider -------- */
+
+.animationSliderDiv > .MuiSlider-root {
+    position: relative;
+    height: 100%;
+    padding: 0;
+    border-radius: 0;
+}
+
+#animationSlider > .MuiSlider-rail, #animationSlider > .MuiSlider-mark, #animationSlider > .MuiSlider-thumb {
+    height: 100%;
+}
+
+#animationSlider > .MuiSlider-rail {
+    box-sizing: border-box;
+    border-width: 1px !important;
+    border-top: solid #1998de;
+    border-bottom: solid #1998de;
+    color: #d3ecfa;
+}
+
+#animationSlider > .MuiSlider-mark {
+    width: 1px;
+    color: #a9daf5;
+}
+
+#animationSlider > .MuiSlider-markActive {
+    z-index: 1;
+    width: 3px;
+    background: #0981c2;
+}
+
+#animationSlider > .MuiSlider-markLabel {
+    z-index: 1;
+    top: 60%;
+    font-size: 90%;
+}
+
+#animationSlider > .MuiSlider-thumb {
+    width: 0;
+    height: 0;
+    box-shadow: none;
+}
+
+/* ++++ in-level part divider ++++ */
+
+.precipitationChart {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* ==================== depth level divider ==================== */
+
+.button-icon {
+    position: absolute;
+}
+
+/* -------- level part divider -------- */
+
+#chart {
+    height: 100%;
+}
+
+/* ++++++++++++++++++++++++++++++++ media query divider ++++++++++++++++++++++++++++++++ */
+
+/* when someone want to see the site on a phone in portrait mode there are some adjustments */
+
+@media screen and (pointer: coarse) {
+    .animationContents {
+        height: calc(100% * (19 / 36));
+    }
+
+    .animationButtonDiv {
+        height: calc(100% * (7 / 19));
+    }
+
+    .dataBar {
+        height: calc(100% * (3 / 19));
+    }
+
+    .scale-container {
+        height: calc(100% * (9 / 22));
+        font-size: 80%;
+        width: 8%;
+        left: -10px;
+    }
+
+    .animationSliderDiv {
+        height: calc(100% * (9 / 22));
+        width: 92%;
+        left: -10px;
+    }
+
+    /* -------- in media query divider -------- */
+
+    .animationButton {
+        margin: 0 2px;
+    }
+}
+
+@media screen and (pointer: coarse) and (max-width: 480px)  {
+    .scale-container {
+        left: 0px;
+    }
+
+    .animationSliderDiv {
+        left: 0px;
+    }
+}
+
+
+/* when someone want to see the site on a phone in landscape mode for some reason there are some adjustments */
+
+@media screen and (pointer: coarse) and (orientation: landscape) and (max-height: 1080px) {
+    .scale-container {
+        left: -40px;
+    }
+
+    .animationSliderDiv {
+        left: -40px;
+    }
+}
+
+@media screen and (pointer: coarse) and (orientation: landscape) and (max-height: 480px)  {
+    /* work as if there are 2 more for the button div and 1 less free space so 37 instead of 36,
+    there are more of course but it is all relative so its fine */
+    .animationContents {
+        height: calc(100% * (22 / 37));
+    }
+
+    .animationButtonDiv {
+        height: calc(100% * (10 / 22));
+    }
+
+    .dataBar {
+        height: calc(100% * (3 / 22));
+    }
+
+    .animationSliderDiv {
+        height: calc(100% * (9 / 22));
+        left: -30px;
+    }
+
+    .scale-container {
+        font-size: 100%;
+        height: calc(100% * (9 / 22));
+        left: -30px;
+    }
+}

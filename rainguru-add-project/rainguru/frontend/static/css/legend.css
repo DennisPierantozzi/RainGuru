@@ -1,0 +1,187 @@
+/*
+ The structure inside this css file splits it up in different level of element depth, and a different parent for
+ element on the same depth also get separated, comments are used as a separator.
+
+ All % values should either be directly clear from the context, or otherwise those in a calc method follow a format.
+ This format explain the value inside the (x / y) part, the y represents the size of the parent and x the size of the
+ element that you are giving the size to, both x and y should represent viewport sizes until the min-size defined.
+ The usage of calc for font sizes is different, here the (x / y) part is a scaler from 100%, (4 / 3) for instance means
+ we scale the font size by 1.33.
+
+ The order of the css rules follows the following scheme, this list only contains commonly used rules:
+ position, z-index, float, top, left, bottom, right, (min-/max-)width, (min-/max-)height, margin(-*), padding(-*),
+ display, justify-content, align-items, pointer-events, (-webkit-)user-select, overflow(-*), cursor, background(-*),
+ color(-*), opacity, box-sizing, border-radius, border(-*), border-color (when separate from border), font(-*), *
+ */
+
+.legendContents {
+    position: relative;
+    top: calc(100% * (1 / 30));
+    width: 100%;
+    height: calc(100% * (12 / 30));
+    pointer-events: auto;
+}
+
+/* ==================== depth level divider ==================== */
+
+.legendTitle {
+    position: relative;
+    width: 100%;
+    height: calc(100% * (3 / 12));
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.legendContainer {
+    position: relative;
+    width: 100%;
+    height: calc(100% * (9 / 12));
+    display: flex;
+    justify-content: center;
+}
+
+/* ==================== depth level divider ==================== */
+
+.legend {
+    position: relative;
+    width: 35%;
+    height: 100%;
+}
+
+/* ==================== depth level divider ==================== */
+
+/* the 30 referenced in this part was since the parent used to resemble 30vh, now it has 35
+   the division however is still the same and 30 makes this a lot smoother */
+.gradient-container {
+    position: absolute;
+    height: 100%;
+    width: calc(100% * (10 / 30));
+}
+
+#gradient1container {
+    width: calc(100% * (6 / 30));
+}
+
+#gradient2container {
+    left: calc(98% * (6 / 30));
+    width: calc(100% * (4 / 30));
+}
+
+#gradient3container {
+    left: calc(98% * (10 / 30));
+}
+
+#gradient4container {
+    left: calc(98% * (20 / 30));
+}
+
+/* ==================== depth level divider ==================== */
+
+.gradient-part {
+    height: calc(100% * (3.5 / 9));
+    box-sizing: border-box;
+    border-top: 2px solid rgb(200, 200, 200);
+    border-bottom: 2px solid rgb(200, 200, 200);
+}
+
+#gradient1 {
+    width: 100%;
+    background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(100, 100, 255));
+    border-left: 2px solid rgb(200, 200, 200);
+}
+
+#gradient2 {
+    width: 100%;
+    background-image: linear-gradient(to right, rgb(100, 100, 255), rgb(0, 0, 255));
+}
+
+#gradient3 {
+    width: 100%;
+    background-image: linear-gradient(to right, rgb(0, 0, 255), rgb(255, 0, 0));
+}
+
+#gradient4 {
+    width: 100%;
+    background-image: linear-gradient(to right, rgb(255, 0, 0), rgb(255, 255, 0));
+    border-right: 2px solid rgb(200, 200, 200);
+}
+
+/* ++++ in-level part divider ++++ */
+
+.double-text-div, .legend-value {
+    position: relative;
+    top: calc(100% * (0.3 / 9));
+    width: 100%;
+    height: calc(100% * (5.2 / 9));
+    text-align: left;
+}
+
+#left-value, #right-value {
+    float: left;
+    top: 0;
+    width: 50%;
+}
+
+#right-value {
+    text-align: right;
+}
+
+.innerRainDescription {
+    position: absolute;
+    transform: translate(-35%, 0);
+}
+
+/* ++++++++++++++++++++++++++++++++ media query divider ++++++++++++++++++++++++++++++++ */
+
+@media screen and (pointer: coarse) {
+    .legendContents {
+        top: calc(100% * (1 / 36));
+        height: calc(100% * (13 / 36));
+    }
+
+    .legendTitle {
+        height: calc(100% * (3 / 13));
+    }
+
+    .legendContainer {
+        height: calc(100% * (10 / 13));
+    }
+}
+
+@media screen and (pointer: coarse) and (orientation: landscape) and (min-height: 481px) and (max-height: 1024px) {
+    /*
+     Make the size of the legend wider when on a tablet/ipad in landscape mode
+     */
+    .legend {
+        width: 40%;
+    }
+}
+
+@media screen and (pointer: coarse) and (orientation: portrait) and (max-width: 1024px) {
+    /*
+     Make the size of the legend wider when on a tablet/ipad in portrait mode
+     */
+    .legend {
+        width: 45%;
+    }
+}
+
+@media screen and (pointer: coarse) and (orientation: portrait) and (max-width: 480px) {
+    /*
+     Make the size of the legend wider when on a phone in portrait mode
+     */
+    .legend {
+        width: 60%;
+    }
+}
+
+/* when someone want to see the site on a phone in landscape mode for some reason there are some adjustments */
+@media screen and (pointer: coarse) and (orientation: landscape) and (max-height: 480px)  {
+    /* work as if there are 2 more for the button div and 1 less free space so 37 instead of 36,
+    there are more of course but it is all relative so its fine */
+    .legendContents {
+        top: calc(100% * (1 / 37));
+        height: calc(100% * (13 / 37));
+    }
+}

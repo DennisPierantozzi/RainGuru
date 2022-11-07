@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PopupContainer tests matches snapshot 1`] = `
+<div
+  data-testid="popupContainer"
+>
+  <div
+    className="mm-popup"
+  >
+    <div
+      className="mm-popup__overlay"
+      onClick={[Function]}
+      role="presentation"
+      style={Object {}}
+    />
+  </div>
+</div>
+`;
