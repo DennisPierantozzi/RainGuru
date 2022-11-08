@@ -16,11 +16,15 @@ export default class Map {
     static marker;
     static loadedImages = 0;
     static dataURLS = [];
-    static minMapBounds = L.latLng(49.18, -4.35);
-    static maxMapBounds = L.latLng(55.72, 15.18);
+    static minMapBounds = L.latLng(42.18, -4.35);
+    static maxMapBounds = L.latLng(61.72, 15.18);
     static minMarkerBounds = L.latLng(50.21, 1.90);
     static maxMarkerBounds = L.latLng(54.71, 9.30);
 
+    static maxBounds = L.latLng(54.71,1.90);
+    static minBounds = L.latLng(50.21,9.30);
+
+    static pointList = [this.minMarkerBounds, this.minBounds, this.maxMarkerBounds, this.maxBounds, this.minMarkerBounds];
 
     /**
      * Preload and cache the images
@@ -98,7 +102,18 @@ export default class Map {
             maxBoundsViscosity: 0.9,
         });
 
+        /* Dennis Upgrade */
+        //boundaries line
+        let boundaries = L.polyline(Map.pointList, {
+            color: 'blue',
+            weight: 3,
+            opacity: 0.6,
+            smoothFactor: 3
+        });
+        
+
         // add layers to the map and the scale
+        boundaries.addTo(map);
         baseLayer.addTo(map);
         this.currentLayer.addTo(map);
         L.control.scale({imperial: false}).addTo(map);

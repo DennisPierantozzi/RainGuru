@@ -124,7 +124,8 @@ html, body, #main, #app {
     z-index: 0;
     top: calc(7 * var(--in-ratio-height));
     width: 100%;
-    height: calc((68 * var(--in-ratio-height)) + var(--out-ratio-height));
+    height: 100%;
+    /*height: calc((68 * var(--in-ratio-height)) + var(--out-ratio-height));*/
     -webkit-user-select: none !important;
     user-select: none;
 }
@@ -137,6 +138,7 @@ html, body, #main, #app {
     top: calc((70 * var(--in-ratio-height)) + var(--out-ratio-height));
     width: 100%;
     height: calc(30 * var(--in-ratio-height));
+    background-color: #fff;
     pointer-events: none;
 }
 

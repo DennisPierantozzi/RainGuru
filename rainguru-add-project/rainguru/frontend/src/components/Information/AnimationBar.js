@@ -36,6 +36,16 @@ export default class AnimationBar extends Component {
             value: 0
         };
 
+        //Dennis Upgrade Keyboard feature
+        window.addEventListener('keydown', (event) => {
+            if (event.defaultPrevented) {
+                return;
+            }
+            let code = event.code;
+            // Function to handle the event
+            this.handleKeyboardPress(code);
+        }, false);
+
         // make the timestamp labels and start the animation
         AnimationBar.updateMarks();
         this.play();
@@ -139,6 +149,19 @@ export default class AnimationBar extends Component {
                 hours = (hours + 1) % 24;
             }
         }
+    }
+
+
+    handleKeyboardPress(keyCode){
+        if(keyCode=="Space") {
+            this.pauseResume();
+        }
+        if(keyCode=="ArrowRight") {
+            this.move(true, true);
+        }
+        if(keyCode=="ArrowLeft") {
+            this.move(false, true);
+        }          
     }
 
     /**
