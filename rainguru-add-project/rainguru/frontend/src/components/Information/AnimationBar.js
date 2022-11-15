@@ -200,6 +200,7 @@ export default class AnimationBar extends Component {
         // change to the new value
         this.setState({value: newValue});
         Slider.sliderValue = newValue;
+
         Map.activateHeatLayer(newValue);
 
         // if called from the buttons the animation needs to be halted, so it doesn't immediately move

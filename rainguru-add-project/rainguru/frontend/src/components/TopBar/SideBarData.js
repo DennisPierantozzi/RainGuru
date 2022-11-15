@@ -17,7 +17,7 @@ export const SideBarData = [
     {
         title: "Application information",
         icon: <HiInformationCircle className="sidebar-element-icon" size="50%"/>,
-        className: "SideBar-item",
+        className: "SideBar-item Bottom-menu-item",
         id:"application-info",
         popupText:
         <div data-testid="application-info-popuptext-sidebardata">
@@ -53,7 +53,7 @@ export const SideBarData = [
     {
         title: "Contributors",
         icon: <IoMdPeople className="sidebar-element-icon" size="50%"/>,
-        className: "SideBar-item" ,
+        className: "SideBar-item Bottom-menu-item" ,
         id: "contributor",
         popupText:
             <div data-testid="contributor-popuptext-sidebardata">
@@ -86,7 +86,7 @@ export const SideBarData = [
     {
         title: "Disclaimer & Liability",
         icon: <CgDanger className="sidebar-element-icon" size="50%"/>,
-        className: "SideBar-item",
+        className: "SideBar-item Bottom-menu-item",
         id: "disclaimer",
         popupText:
             <div data-testid="disclaimer-popuptext-sidebardata">
@@ -101,7 +101,7 @@ export const SideBarData = [
     {
         title: "Privacy statement",
         icon: <SiGnuprivacyguard className="sidebar-element-icon" size="50%"/>,
-        className: "SideBar-item",
+        className: "SideBar-item Bottom-menu-item",
         id:"privacy",
         popupText:
             <div data-testid="privacy-popuptext-sidebardata">
@@ -113,7 +113,7 @@ export const SideBarData = [
     {
         title: "Acknowledgement",
         icon: <FaBook className="sidebar-element-icon" size="50%"/>,
-        className: "SideBar-item",
+        className: "SideBar-item Bottom-menu-item",
         id:"acknowledgement",
         popupText:
         <div data-testid="acknowledgement-popuptext-sidebardata">

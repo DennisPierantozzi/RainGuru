@@ -14,13 +14,24 @@
  color(-*), opacity, box-sizing, border-radius, border(-*), border-color (when separate from border), font(-*), *
  */
 
-.Sidebar, .Location, .TUDelft-logo {
+.Sidebar, .Location, .TUDelft-logo, .PastData {
     position: relative;
     float: left;
     height: 100%;
     display: inline-flex;
     justify-content: center;
     align-items: center;
+
+    /*Dennis Upgrade*/
+    background-color: #22587C;
+    border-radius: 20px;
+    margin-right: 20px;
+    color: #fff;
+}
+
+.PastData {
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .Sidebar:hover, .Location:hover, .TUDelft-logo:hover {
@@ -36,6 +47,7 @@
     justify-content: center;
     align-items: center;
     font-size: 100%;
+    margin-right: 20px;
 }
 
 /* Search bar button */
@@ -57,18 +69,29 @@
 }
 
 .Sidebar-shown {
-    position: absolute;
+    position: relative;
     z-index: 1;
     top: 100%;
-    width: 25%;
+    width: 100%;
     height: var(--sidebar-height);
-    background-color: var(--sidebar-color);
+    background-color: #22587C;
+    /*Dennis Upgrade*/
+    z-index: 2;
+    top:0;
+    height: 100%;
+
+    /*Dennis Upgrade*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 20px;
 }
 
 /* ==================== depth level divider ==================== */
 
 .Sidebar-icon, .Location-icon, .TUDelft-logo-icon {
     position: absolute;
+    color: white;
 }
 
 .TUDelft-logo-icon {
@@ -80,12 +103,35 @@
 
 /* -------- level part divider -------- */
 
+.open-menu {
+    display: flex;
+    justify-content: center;
+}
+
 .Sidebar-items {
     position: relative;
     width: 100%;
-    height: 100%;
-    background-color: var(--sidebar-color);
+    height: 10%;
+    background-color: #22587C;
     list-style: none;
+
+    /*Dennis Upgrade*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 16px;
+}
+
+.Bottom-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.Bottom-menu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 /* ==================== depth level divider ==================== */
@@ -123,6 +169,8 @@
 }
 
 #sidebar-splitter {
+    /*Dennis Upgrade*/
+    height: auto;
     background-color: var(--sidebar-color);
     cursor: auto;
 }
@@ -150,6 +198,8 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    color: #fff;
+    cursor: pointer;
 }
 
 .item-title {
@@ -179,8 +229,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    border: solid gray;
+    border-radius: 20px;
 }
 
 /* ==================== depth level divider ==================== */
@@ -279,6 +328,36 @@
     border-color: #AAAAAA;
     border-radius: 2px;
 }
+
+
+
+
+
+
+
+.menuOverlay {
+    top: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.Menu-title {
+    font-size: 45px;
+    font-weight: bold;
+    color: white;
+    display: inline-flex;
+    justify-content: inherit;
+}
+
+
+
+
+
+
+
+
+
+
 
 /* ++++++++++++++++++++++++++++++++ media query divider ++++++++++++++++++++++++++++++++ */
 

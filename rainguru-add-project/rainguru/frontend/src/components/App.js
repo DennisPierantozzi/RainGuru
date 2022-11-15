@@ -9,6 +9,7 @@ import Information from "./Information/Information";
 import AnimationBar from "./Information/AnimationBar";
 import Slider from "./Information/Slider";
 import PopupContainer from "./PopupContainer/PopupContainer";
+import SideBar from "./TopBar/SideBar";
 
 export default class App extends Component {
     /**
@@ -22,11 +23,17 @@ export default class App extends Component {
         this.state = {
             loadingData: false,
             animationBarUpdateProp: 0,
-            pastDataSelectorUpdateProp: 0
+            pastDataSelectorUpdateProp: 0,
+            sidebar: false,
+            compare: false
         }
 
         // bind this to update the state when this function is called from the past data selector
         this.displayData = this.displayData.bind(this);
+        this.compareData = this.compareData.bind(this);
+        this.displayComparedData = this.displayComparedData.bind(this);
+        this.setShowSidebar = this.setShowSidebar.bind(this);
+        this.setShowCompare = this.setShowCompare.bind(this);
     }
 
     static renderSetup() {
@@ -59,6 +66,18 @@ export default class App extends Component {
         }, 50);
     }
 
+    setShowSidebar() {
+        this.setState({ sidebar: !this.state.sidebar})
+        if(!this.state.sidebar) {
+            document.getElementById("img-menu").src = "../../../static/images/close-menu.png";
+        }
+    }
+
+    setShowCompare(compare) {
+        this.setState({compare: compare});
+        console.log("compare è    "+this.state.compare);
+    }
+
 
     /**
      * Renders the components that the screen is divided into and set the setup to load the map into.
@@ -67,8 +86,15 @@ export default class App extends Component {
         return [
             <div id="map" key="map"></div>,
             <div id="information" key="information"><Information animationBarUpdateProp={this.state.animationBarUpdateProp}/></div>,
-            <div id="topBar" key="topBar"><TopBar pastDataSelectorUpdateProp={this.state.pastDataSelectorUpdateProp}
-                                     loadingData={this.state.loadingData} displayData={this.displayData}/></div>
+            <div id="topBar" key="topBar"><TopBar
+                                     setShowSidebar = {this.setShowSidebar} displayComparedData={this.displayComparedData}
+                                     loadingData={this.state.loadingData} showCompare={this.state.compare}/></div>,
+            <div id="menu" key="menuOverlay"  className={this.state.sidebar ? "menuOverlay" : "hideElement"}>
+                <SideBar pastDataSelectorUpdateProp={this.state.pastDataSelectorUpdateProp}
+                    loadingData={this.state.loadingData} displayData={this.displayData} 
+                    compareData={this.compareData} 
+                    displayComparedData={this.displayComparedData} setShowCompare={this.setShowCompare}/>
+            </div> 
         ];
     }
 
@@ -161,8 +187,8 @@ export default class App extends Component {
         // only run this code if it isn't already loading data already
         if (!this.state.loadingData) {
             this.setState({loadingData: true});
-
             // set the communication variables used in the requests
+            Communication.setCompare(false);
             Communication.setUseLatestData(latest);
             Communication.setObserved(observed);
             Communication.setRequestTimestamp(timestamp);
@@ -177,9 +203,63 @@ export default class App extends Component {
                             // set the rain images
                             Map.setHeatLayers();
 
+                            console.log(Slider.precipitation);
+                            // update the animation bar rain chart and location information
+                            if (!Slider.precipitation.length) {
+                                console.log("entrato in undefined");
+                               Slider.getPrecipitationData(Slider.lastLat, Slider.lastLong, false);
+                            }
+                            else {
+                                console.log("entrato in show");
+                                Slider.showPredictionData();}
+
+                            // update the animation bar timestamps and past data time intervals
+                            AnimationBar.updateMarks();
+                            this.setState({animationBarUpdateProp: this.state.animationBarUpdateProp + propChange});
+
+                            // clear the interval and set the loading to be done
+                            this.setState({loadingData: false});
+                            clearInterval(waitForNewImages);
+                        }
+                    }.bind(this), 100);
+                });
+        }
+    }
+
+
+/**
+     * Changes the map rain layers and the animation bar timestamps to new data that is requested
+     * Prepare to compare predictions and observations
+     *
+     * @param propChange the change that the animation bar prop should update which indicates how it should update.
+     * @param latest a boolean value representing if the latest data should be loaded.
+     * @param observed a boolean value representing if observed or predicted data should be loaded.
+     * @param timestamp the timestamp from which to load the data in case it isn't the latest.
+     * @param compare boolean value that indicate the start of the compare feature
+     */
+    compareData(propChange, latest, observed, timestamp, compare) {
+        // only run this code if it isn't already loading data already
+        if (!this.state.loadingData) {
+            this.setState({loadingData: true});
+            // set the communication variables used in the requests
+            Communication.setUseLatestData(latest);
+            Communication.setObserved(observed);
+            Communication.setRequestTimestamp(timestamp);
+            Communication.setCompare(compare);
+
+            // reset the loaded images count and then fetch the new images
+            Map.loadedImages = 0;
+            Communication.fetchUrlsToCompare()
+                .then(() => {
+                    // wait for all new images to be preloaded and then render them and update the other parts
+                    const waitForNewImages = setInterval(function () {
+                        if (Map.loadedImages === 20) {
+                            // set the rain images
+                            Map.setHeatLayers();
+
                             // update the animation bar rain chart and location information
                             if (Slider.lastLat !== undefined) {
-                                Slider.showPrecipitationData(Slider.lastLat, Slider.lastLong);
+                                Slider.getPrecipitationData(Slider.lastLat, Slider.lastLong, false);
                             }
 
                             // update the animation bar timestamps and past data time intervals
@@ -194,4 +274,41 @@ export default class App extends Component {
                 });
         }
     }
+
+
+    /**
+     * Changes the map rain layers based on the compare switch
+     *
+     * @param pred boolean value that indicate the layers to display. 
+     *        False for observation, True for predictions
+     */
+    displayComparedData(pred) {
+        // only run this code if it isn't already loading data already
+        if (!this.state.loadingData) {
+            this.setState({loadingData: true});
+            // set the communication variables used in the requests
+            Map.loadedImages = 0;
+            Map.preloadedImages(pred);
+            const waitForNewImages = setInterval(function () {
+                if (Map.loadedImages === 20) {
+                    // set the rain images
+                    Map.setHeatLayers();
+
+                    // update the animation bar rain chart and location information
+                    if (Slider.lastLat !== undefined) {
+                        Slider.getPrecipitationData(Slider.lastLat, Slider.lastLong, true);
+                    }
+
+                    // update the animation bar timestamps and past data time intervals
+                    AnimationBar.updateMarks();
+                    this.setState({animationBarUpdateProp: this.state.animationBarUpdateProp -1});
+
+                    // clear the interval and set the loading to be done
+                    this.setState({loadingData: false});
+                    clearInterval(waitForNewImages);
+                }
+            }.bind(this), 100);
+        }
+    }
+
 }

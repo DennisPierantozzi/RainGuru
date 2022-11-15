@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import moment from "moment";
 import { MenuItem, Select } from "@mui/material";
+import { FormGroup, FormControlLabel, Switch } from '@mui/material';
 import Communication from "../Communication";
 
 export default class PastDataSelector extends Component {
@@ -24,12 +25,13 @@ export default class PastDataSelector extends Component {
             updateProp: 0,
             predictedValue: "",
             observedValue: "",
-            observedTimestamp: ""
+            observedTimestamp: "",
         }
 
         // set the available times
         PastDataSelector.updateTimes();
     }
+
 
     /**
      * Changes the state to set up the update of the rendered time intervals.
@@ -90,7 +92,7 @@ export default class PastDataSelector extends Component {
         // get the information about which timestamps are available and which aren't
         const dataAvailable = await Communication.fetchDataAvailability();
         const predicted = dataAvailable.predictedTimes;
-        const observed = dataAvailable.observedTimes
+        const observed = dataAvailable.observedTimes;
         const lastTime = Math.max(predicted[predicted.length - 1], observed[observed.length - 1]);
         const fiveMinSmall = 300;
         const fiveMinBig = 300000;
@@ -102,7 +104,7 @@ export default class PastDataSelector extends Component {
         PastDataSelector.observationIntervals = [];
 
         // 36 = 3 hours * 12 5-min intervals per hour, >= 19 is since from that point there is enough time for a full interval
-        for (let i = 0, time = lastTime; i < 36; i++, time -= fiveMinSmall) {
+        for (let i = 0, time = lastTime; i < 50; i++, time -= fiveMinSmall) {
             // add the time to a list to reference later for fetching the required data
             PastDataSelector.times.push(time);
             // get the time intervals with hours:minutes time formats
@@ -110,6 +112,7 @@ export default class PastDataSelector extends Component {
             const predictionTime = moment(new Date(timeBig)).format("HH:mm");
             const observationInterval = moment(new Date(timeBig)).format("HH:mm") + " - " +
                 moment(new Date(timeBig + (19 * fiveMinBig))).format("HH:mm");
+
 
             // add the menu items with the time intervals
             if (predicted.includes(time)) {
@@ -132,6 +135,8 @@ export default class PastDataSelector extends Component {
                 }
             }
         }
+
+        
     }
 
     /**
@@ -150,6 +155,7 @@ export default class PastDataSelector extends Component {
                 PastDataSelector.observedTimestamps.push(<MenuItem value={i} key={i}>{time}</MenuItem>);
             }
         }
+
     }
 
     /**
@@ -158,12 +164,13 @@ export default class PastDataSelector extends Component {
      * @param latest a boolean value representing if the latest data should be loaded.
      * @param observed a boolean value representing if observed or predicted data should be loaded.
      */
-    loadData(latest, observed) {
+    loadData(latest, observed, compare) {
         // variables for what needs to change, the values are set depending on how this method was called
         const currentlyShowing = document.getElementById("currently-showing");
         let validCall = false;
         let time = [];
         let timeString = "";
+        let timeCompare = "";
 
         if (latest) {
             // set it to a valid call and set the timestring
@@ -187,20 +194,30 @@ export default class PastDataSelector extends Component {
                 validCall = true;
                 time = PastDataSelector.times[this.state.predictedValue];
                 timeString = "Predictions made at: " + moment(new Date(time * 1000)).format("HH:mm");
-
                 // update the accessible observation timestamp
                 PastDataSelector.loadTimestamp = 0;
+            }
+            if(compare && observed) {
+                if(this.state.observedValue !== "") {
+                    time = PastDataSelector.times[this.state.observedValue];
+                    timeString = "Observations from: " + moment(new Date(time * 1000)).format("HH:mm");
+                    timeCompare=PastDataSelector.times[this.state.observedValue].toString()+'c'+(PastDataSelector.times[this.state.observedValue]-300).toString();
+                }
             }
         }
 
         // load new data when a valid call was made that is also different from what is currently already loaded
         if (validCall && timeString !== currentlyShowing.innerHTML) {
+            if(compare){     
+                this.props.compareData(-1, latest, observed, timeCompare, compare);
+            }
             // call app to display the new data
-            this.props.displayData(-1, latest, observed, time);
+            else{this.props.displayData(-1, latest, observed, time);}
             // display what data should be loaded now
             currentlyShowing.innerHTML = timeString;
         }
     }
+
 
     /**
      * Renders the content of the pastDataSelector div at the top of the screen with a menu to choose past data to show.
@@ -214,24 +231,20 @@ export default class PastDataSelector extends Component {
      */
     render() {
         return (<div className="pastDataSelectorContents" data-testid="pastDataSelector">
-            <p className="past-data-menu-part" id="past-data-explanation">
-                Currently showing:<br/><i id="currently-showing" data-testid="currently-showing">Latest data</i>
-            </p>
-            <hr className="past-data-divider"/>
-            <div className="past-data-menu-part">
+            <div className="past-data-menu-part display-data-width">
                 <div className="latest-data-chooser">
                     <p className="latest-data-text">Display the latest data:</p>
                     <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
                             disabled={this.state.loadingData} id="latest-data-loader" data-testid="latest-loader" onClick={() => {
-                        this.loadData(true, false);
-                    }}>LOAD</button>
+                        this.props.setShowCompare(false);
+                        this.loadData(true, false, false);
+                    }}>Load</button>
                 </div>
             </div>
-            <hr className="past-data-divider"/>
             <div className="past-data-menu-part">
                 <p>Predictions made at:</p>
                 <div className="time-interval-chooser">
-                    <Select className="time-interval-drop-down" id="predicted-drop-down" data-testid="predicted-drop-down"
+                    <Select className="time-interval-drop-down times-color" id="predicted-drop-down" data-testid="predicted-drop-down"
                             variant="standard" defaultValue="" value={this.state.predictedValue}
                             MenuProps={{ PaperProps: { sx: { maxHeight: 'calc(7 * var(--sidebar-item-height))' } } }}
                             onChange={(e) => this.setState({predictedValue: e.target.value})}>
@@ -240,15 +253,15 @@ export default class PastDataSelector extends Component {
                     </Select>
                     <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
                             disabled={this.state.loadingData} data-testid="predicted-loader" onClick={() => {
-                        this.loadData(false, false);
-                    }}>LOAD</button>
+                            this.props.setShowCompare(false);
+                        this.loadData(false, false, false);
+                    }}>Load</button>
                 </div>
             </div>
-            <hr className="past-data-divider"/>
             <div className="past-data-menu-part">
                 <p>Observations from:</p>
                 <div className="time-interval-chooser">
-                    <Select className="time-interval-drop-down" id="observed-drop-down" data-testid="observed-drop-down"
+                    <Select className="time-interval-drop-down times-color" id="observed-drop-down" data-testid="observed-drop-down"
                             variant="standard" defaultValue="" value={this.state.observedValue}
                             MenuProps={{ PaperProps: { sx: { maxHeight: 'calc(7 * var(--sidebar-item-height))' } } }}
                             onChange={(e) => {
@@ -260,12 +273,18 @@ export default class PastDataSelector extends Component {
                     </Select>
                     <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
                             disabled={this.state.loadingData} data-testid="observed-loader" onClick={() => {
-                        this.loadData(false, true);
-                    }}>LOAD</button>
+                                this.props.setShowCompare(false);
+                        this.loadData(false, true, false);
+                    }}>Load</button>
+                    <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
+                            disabled={this.state.loadingData} data-testid="observed-loader" onClick={() => {
+                                this.props.setShowCompare(true);
+                        this.loadData(false, true, true);
+                    }}>Compare</button>
                 </div>
                 <div className={(this.state.observedValue !== "") ? "timestamp-observation-chooser" : "timestamp-observation-chooser-disabled"}>
                     <p className="load-on">Load on:</p>
-                    <Select className="timestamp-drop-down" id="timestamp-observed-drop-down" data-testid="timestamp-observed-drop-down"
+                    <Select className="timestamp-drop-down times-color" id="timestamp-observed-drop-down" data-testid="timestamp-observed-drop-down"
                             variant="standard" defaultValue={9} value={this.state.observedTimestamp}
                             MenuProps={{ PaperProps: { sx: { maxHeight: 'calc(7 * var(--sidebar-item-height))' } } }}
                             onChange={(e) => this.setState({observedTimestamp: e.target.value})}>
@@ -273,7 +292,6 @@ export default class PastDataSelector extends Component {
                     </Select>
                 </div>
             </div>
-            <hr className="past-data-divider"/>
         </div>);
     }
 }

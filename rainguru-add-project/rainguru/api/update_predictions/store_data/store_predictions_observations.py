@@ -7,7 +7,7 @@ from api.models import Predicted, Observed
 from api.update_predictions.convert_data import convert_matrix_image
 from django import db
 
-store_data = True
+store_data = False
 
 
 def get_store_data():

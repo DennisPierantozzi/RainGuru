@@ -151,4 +151,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = "/media/"
 MEDIA_ROOT=os.path.join(BASE_DIR,"media/")
 
-TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+TESTING = False
+#TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'

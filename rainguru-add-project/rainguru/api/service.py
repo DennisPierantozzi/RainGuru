@@ -1,15 +1,25 @@
 import datetime
+import json
 import math
 import os
+from datetime import timezone
+from json import JSONEncoder
 
+import numpy as np
 from api.memory_store import memory_store
 from api.models import Observed, Predicted
-from api.update_predictions.store_data import store_predictions_observations
 from api.update_predictions.convert_data import convert_matrix_image
-from datetime import timezone
+from api.update_predictions.scheduler import restart, stop
+from api.update_predictions.store_data import store_predictions_observations
 
 
-def fetch_observed_precipitation(timestamp, x, y):
+class NumpyArrayEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return JSONEncoder.default(self, obj)      
+
+def fetch_observed_precipitation(timestamp, passx, passy):
     """
     Fetch observed precipitation at a given point from the database
 
@@ -18,12 +28,26 @@ def fetch_observed_precipitation(timestamp, x, y):
     :param y: The y coordinate of the image pixel
     :return: An array of 20 observed precipitation values, starting at the given timestamp
     """
-    x, y = convert_matrix_image.image_map[(x, y)]
+    x, y = convert_matrix_image.image_map[(passx, passy)]
     precipitation = []
+    #nozero = []
+    #gino = []
+    #prova = 0
+    
     for o in Observed.objects\
             .filter(time__gte=timestamp)\
             .filter(time__lt=timestamp + datetime.timedelta(minutes=100))\
             .order_by('time'):
+
+        #print(o.time)
+        #if prova == 0: 
+            #print(o.matrix_data[0])
+            #gino = np.array(o.matrix_data)
+            #nozero = np.transpose(np.nonzero(gino))
+            #numpyData = {"array": nozero}
+            #print(str(o.matrix_data[0][119]))
+            #print(str(o.matrix_data[0][145]))
+
         if x == -1:
             value = 0
         else:
@@ -32,9 +56,11 @@ def fetch_observed_precipitation(timestamp, x, y):
         rounded = math.floor(value * 100) / 100
 
         precipitation.append(rounded)
+        #prova = prova+1
 
     response_dict = {
-        'precipitation': precipitation
+        'precipitation': precipitation,
+        #'nozero': json.dumps(numpyData, cls=NumpyArrayEncoder)
     }
 
     return response_dict
@@ -78,6 +104,7 @@ def fetch_predicted_precipitation(timestamp, x, y):
     """
     x, y = convert_matrix_image.image_map[(x, y)]
     precipitation = []
+    
     for p in Predicted.objects.filter(calculation_time=timestamp).order_by('prediction_time'):
         if x == -1:
             value = 0
@@ -118,6 +145,8 @@ def fetch_observed_urls(timestamp):
         "exception_active": False,
         "exception_message": ''
     }
+
+    #store_predictions_observations.store_previous_data_clicked(timestamp, True, response_dict)
 
     return response_dict
 
@@ -208,4 +237,14 @@ def check_new_data():
         'timestamp': memory_store.fetch_timestamp().replace(tzinfo=timezone.utc).timestamp()
     }
 
+    return response_dict
+
+
+def handle_update(update):
+    if update=='true': restart()
+    if update=='false': stop()
+
+    response_dict = {
+        'update': update
+    }
     return response_dict

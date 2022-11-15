@@ -6,6 +6,7 @@ import {GeoSearchControl, OpenStreetMapProvider} from "leaflet-geosearch";
 import Slider from "../Information/Slider";
 import Communication from "../Communication";
 
+
 export default class Map {
 
     // static variables that contain everything for the map component
@@ -13,26 +14,35 @@ export default class Map {
     static heatLayers = [];
     static nextLayers = [];
     static currentLayer = new L.LayerGroup();
+    static polylineLayer = new L.Layer();
     static marker;
     static loadedImages = 0;
     static dataURLS = [];
-    static minMapBounds = L.latLng(42.18, -4.35);
-    static maxMapBounds = L.latLng(61.72, 15.18);
+    static minMapBounds = L.latLng(42.18, -4.35); //49 - 42
+    static maxMapBounds = L.latLng(61.72, 15.18); // 55 - 61
     static minMarkerBounds = L.latLng(50.21, 1.90);
     static maxMarkerBounds = L.latLng(54.71, 9.30);
-
+    
     static maxBounds = L.latLng(54.71,1.90);
     static minBounds = L.latLng(50.21,9.30);
 
     static pointList = [this.minMarkerBounds, this.minBounds, this.maxMarkerBounds, this.maxBounds, this.minMarkerBounds];
+    static compare = false;
+    static compareData = false;
 
     /**
      * Preload and cache the images
      */
-    static preloadedImages() {
+    static preloadedImages(compareData=false) {
         // get the image urls
-        const imageUrls = Communication.getImageUrls();
+        this.compare = Communication.getCompare();
+        this.compareData = compareData;
+        let imageUrls = [];
+        if(!this.compare){imageUrls = Communication.getImageUrls();}
+        if(this.compare && !compareData){imageUrls = Communication.getImageUrlsObsCompare();console.log("compare obs"+imageUrls);}
+        if(this.compare && compareData){imageUrls = Communication.getImageUrlsPrepCompare();console.log("compare pred"+imageUrls);}
 
+        
         // for each url preload the image so it doesn't flicker
         imageUrls.forEach((image) => {
             const newImage = new Image();
@@ -44,12 +54,19 @@ export default class Map {
         });
     }
 
+
+
     /**
      * Generates a list of all generated precipitation images for the coming 100 minutes.
      */
     static setHeatLayers() {
         // heat layer code
-        const imageUrls = Communication.getImageUrls();
+        let imageUrls = [];
+        console.log("entrato con compare: " + this.compare +"entrato con compareData: " + this.compareData);
+        if(!this.compare) {imageUrls = Communication.getImageUrls();}
+        if(this.compare) {imageUrls = Communication.getImageUrlsObsCompare();}
+        if(this.compare && this.compareData) {imageUrls = Communication.getImageUrlsPrepCompare();}
+
         const imageBounds = [[54.71, 1.90], [50.21, 9.30]];
         this.heatLayers = [];
 
@@ -85,27 +102,40 @@ export default class Map {
      * Renders the map and handles the event of clicking on the map and putting a marker at that location.
      */
     static render() {
+        const options = {
+            // Required: API key
+            key: 'edBkqFTbtnIHDh1gMxQ1k50PxREIG3lK',
+        
+            // Put additional console output
+            verbose: true,
+        
+            // Optional: Initial state of the map
+            lat: 52.45,
+            lon: 5.415,
+            zoom: 7,
+        };
+
         // base layer code
         const baseLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
             attribution: '&copy; <a href="https://www.esri.com/en-us/home">Esri</a>'
         });
 
-        // set up the heat layers
+        // set up the heat layers *forecasts*
         Map.setHeatLayers();
 
         // map code
         let map = L.map("map", {
             center: new L.LatLng(52.45, 5.415),
-            zoom: 7,
+            zoom: 5,
             minZoom: 7,
             maxBounds: L.latLngBounds(Map.minMapBounds, Map.maxMapBounds),
             maxBoundsViscosity: 0.9,
         });
-
+        
         /* Dennis Upgrade */
         //boundaries line
         let boundaries = L.polyline(Map.pointList, {
-            color: 'blue',
+            color: '#22587C',
             weight: 3,
             opacity: 0.6,
             smoothFactor: 3
@@ -113,10 +143,13 @@ export default class Map {
         
 
         // add layers to the map and the scale
-        boundaries.addTo(map);
         baseLayer.addTo(map);
+        boundaries.addTo(map);
         this.currentLayer.addTo(map);
+        
         L.control.scale({imperial: false}).addTo(map);
+        
+        
 
         // load the first rain image and center the map to the Netherlands
         this.activateHeatLayer(0);
@@ -146,6 +179,8 @@ export default class Map {
         map.on('geosearch/showlocation', function (e) {
             Map.markerHandling(e, true, false);
         });
+
+        
     }
 
     /**
@@ -215,6 +250,6 @@ export default class Map {
         } else {
             Map.map.flyTo(L.latLng(latitude, longitude), found ? Math.max(8, Map.map.getZoom()) : Map.map.getZoom());
         }
-        Slider.showPrecipitationData(latitude, longitude);
+        Slider.getPrecipitationData(latitude, longitude);
     }
 }

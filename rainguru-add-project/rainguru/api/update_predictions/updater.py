@@ -17,8 +17,7 @@ logger = mainLogger
 
 model_input_folder = os.path.join(os.path.abspath(os.curdir), 'api', 'model_input')
 
-use_latest_data = True
-
+use_latest_data = False
 
 def update():
     """
@@ -37,8 +36,10 @@ def update():
     if use_latest_data:
         forecast, used = run_model(start_timestamp, model_input_folder)
     else:
-        forecast, used = run_model('2018-06-01 13:35:00',
-                                   os.path.join(os.getcwd(), 'api', 'tests', 'model_input_test_data'))
+        forecast, used = run_model('2022-11-08 14:05:00',
+                                   model_input_folder)
+        #forecast, used = run_model('2022-11-08 14:05:00',
+         #                          os.path.join(os.getcwd(), 'api', 'tests', 'model_input_test_data'))
     print('Model has finished running!')
 
     print("Store predictions...")

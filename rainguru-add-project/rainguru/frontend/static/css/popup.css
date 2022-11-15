@@ -37,7 +37,7 @@
         border-radius: 10px;
         border: none;
         text-indent: -9999px;
-        background: transparent url('../images/closebutton.png') no-repeat center center;
+        background: transparent url('../images/close-menu.png') no-repeat center center;
         background-size: 100%;
         margin: 0;
     }

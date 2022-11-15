@@ -1,6 +1,7 @@
 import React from "react";
 import Popup from "react-popup";
 import Map from "./Map/Map";
+import Slider from "./Information/Slider";
 
 export default class Communication {
     static useLatestData = true;
@@ -11,6 +12,12 @@ export default class Communication {
     static requestTimestamp = [];
     static dataTimestamp = [];
 
+    static update = true;
+    static compare = false;
+    static imageUrlsObsCompare = [];
+    static imageUrlsPrepCompare = [];
+    static dataTimestampObsCompare = [];
+    static dataTimestampPrepCompare = [];
     // getters
     /**
      * Get the boolean representing if we use the latest data.
@@ -39,6 +46,12 @@ export default class Communication {
     static getImageUrls() {
         return this.imageUrls;
     }
+    static getImageUrlsObsCompare() {
+        return this.imageUrlsObsCompare;
+    }
+    static getImageUrlsPrepCompare() {
+        return this.imageUrlsPrepCompare;
+    }
 
     /**
      * Get the timestamp of the first prediction of the latest data.
@@ -59,6 +72,17 @@ export default class Communication {
      */
     static getDataTimestamp() {
         return this.dataTimestamp;
+    }
+
+    static getDataTimestampObsCompare() {
+        return this.dataTimestampObsCompare;
+    }
+    static getDataTimestampPrepCompare() {
+        return this.dataTimestampPrepCompare;
+    }
+
+    static getCompare() {
+        return this.compare;
     }
 
     // setters
@@ -83,16 +107,27 @@ export default class Communication {
         this.requestTimestamp = timestamp;
     }
 
+    /**
+     * Set the boolean rapresenting if we show the comparison 
+     */
+     static setCompare(compare) {
+        this.compare = compare;
+    }
+
 
     /**
      * Fetches new data from the back-end.
      */
     static async fetchUrls() {
-        let url = "api/fetch?observed=" + this.observed;
+        const coord = Slider.getMatrixCoordinates(Slider.lastLat, Slider.lastLong);
+
+        let url = "api/fetch?observed=" + this.observed + "&compare=false&x=" + (699-coord["y"]) + "&y=" + coord["x"];
         // only add timestamp if not fetching latest data
         if (!this.useLatestData) {
+            console.log("requestTimeStamp "+this.requestTimestamp);
             url += "&timestamp=" + this.requestTimestamp;
         }
+
         // make request to retrieve predictions
         await fetch(url)
           .then(response => {
@@ -105,9 +140,46 @@ export default class Communication {
             // store predictions and create images for them
             this.imageUrls = responseJson.urls;
             this.dataTimestamp = new Date(responseJson.timestamp * 1000);
+            if(responseJson.hasOwnProperty("precipitation")) {Slider.precipitation = responseJson.precipitation;}
+            
             if(responseJson.exception_active) {
                 Popup.alert("Message from server:\n" + responseJson.exception_message, "Warning: Model might be using old data.");
                 console.log(responseJson.exception_message);
+            }
+            Map.preloadedImages();
+            this.dataCollected = true;
+          });
+    }
+
+    /**
+     * Dennis Upgrade
+     * Fetches new data from the back-end to compare starting from observations choosed by the user
+     */
+    static async fetchUrlsToCompare() {
+        let url = "api/fetch?observed=" + this.observed + "&compare=" + this.compare;
+        // only add timestamp if not fetching latest data
+        if (!this.useLatestData) {
+            console.log("requestTimeStamp "+this.requestTimestamp);
+            url += "&timestamp=" + this.requestTimestamp;
+        }
+
+        // make request to retrieve predictions
+        await fetch(url)
+          .then(response => {
+            if (response.status > 400) {
+              throw new Error();
+            }
+            return response.json();
+          })
+          .then(responseJson => {
+            // store predictions and create images for them
+            this.imageUrlsObsCompare = responseJson.urls_observation;
+            this.imageUrlsPrepCompare = responseJson.urls_precipitation;
+            this.dataTimestampObsCompare = responseJson.timestamp_observation;
+            this.dataTimestampPrepCompare = responseJson.timestamp_precipitation;
+            if(responseJson.exception_active_observation) {
+                Popup.alert("Message from server:\n" + responseJson.exception_message_observation, "Warning: Model might be using old data.");
+                console.log(responseJson.exception_message_observation);
             }
             Map.preloadedImages();
             this.dataCollected = true;
@@ -147,12 +219,17 @@ export default class Communication {
      * @param y the y coordinate of the 480x480 images
      * @returns {Promise<any>} the precipitation of the location for a selected 100 minutes.
      */
-    static async fetchPrecipitation(x, y) {
-        let url = "api/precipitation?x=" + x + "&y=" + y + "&observed=" + this.observed;
+    static async fetchPrecipitation(x, y, pred) {
+        let url = "api/precipitation?x=" + x + "&y=" + y;
         // only add timestamp if not fetching latest data
         if (!this.useLatestData) {
-            url += "&timestamp=" + this.requestTimestamp;
+            if(this.compare) {
+                if(pred) {url += "&observed=false&timestamp=" + (this.dataTimestampPrepCompare-300);}
+                else {url += "&observed=true&timestamp=" + this.dataTimestampObsCompare;}
+            }
+            else {url += "&observed="+this.observed+"&timestamp=" + this.requestTimestamp;}
         }
+        else{url += "&observed="+this.observed;}
 
         // make a request for the precipitation information of the give location
         return await fetch(url)
@@ -173,6 +250,7 @@ export default class Communication {
      *
      * @returns {Promise<{available: *, predictedTimes: *, observedTimes: *}>} the availability of data times
      */
+    
     static async fetchDataAvailability() {
         // make a request to get the availability times
         return await fetch("api/available")
@@ -191,4 +269,5 @@ export default class Communication {
                 };
             })
     }
+
 }

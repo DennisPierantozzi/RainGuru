@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./rainguru/api/prediction_model"
+    ]
+}

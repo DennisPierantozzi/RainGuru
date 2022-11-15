@@ -11,6 +11,10 @@ class Store:
         self.matrices = []
         self.predictions_timestamp = datetime.now()
 
+        self.urls_clicked = ["/media/404.png" for x in range(20)]
+        self.matrices_clicked = []
+        self.timestamp_clicked = ""
+
     def store_predictions(self, urls, matrices, timestamp):
         """
         Store information about the latest data
@@ -22,6 +26,19 @@ class Store:
         self.urls = urls
         self.matrices = matrices
         self.predictions_timestamp = timestamp
+
+    def store_predictions_clicked(self, urls, matrices, timestamp):
+        """
+        Store information about the latest data
+
+        :param urls: The urls of the latest images
+        :param matrices: The latest matrices that the model produced
+        :param timestamp: The timestamp of the latest predictions
+        """
+        self.urls_clicked = urls
+        self.matrices_clicked = matrices
+        self.timestamp_clicked = timestamp
+    
 
     def fetch_timestamp(self):
         return self.predictions_timestamp
