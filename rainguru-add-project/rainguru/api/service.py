@@ -13,11 +13,25 @@ from api.update_predictions.scheduler import restart, stop
 from api.update_predictions.store_data import store_predictions_observations
 
 
-class NumpyArrayEncoder(JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, np.ndarray):
-            return obj.tolist()
-        return JSONEncoder.default(self, obj)      
+def get_precipitations_array(x, y, observed):
+    precipitation = []
+    data = []
+    if observed:
+        data = memory_store.fetch_matrices_obs()
+    else: data = memory_store.fetch_matrices_pred()
+
+    for matrix in data:
+            if x == -1:
+                value = 0
+            else:
+                value = matrix[y][x]
+
+            rounded = math.floor(value * 100) / 100
+
+            precipitation.append(rounded)
+    
+    return precipitation
+
 
 def fetch_observed_precipitation(timestamp, passx, passy):
     """
@@ -30,37 +44,29 @@ def fetch_observed_precipitation(timestamp, passx, passy):
     """
     x, y = convert_matrix_image.image_map[(passx, passy)]
     precipitation = []
-    #nozero = []
-    #gino = []
-    #prova = 0
+    precipitationOne = []
     
-    for o in Observed.objects\
-            .filter(time__gte=timestamp)\
-            .filter(time__lt=timestamp + datetime.timedelta(minutes=100))\
-            .order_by('time'):
+    if memory_store.fetch_timestamp_obs() == timestamp:
+        print("entrato in store observation clicked")
+        precipitation = get_precipitations_array(x, y, True)
 
-        #print(o.time)
-        #if prova == 0: 
-            #print(o.matrix_data[0])
-            #gino = np.array(o.matrix_data)
-            #nozero = np.transpose(np.nonzero(gino))
-            #numpyData = {"array": nozero}
-            #print(str(o.matrix_data[0][119]))
-            #print(str(o.matrix_data[0][145]))
+    else:
+        for o in Observed.objects\
+                    .filter(time__gte=timestamp)\
+                    .filter(time__lt=timestamp + datetime.timedelta(minutes=100))\
+                    .order_by('time'):
 
-        if x == -1:
-            value = 0
-        else:
-            value = o.matrix_data[y][x]
+            if x == -1:
+                    value = 0
+            else:
+                    value = o.matrix_data[y][x]
 
-        rounded = math.floor(value * 100) / 100
-
-        precipitation.append(rounded)
-        #prova = prova+1
+            rounded = math.floor(value * 100) / 100
+            precipitationOne.append(rounded)
+        print("precipitation database: " + str(precipitationOne))
 
     response_dict = {
         'precipitation': precipitation,
-        #'nozero': json.dumps(numpyData, cls=NumpyArrayEncoder)
     }
 
     return response_dict
@@ -104,16 +110,42 @@ def fetch_predicted_precipitation(timestamp, x, y):
     """
     x, y = convert_matrix_image.image_map[(x, y)]
     precipitation = []
-    
-    for p in Predicted.objects.filter(calculation_time=timestamp).order_by('prediction_time'):
-        if x == -1:
-            value = 0
-        else:
-            value = p.matrix_data[y][x]
 
-        rounded = math.floor(value * 100) / 100
+    if memory_store.fetch_timestamp_pred() == timestamp:
+        print("entrato in store predictions clicked")
+        precipitation = get_precipitations_array(x, y, False)
 
-        precipitation.append(rounded)
+    else:
+        for p in Predicted.objects.filter(calculation_time=timestamp).order_by('prediction_time'):
+            if x == -1:
+                value = 0
+            else:
+                value = p.matrix_data[y][x]
+
+            rounded = math.floor(value * 100) / 100
+
+            precipitation.append(rounded)
+
+    response_dict = {
+        'precipitation': precipitation
+    }
+
+    return response_dict
+
+def fetch_compare_precipitation(timestamp, x, y):
+    """
+    Fetch predicted precipitation at a given point from the database
+
+    :param timestamp: The timestamp at which the predictions were made
+    :param x: The x coordinate of the image pixel
+    :param y: The y coordinate of the image pixel
+    :return: An array of 20 predicted precipitation values which were calculated at the given timestamp
+    """
+    x, y = convert_matrix_image.image_map[(x, y)]
+    precipitation = []
+
+    if memory_store.fetch_timestamp_compare_clicked() == timestamp and memory_store.fetch_observed_clicked() == -1:
+        precipitation = get_precipitations_array(x, y, True)
 
     response_dict = {
         'precipitation': precipitation
@@ -146,7 +178,7 @@ def fetch_observed_urls(timestamp):
         "exception_message": ''
     }
 
-    #store_predictions_observations.store_previous_data_clicked(timestamp, True, response_dict)
+    store_predictions_observations.store_previous_data_clicked(timestamp, True)
 
     return response_dict
 
@@ -191,6 +223,33 @@ def fetch_predicted_urls(timestamp):
         "exception_active": False,
         "exception_message": ''
     }
+
+    store_predictions_observations.store_previous_data_clicked(timestamp, False)
+
+    return response_dict
+
+def fetch_compare_urls(timestamp_obs, timestamp_pred):
+    """
+    Fetches urls of predicted images
+
+    :param timestamp: The timestamp at which the predictions were calculated
+    :return: A dictionary with the urls, timestamp and exceptions
+    """
+    dict_obs = fetch_observed_urls(timestamp_obs)
+    dict_prep = fetch_predicted_urls(timestamp_pred)
+
+    response_dict = {
+                "urls_observation": dict_obs["urls"],
+                "urls_precipitation": dict_prep["urls"],
+                "timestamp_observation": dict_obs["timestamp"],
+                "timestamp_precipitation": dict_prep["timestamp"],
+                "exception_active_observation": dict_obs["exception_active"],
+                "exception_active_precipitation": dict_prep["exception_active"],
+                "exception_message_observation": dict_obs["exception_message"],
+                "exception_message_precipitation": dict_prep["exception_message"],
+    }
+
+    #store_predictions_observations.store_previous_data_clicked(timestamp_obs, -1, timestamp_pred)
 
     return response_dict
 

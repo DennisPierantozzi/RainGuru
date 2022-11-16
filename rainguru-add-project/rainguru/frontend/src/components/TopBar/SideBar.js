@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {HiOutlineDatabase} from 'react-icons/hi';
+import {BiFilter} from 'react-icons/bi';
 import PastDataSelector from "./PastDataSelector";
 import {SideBarData} from "./SideBarData";
 import AppInfoPopup from "./AppInfoPopup";
-export default function SideBar({pastDataSelectorUpdateProp, loadingData, displayData, compareData, displayComparedData, setShowCompare}) {
+export default function SideBar({pastDataSelectorUpdateProp, loadingData, displayData, compareData, displayComparedData, setShowCompare, setShowSidebar}) {
 
      /**
      * Initializing five states and functions to update them. Initial states are set to false for all of them.
@@ -68,9 +68,12 @@ export default function SideBar({pastDataSelectorUpdateProp, loadingData, displa
 
     return (
         <div className="Sidebar-shown">
-                <div className="Menu-title">RainGuru</div>
+                <div className="Menu-title">
+                    RainGuru <br/> <span className="Menu-subtitle">Weather forecast app</span>
+                </div>
                 <div className="open-menu">
-                        <PastDataSelector updateProp={pastDataSelectorUpdateProp} loadingData={loadingData} displayData={displayData} compareData={compareData} displayComparedData={displayComparedData} setShowCompare={setShowCompare}/>
+                        <PastDataSelector updateProp={pastDataSelectorUpdateProp} loadingData={loadingData} displayData={displayData} compareData={compareData} 
+                        displayComparedData={displayComparedData} setShowCompare={setShowCompare} setShowSidebar={setShowSidebar}/>
                 </div>
                 <div className="Sidebar-items Bottom-menu">
                     {SideBarData.map((item, index) => {

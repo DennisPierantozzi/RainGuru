@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {FaBars} from 'react-icons/fa';
+import {BiFilter} from 'react-icons/bi';
 import {ImLocation} from 'react-icons/im';
 import { FormGroup, FormControlLabel, Switch } from '@mui/material';
 import Map from "../Map/Map";
@@ -57,7 +57,7 @@ export default function TopBar({setShowSidebar, displayComparedData, loadingData
 
             <div className="Sidebar" data-testid="sidebar-menu">
                 <img id="img-menu" className="ratioImage" src="../../../static/images/1x1.png"/>
-                <FaBars className="Sidebar-icon" onClick={() => setShowSidebar()} size="60%"/>
+                <BiFilter className="Sidebar-icon" onClick={() => setShowSidebar()} size="90%"/>
             </div>
             <div className="Location">
                 <img className="ratioImage" src="../../../static/images/1x1.png"/>

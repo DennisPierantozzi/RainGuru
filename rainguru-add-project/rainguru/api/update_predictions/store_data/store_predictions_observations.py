@@ -132,6 +132,36 @@ def store_observed_images(observed, now):
             convert_matrix_image.create_image(observed[t][0][0], location)
 
 
+def store_previous_data_clicked(timestamp, observed):
+    if observed:
+        if not timestamp == memory_store.fetch_timestamp_obs:
+            store_previous_observation(timestamp)
+
+    elif not observed:
+        if not timestamp == memory_store.fetch_timestamp_pred:
+            store_previous_predictions(timestamp)
+
+
+
+def store_previous_observation(timestamp):
+    matrices = []
+    for o in Observed.objects\
+            .filter(time__gte=timestamp)\
+            .filter(time__lt=timestamp + datetime.timedelta(minutes=100))\
+            .order_by('time'):
+            
+            matrices.append(o.matrix_data)
+
+    memory_store.store_observation_clicked(matrices, timestamp)
+
+def store_previous_predictions(timestamp):
+    matrices = []
+    for p in Predicted.objects.filter(calculation_time=timestamp).order_by('prediction_time'):
+        matrices.append(p.matrix_data)
+        
+    memory_store.store_predictions_clicked(matrices, timestamp)
+
+
 def cleanup(now):
     """
     Cleans up the database records and disk stored images of old predictions and observations

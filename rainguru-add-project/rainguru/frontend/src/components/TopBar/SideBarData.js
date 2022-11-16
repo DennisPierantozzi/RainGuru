@@ -79,6 +79,7 @@ export const SideBarData = [
                         <li>Mike Raave, TU Delft</li>
                         <li>Dr.Elvin Isufi, TU Delft</li>
                         <li>Radu Gaghi, TU Delft</li>
+                        <li>Dennis Pierantozzi, TU Delft</li>
                     </ul>
                 </div>
             </div>

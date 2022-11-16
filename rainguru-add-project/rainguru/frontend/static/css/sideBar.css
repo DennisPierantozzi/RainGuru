@@ -85,6 +85,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     font-size: 20px;
+    opacity: 0.98;
 }
 
 /* ==================== depth level divider ==================== */
@@ -342,11 +343,18 @@
     height: 100%;
 }
 .Menu-title {
-    font-size: 45px;
+    font-size: 58px;
     font-weight: bold;
     color: white;
     display: inline-flex;
-    justify-content: inherit;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Menu-subtitle {
+    font-size: 15px;
+    font-weight: 400;
+    color: #ffffff;
 }
 
 

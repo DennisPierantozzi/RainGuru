@@ -11,9 +11,12 @@ class Store:
         self.matrices = []
         self.predictions_timestamp = datetime.now()
 
-        self.urls_clicked = ["/media/404.png" for x in range(20)]
-        self.matrices_clicked = []
-        self.timestamp_clicked = ""
+        self.matrices_obs_clicked = []
+        self.timestamp_obs_clicked = ""
+        self.observed_clicked = False
+
+        self.matrices_pred_clicked = []
+        self.timestamp_pred_clicked = ""
 
     def store_predictions(self, urls, matrices, timestamp):
         """
@@ -27,17 +30,31 @@ class Store:
         self.matrices = matrices
         self.predictions_timestamp = timestamp
 
-    def store_predictions_clicked(self, urls, matrices, timestamp):
+    def store_observation_clicked(self, matrices, timestamp):
         """
-        Store information about the latest data
+        Store information about the latest data requested
 
-        :param urls: The urls of the latest images
         :param matrices: The latest matrices that the model produced
         :param timestamp: The timestamp of the latest predictions
+        :param observed: The boolean value to discriminate observations and predictions
         """
-        self.urls_clicked = urls
-        self.matrices_clicked = matrices
-        self.timestamp_clicked = timestamp
+
+        self.matrices_obs_clicked = matrices
+        self.timestamp_obs_clicked = timestamp
+        self.observed_clicked = True
+
+    def store_predictions_clicked(self, matrices, timestamp):
+        """
+        Store information about the latest data requested
+
+        :param matrices: The latest matrices that the model produced
+        :param timestamp: The timestamp of the latest predictions
+        :param observed: The boolean value to discriminate observations and predictions
+        """
+
+        self.matrices_pred_clicked = matrices
+        self.timestamp_pred_clicked = timestamp
+        self.observed_clicked = False
     
 
     def fetch_timestamp(self):
@@ -48,6 +65,24 @@ class Store:
 
     def fetch_matrices(self):
         return self.matrices
+
+
+    def fetch_timestamp_obs(self):
+        return self.timestamp_obs_clicked
+
+    def fetch_matrices_obs(self):
+        return self.matrices_obs_clicked
+
+    def fetch_timestamp_pred(self):
+        return self.timestamp_pred_clicked
+
+    def fetch_matrices_pred(self):
+        return self.matrices_pred_clicked
+
+    def fetch_observed_clicked(self):
+        return self.observed_clicked
+
+
 
     def store_exception(self, message):
         self.exception_active = True

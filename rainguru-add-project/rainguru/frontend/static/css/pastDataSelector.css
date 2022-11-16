@@ -19,7 +19,8 @@
     width: 90%;
     /*background-color: white;*/
     color: #ffffff;
-
+    font-size: 25px;
+    font-weight: 300;
 }
 
 /* ==================== depth level divider ==================== */
@@ -31,16 +32,22 @@
 }
 
 .past-data-menu-part {
-    width: 90%;
     padding: 10px 5%;
     display: inline-flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
+    align-items: center;
 }
 
 /*Dennis Upgrade*/
 .display-data-width {
     width: 20%;
+}
+.display-predictions-width {
+    width: 50%;
+}
+.display-observations-width {
+    width: 80%;
 }
 
 /* ==================== depth level divider ==================== */
@@ -55,8 +62,12 @@
 
 .time-interval-chooser {
     position: relative;
-    width: 100%;
+    width: auto;
     display: flex;
+    background-color: white;
+    border-radius: 20px;
+    padding: 0px 30px;
+    margin: 0px 20px;
 }
 
 .timestamp-observation-chooser, .timestamp-observation-chooser-disabled {
@@ -68,6 +79,17 @@
 .timestamp-observation-chooser-disabled {
     pointer-events: none;
     color: lightgray;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.timestamp-observation-chooser {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 /* ==================== depth level divider ==================== */
@@ -88,19 +110,27 @@
     background-color: white;
     color: #22587C;
     border: solid 1px transparent;
-    border-radius: 8px;
+    border-radius: 20px;
     font-size: 18px;
     padding: 8px 8px;
     margin-right: 8px;
 }
 
+.load-interval-chooser {
+    background-color: white;
+    border-radius: 20px;
+    padding: 0px 30px;
+    margin: 0px 20px;
+}
+
 .time-interval-loader:hover {
     cursor: pointer;
+    font-weight: bold;
 }
 
 #latest-data-loader {
     left: 0;
-    padding: 8px 8px;
+    padding: 8px 20px;
 }
 
 .disabled-time-interval-loader {
@@ -131,7 +161,7 @@
 }
 
 .times-color {
-    color: white!important;
+    color: #0e0e0e!important;
 }
 
 .timestamp-observation-chooser-disabled .MuiSelect-icon {

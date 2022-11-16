@@ -93,7 +93,7 @@ export default class App extends Component {
                 <SideBar pastDataSelectorUpdateProp={this.state.pastDataSelectorUpdateProp}
                     loadingData={this.state.loadingData} displayData={this.displayData} 
                     compareData={this.compareData} 
-                    displayComparedData={this.displayComparedData} setShowCompare={this.setShowCompare}/>
+                    displayComparedData={this.displayComparedData} setShowCompare={this.setShowCompare} setShowSidebar={this.setShowSidebar}/>
             </div> 
         ];
     }

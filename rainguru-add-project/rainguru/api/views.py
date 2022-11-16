@@ -64,6 +64,7 @@ def fetch_urls(request):
 
     if observed is None:
         return HttpResponseBadRequest("observed parameter missing!")
+
     if provided_timestamp is None:
         response_dict = service.fetch_latest_urls()
         if not (math.isnan(float(x))) and not (math.isnan(float(y))): 
@@ -73,31 +74,25 @@ def fetch_urls(request):
         if compare == 'false':
             timestamp = datetime.datetime.utcfromtimestamp(int(provided_timestamp))
 
+
         if observed == 'true' and compare == 'false':
             response_dict = service.fetch_observed_urls(timestamp)
+
             if not (math.isnan(float(x))) and not (math.isnan(float(y))): 
                 responsePrecipitation = service.fetch_observed_precipitation(timestamp, int(x), int(y))
                 response_dict['precipitation']=responsePrecipitation['precipitation']
+             
         elif observed == 'false' and compare == 'false':
             response_dict = service.fetch_predicted_urls(timestamp)
+
             if not (math.isnan(float(x))) and not (math.isnan(float(y))): 
                 responsePrecipitation = service.fetch_predicted_precipitation(timestamp, int(x), int(y))
                 response_dict['precipitation']=responsePrecipitation['precipitation']
         
+
         if observed == 'true' and compare == 'true':
             times = provided_timestamp.split('c')
-            dict_obs = service.fetch_observed_urls(datetime.datetime.utcfromtimestamp(int(times[0])))
-            dict_prep = service.fetch_predicted_urls(datetime.datetime.utcfromtimestamp(int(times[1])))
-            response_dict = {
-                "urls_observation": dict_obs["urls"],
-                "urls_precipitation": dict_prep["urls"],
-                "timestamp_observation": dict_obs["timestamp"],
-                "timestamp_precipitation": dict_prep["timestamp"],
-                "exception_active_observation": dict_obs["exception_active"],
-                "exception_active_precipitation": dict_prep["exception_active"],
-                "exception_message_observation": dict_obs["exception_message"],
-                "exception_message_precipitation": dict_prep["exception_message"],
-            }
+            response_dict = service.fetch_compare_urls(datetime.datetime.utcfromtimestamp(int(times[0])), datetime.datetime.utcfromtimestamp(int(times[1])))
 
     return HttpResponse(json.dumps(response_dict))
 

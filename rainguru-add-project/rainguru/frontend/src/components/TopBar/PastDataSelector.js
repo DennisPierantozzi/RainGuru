@@ -231,34 +231,36 @@ export default class PastDataSelector extends Component {
      */
     render() {
         return (<div className="pastDataSelectorContents" data-testid="pastDataSelector">
-            <div className="past-data-menu-part display-data-width">
-                <div className="latest-data-chooser">
-                    <p className="latest-data-text">Display the latest data:</p>
-                    <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
-                            disabled={this.state.loadingData} id="latest-data-loader" data-testid="latest-loader" onClick={() => {
-                        this.props.setShowCompare(false);
-                        this.loadData(true, false, false);
-                    }}>Load</button>
+                <div className="past-data-menu-part display-data-width">
+                    <div className="latest-data-chooser">
+                        <p className="latest-data-text">Display the latest data:</p>
+                        <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
+                                disabled={this.state.loadingData} id="latest-data-loader" data-testid="latest-loader" onClick={() => {
+                                    this.props.setShowSidebar();
+                                    this.props.setShowCompare(false);
+                                    this.loadData(true, false, false);
+                        }}>Load</button>
+                    </div>
                 </div>
-            </div>
-            <div className="past-data-menu-part">
-                <p>Predictions made at:</p>
-                <div className="time-interval-chooser">
-                    <Select className="time-interval-drop-down times-color" id="predicted-drop-down" data-testid="predicted-drop-down"
-                            variant="standard" defaultValue="" value={this.state.predictedValue}
-                            MenuProps={{ PaperProps: { sx: { maxHeight: 'calc(7 * var(--sidebar-item-height))' } } }}
-                            onChange={(e) => this.setState({predictedValue: e.target.value})}>
-                        <MenuItem value=""><em>None</em></MenuItem>
-                        {PastDataSelector.predictionTimes}
-                    </Select>
-                    <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
-                            disabled={this.state.loadingData} data-testid="predicted-loader" onClick={() => {
-                            this.props.setShowCompare(false);
-                        this.loadData(false, false, false);
-                    }}>Load</button>
+                <div className="past-data-menu-part display-predictions-width">
+                    <p>Predictions made at:</p>
+                    <div className="time-interval-chooser">
+                        <Select className="time-interval-drop-down times-color" id="predicted-drop-down" data-testid="predicted-drop-down"
+                                variant="standard" defaultValue="" value={this.state.predictedValue}
+                                MenuProps={{ PaperProps: { sx: { maxHeight: 'calc(7 * var(--sidebar-item-height))' } } }}
+                                onChange={(e) => this.setState({predictedValue: e.target.value})}>
+                            <MenuItem value=""><em>None</em></MenuItem>
+                            {PastDataSelector.predictionTimes}
+                        </Select>
+                        <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
+                                disabled={this.state.loadingData} data-testid="predicted-loader" onClick={() => {
+                                this.props.setShowSidebar();    
+                                this.props.setShowCompare(false);
+                                this.loadData(false, false, false);
+                        }}>Load</button>
+                    </div>
                 </div>
-            </div>
-            <div className="past-data-menu-part">
+            <div className="past-data-menu-part display-observations-width">
                 <p>Observations from:</p>
                 <div className="time-interval-chooser">
                     <Select className="time-interval-drop-down times-color" id="observed-drop-down" data-testid="observed-drop-down"
@@ -273,23 +275,27 @@ export default class PastDataSelector extends Component {
                     </Select>
                     <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
                             disabled={this.state.loadingData} data-testid="observed-loader" onClick={() => {
+                                this.props.setShowSidebar();
                                 this.props.setShowCompare(false);
-                        this.loadData(false, true, false);
+                                this.loadData(false, true, false);
                     }}>Load</button>
-                    <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
-                            disabled={this.state.loadingData} data-testid="observed-loader" onClick={() => {
+                    <button className={"time-interval-loader" + (this.state.loadingData || (this.state.observedValue=="") ? " disabled-time-interval-loader" : "")}
+                            disabled={this.state.loadingData || (this.state.observedValue=="")} data-testid="observed-loader" onClick={() => {
+                                this.props.setShowSidebar();
                                 this.props.setShowCompare(true);
-                        this.loadData(false, true, true);
+                                this.loadData(false, true, true);
                     }}>Compare</button>
                 </div>
                 <div className={(this.state.observedValue !== "") ? "timestamp-observation-chooser" : "timestamp-observation-chooser-disabled"}>
                     <p className="load-on">Load on:</p>
-                    <Select className="timestamp-drop-down times-color" id="timestamp-observed-drop-down" data-testid="timestamp-observed-drop-down"
-                            variant="standard" defaultValue={9} value={this.state.observedTimestamp}
-                            MenuProps={{ PaperProps: { sx: { maxHeight: 'calc(7 * var(--sidebar-item-height))' } } }}
-                            onChange={(e) => this.setState({observedTimestamp: e.target.value})}>
-                        {PastDataSelector.observedTimestamps}
-                    </Select>
+                    <div className="load-interval-chooser">
+                        <Select className="timestamp-drop-down times-color" id="timestamp-observed-drop-down" data-testid="timestamp-observed-drop-down"
+                                variant="standard" defaultValue={9} value={this.state.observedTimestamp}
+                                MenuProps={{ PaperProps: { sx: { maxHeight: 'calc(7 * var(--sidebar-item-height))' } } }}
+                                onChange={(e) => this.setState({observedTimestamp: e.target.value})}>
+                            {PastDataSelector.observedTimestamps}
+                        </Select>
+                    </div>
                 </div>
             </div>
         </div>);
