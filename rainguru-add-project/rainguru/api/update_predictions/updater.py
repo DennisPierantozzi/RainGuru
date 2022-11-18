@@ -10,7 +10,7 @@ from api.update_predictions.scheduler import mainLogger
 
 # This has to be added to the environment variables before importing to make sure the import does not throw an exception
 sys.path.append(os.path.join(os.path.abspath(os.curdir), 'api', 'prediction_model'))
-from generate_model_output import run_model
+from api.prediction_model.generate_model_output import run_model
 
 
 logger = mainLogger
@@ -36,10 +36,10 @@ def update():
     if use_latest_data:
         forecast, used = run_model(start_timestamp, model_input_folder)
     else:
-        forecast, used = run_model('2022-11-08 14:05:00',
+        forecast, used = run_model('2022-11-18 11:45:00',
                                    model_input_folder)
         #forecast, used = run_model('2022-11-08 14:05:00',
-         #                          os.path.join(os.getcwd(), 'api', 'tests', 'model_input_test_data'))
+        #                           os.path.join(os.getcwd(), 'api', 'tests', 'model_input_test_data'))
     print('Model has finished running!')
 
     print("Store predictions...")

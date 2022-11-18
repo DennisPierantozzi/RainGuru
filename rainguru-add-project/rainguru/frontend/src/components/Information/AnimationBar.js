@@ -94,7 +94,7 @@ export default class AnimationBar extends Component {
         }
 
         // Setting the current interval rain intensity dynamically
-        if (Slider.predictions) {
+        if (Slider.predictionsShowing) {
             // if location is selected, display interval and rain information
             const intervalInfoDiv = document.getElementById("intervalInfo");
             intervalInfoDiv.innerHTML = "";
@@ -102,10 +102,10 @@ export default class AnimationBar extends Component {
             let intervalInfoDivNode;
 
             // if the precipitation amount can be represented with an integer, add .0 to it. e.g. 5.0 mm/h instead of 5 mm/h
-            if(Slider.predictions[Slider.sliderValue] % 1 === 0) {
-                intervalInfoDivNode = document.createTextNode(timeString + " - " + Slider.predictions[this.state.value] + ".0 mm/h");
+            if(Slider.predictionsShowing[Slider.sliderValue] % 1 === 0) {
+                intervalInfoDivNode = document.createTextNode(timeString + " - " + Slider.predictionsShowing[this.state.value] + ".0 mm/h");
             } else {
-                intervalInfoDivNode = document.createTextNode(timeString + " - " + Slider.predictions[this.state.value] + " mm/h");
+                intervalInfoDivNode = document.createTextNode(timeString + " - " + Slider.predictionsShowing[this.state.value] + " mm/h");
             }
             intervalInfoDiv.appendChild(intervalInfoDivNode);
         } else {

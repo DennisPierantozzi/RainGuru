@@ -356,7 +356,16 @@
     font-weight: 400;
     color: #ffffff;
 }
-
+.Bottom-privacy-statement {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    color: white;
+    font-weight: 100;
+    font-size: 12px;
+    text-align: center;
+}
 
 
 
@@ -383,7 +392,7 @@
      When on a tablet/ipad in portrait mode change the size of sidebar related parts
      */
     .Sidebar-shown {
-        width: 50%;
+        width: 100%;
     }
 
     /*
@@ -397,7 +406,8 @@
      When on a mobile device in portrait mode change the size of sidebar related parts
      */
     .item-title {
-        font-size: 150%;
+        font-size: 100%;
+        text-decoration: underline;
     }
 
     .Sidebar-items > li {
@@ -426,7 +436,9 @@
       change the size of sidebar related parts
      */
     .Sidebar-shown {
-        width: 75%;
+        /*width: 75%;*/
+        /*Dennis Upgrade*/
+        width: 100%;
     }
 
     /*
@@ -434,6 +446,14 @@
      */
     .Searchbar {
         transform: scale(1.3);
+    }
+
+    /*Dennis Upgrade*/
+    .Bottom-menu{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }
 

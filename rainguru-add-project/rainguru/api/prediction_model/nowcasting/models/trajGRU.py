@@ -1,8 +1,8 @@
 import sys
 import torch
 from torch import nn
-from nowcasting.config import cfg
-from nowcasting.models.model import activation
+from api.prediction_model.nowcasting.config import cfg
+from api.prediction_model.nowcasting.models.model import activation
 import torch.nn.functional as F
 
 # input: B, C, H, W

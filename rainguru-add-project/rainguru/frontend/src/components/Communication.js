@@ -18,6 +18,8 @@ export default class Communication {
     static imageUrlsPrepCompare = [];
     static dataTimestampObsCompare = [];
     static dataTimestampPrepCompare = [];
+
+
     // getters
     /**
      * Get the boolean representing if we use the latest data.
@@ -140,7 +142,7 @@ export default class Communication {
             // store predictions and create images for them
             this.imageUrls = responseJson.urls;
             this.dataTimestamp = new Date(responseJson.timestamp * 1000);
-            if(responseJson.hasOwnProperty("precipitation")) {Slider.precipitation = responseJson.precipitation;}
+            if(responseJson.hasOwnProperty("precipitation")) {Slider.precipitationShowing = responseJson.precipitation;}
             
             if(responseJson.exception_active) {
                 Popup.alert("Message from server:\n" + responseJson.exception_message, "Warning: Model might be using old data.");
@@ -172,17 +174,23 @@ export default class Communication {
             return response.json();
           })
           .then(responseJson => {
-            // store predictions and create images for them
-            this.imageUrlsObsCompare = responseJson.urls_observation;
-            this.imageUrlsPrepCompare = responseJson.urls_precipitation;
-            this.dataTimestampObsCompare = responseJson.timestamp_observation;
-            this.dataTimestampPrepCompare = responseJson.timestamp_precipitation;
             if(responseJson.exception_active_observation) {
-                Popup.alert("Message from server:\n" + responseJson.exception_message_observation, "Warning: Model might be using old data.");
+                Popup.alert("Message from server:\n" + 
+                responseJson.exception_message_observation, "Warning: Model might be using old data.");
                 console.log(responseJson.exception_message_observation);
             }
-            Map.preloadedImages();
-            this.dataCollected = true;
+            if(responseJson.urls_precipitation.length === 0) {
+                Popup.alert("Message from server:\n No predictins found for the selected interval");
+            }
+            else {// store predictions and create images for them
+                this.imageUrlsObsCompare = responseJson.urls_observation;
+                this.imageUrlsPrepCompare = responseJson.urls_precipitation;
+                this.dataTimestampObsCompare = responseJson.timestamp_observation;
+                this.dataTimestampPrepCompare = responseJson.timestamp_precipitation;
+                
+                Map.preloadedImages();
+                this.dataCollected = true;
+            }
           });
     }
 
@@ -224,8 +232,10 @@ export default class Communication {
         // only add timestamp if not fetching latest data
         if (!this.useLatestData) {
             if(this.compare) {
-                if(pred) {url += "&observed=false&timestamp=" + (this.dataTimestampPrepCompare-300);}
-                else {url += "&observed=true&timestamp=" + this.dataTimestampObsCompare;}
+                let timeCompare=this.dataTimestampObsCompare.toString()+'c'+(this.dataTimestampPrepCompare-300).toString();
+                url += "&compare="+this.compare+"&timestamp=" + timeCompare;
+                //if(pred) {url += "&observed=false&timestamp=" + (this.dataTimestampPrepCompare-300);}
+                //else {url += "&observed=true&timestamp=" + this.dataTimestampObsCompare;}
             }
             else {url += "&observed="+this.observed+"&timestamp=" + this.requestTimestamp;}
         }
@@ -241,6 +251,12 @@ export default class Communication {
             })
             .then(responseJson => {
                 // return the fetched precipitation
+                if(this.compare) {
+                    let precipitation = [];
+                    precipitation[0] = responseJson.precipitationObs;
+                    precipitation[1] = responseJson.precipitationPred;
+                    return precipitation;
+                }
                 return responseJson.precipitation;
             })
     }

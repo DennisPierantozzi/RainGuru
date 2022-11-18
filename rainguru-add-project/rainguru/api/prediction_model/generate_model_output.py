@@ -9,13 +9,13 @@ import os
 import pandas as pd
 import torch
 
-from nowcasting.config import cfg
-from nowcasting.image import quick_read_frames
-from nowcasting.models.encoder import Encoder
-from nowcasting.models.forecaster import Forecaster
-from nowcasting.models.model import EF
-from nowcasting.net_params import encoder_params, forecaster_params
-from nowcasting.utils import pixel_to_rainfall
+from api.prediction_model.nowcasting.config import cfg
+from api.prediction_model.nowcasting.image import quick_read_frames
+from api.prediction_model.nowcasting.models.encoder import Encoder
+from api.prediction_model.nowcasting.models.forecaster import Forecaster
+from api.prediction_model.nowcasting.models.model import EF
+from api.prediction_model.nowcasting.net_params import encoder_params, forecaster_params
+from api.prediction_model.nowcasting.utils import pixel_to_rainfall
 
 
 def run_model(start_datetime, data_dir, model_name = "all_data_balanced_loss_iteration100", iteration_number = 68000, pixel_type='normalised pixel values'):

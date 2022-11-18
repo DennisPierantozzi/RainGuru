@@ -100,18 +100,6 @@ export const SideBarData = [
             </div>
     },
     {
-        title: "Privacy statement",
-        icon: <SiGnuprivacyguard className="sidebar-element-icon" size="50%"/>,
-        className: "SideBar-item Bottom-menu-item",
-        id:"privacy",
-        popupText:
-            <div data-testid="privacy-popuptext-sidebardata">
-                <h3><span>Privacy statement</span></h3>
-                <p>This website does not store privacy sensitive information, except
-            for the location of the user during usage if permitted.</p>
-            </div>
-    },
-    {
         title: "Acknowledgement",
         icon: <FaBook className="sidebar-element-icon" size="50%"/>,
         className: "SideBar-item Bottom-menu-item",

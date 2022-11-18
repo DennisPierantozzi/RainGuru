@@ -8,7 +8,7 @@ import sys
 import numpy as np
 from torch import nn
 from collections import OrderedDict
-from nowcasting.config import cfg
+from api.prediction_model.nowcasting.config import cfg
 # import cv2
 import os.path as osp
 import os

@@ -6,8 +6,8 @@ Created on Wed Nov 11 16:02:03 2020
 """
 import sys
 import numpy as np
-from nowcasting.importers import knmi_hdf5_importer
-from nowcasting.config import cfg
+from api.prediction_model.nowcasting.importers import knmi_hdf5_importer
+from api.prediction_model.nowcasting.config import cfg
 
 def quick_read_frames(path_list, im_w=480, im_h=480):
     """

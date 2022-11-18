@@ -68,7 +68,7 @@ export default class App extends Component {
 
     setShowSidebar() {
         this.setState({ sidebar: !this.state.sidebar})
-        if(!this.state.sidebar) {
+        if(this.state.sidebar == false) {
             document.getElementById("img-menu").src = "../../../static/images/close-menu.png";
         }
     }
@@ -203,14 +203,12 @@ export default class App extends Component {
                             // set the rain images
                             Map.setHeatLayers();
 
-                            console.log(Slider.precipitation);
+                            console.log(Slider.precipitationShowing);
                             // update the animation bar rain chart and location information
-                            if (!Slider.precipitation.length) {
-                                console.log("entrato in undefined");
-                               Slider.getPrecipitationData(Slider.lastLat, Slider.lastLong, false);
+                            if (!Slider.precipitationShowing.length) {
+                               Slider.getPrecipitationData(Slider.lastLat, Slider.lastLong, observed);
                             }
                             else {
-                                console.log("entrato in show");
                                 Slider.showPredictionData();}
 
                             // update the animation bar timestamps and past data time intervals
@@ -259,7 +257,7 @@ export default class App extends Component {
 
                             // update the animation bar rain chart and location information
                             if (Slider.lastLat !== undefined) {
-                                Slider.getPrecipitationData(Slider.lastLat, Slider.lastLong, false);
+                                Slider.getPrecipitationData(Slider.lastLat, Slider.lastLong, observed);
                             }
 
                             // update the animation bar timestamps and past data time intervals
@@ -296,7 +294,7 @@ export default class App extends Component {
 
                     // update the animation bar rain chart and location information
                     if (Slider.lastLat !== undefined) {
-                        Slider.getPrecipitationData(Slider.lastLat, Slider.lastLong, true);
+                        Slider.getPrecipitationData(Slider.lastLat, Slider.lastLong, -1);
                     }
 
                     // update the animation bar timestamps and past data time intervals

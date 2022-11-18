@@ -7,8 +7,7 @@ from api.models import Predicted, Observed
 from api.update_predictions.convert_data import convert_matrix_image
 from django import db
 
-store_data = False
-
+store_data = True
 
 def get_store_data():
     return store_data
@@ -24,7 +23,7 @@ def store_predictions(forecast, used, now):
     """
     print('Store forecast images...')
     store_forecast_images(forecast, now)
-
+    
     if store_data:
         print('Store observed...')
         store_observed(used, now)
@@ -32,7 +31,7 @@ def store_predictions(forecast, used, now):
         store_forecast_database(forecast, now)
 
     print('Clean up...')
-    #cleanup(now)
+    cleanup(now)
 
 
 def store_forecast_images(forecast, now):
@@ -68,12 +67,14 @@ def store_forecast_database(forecast, now):
     :param forecast: The frames that represent the forecast
     :param now: The timestamp of the latest observation
     """
+
     for t in range(len(forecast)):
         p = Predicted()
         p.calculation_time = now
         # Added the + 1 since the first prediction is 5 min into the future
         p.prediction_time = (now + datetime.timedelta(minutes=(t + 1) * 5))
         # Only store in database if it does not already exist
+        print(f'{t} con prediction time {p.prediction_time}')
         if not Predicted.objects.filter(calculation_time=p.calculation_time,
                                         prediction_time=p.prediction_time).exists():
             p.matrix_data = forecast[t].tolist()
@@ -88,8 +89,8 @@ def store_observed(observed, now):
     :param observed: The frames that represent the observations
     :param now: The timestamp of the latest observation
     """
-    store_observed_database(observed, now)
     store_observed_images(observed, now)
+    store_observed_database(observed, now) 
 
 
 def store_observed_database(observed, now):
@@ -103,8 +104,10 @@ def store_observed_database(observed, now):
 
     for t in range(len(observed)):
         o = Observed()
+        
         o.time = (start + datetime.timedelta(minutes=t * 5))
         # Only store it if no other object with the same time exists
+        print(f'{t} con observed time {o.time}')
         if not Observed.objects.filter(time=o.time).exists():
             # Add [0][0] because the shape was (1, 1, 480, 480) for some reason
             o.matrix_data = observed[t][0][0].tolist()
@@ -134,11 +137,13 @@ def store_observed_images(observed, now):
 
 def store_previous_data_clicked(timestamp, observed):
     if observed:
-        if not timestamp == memory_store.fetch_timestamp_obs:
+        if not timestamp == memory_store.fetch_timestamp_obs():
+            print("entrato in storing for observation")
             store_previous_observation(timestamp)
 
     elif not observed:
-        if not timestamp == memory_store.fetch_timestamp_pred:
+        if not timestamp == memory_store.fetch_timestamp_pred():
+            print("entrato in storing for predictions")
             store_previous_predictions(timestamp)
 
 

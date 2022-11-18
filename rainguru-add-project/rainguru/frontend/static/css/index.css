@@ -241,12 +241,16 @@ html, body, #main, #app {
     }
 
     #topBar {
-        height: calc(10 * var(--in-ratio-height));
+        height: calc(5 * var(--in-ratio-height));
     }
 
     #map {
+        /*
         top: calc(10 * var(--in-ratio-height));
-        height: calc((61 * var(--in-ratio-height)) + var(--out-ratio-height));
+        height: calc((61 * var(--in-ratio-height)) + var(--out-ratio-height)); */
+        /*Dennis Upgrade*/
+        top: 0;
+        height: 100%;
     }
 
     #information {

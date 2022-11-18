@@ -104,6 +104,9 @@ export default function SideBar({pastDataSelectorUpdateProp, loadingData, displa
                         )
                     })}
                 </div>
+                <div className='Bottom-privacy-statement'>
+                    <p>This website does not store privacy sensitive information, except for the location of the user during usage if permitted.</p>
+                </div>
             
         </div>
     )

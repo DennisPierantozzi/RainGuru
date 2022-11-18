@@ -1,8 +1,8 @@
 import sys
 from torch import nn
 import torch
-from nowcasting.utils import make_layers
-from nowcasting.config import cfg
+from api.prediction_model.nowcasting.utils import make_layers
+from api.prediction_model.nowcasting.config import cfg
 import logging
 
 class Encoder(nn.Module):

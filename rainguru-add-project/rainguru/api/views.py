@@ -20,22 +20,25 @@ def fetch_precipitation(request):
     x = request.GET.get('x')
     y = request.GET.get('y')
     observed = request.GET.get('observed')
+    compare = request.GET.get('compare')
     provided_timestamp = request.GET.get('timestamp')
 
     if x is None or y is None:
         return HttpResponseBadRequest("x or y parameter missing!")
-    if observed is None:
-        return HttpResponseBadRequest("observed parameter missing!")
+    #if observed is None:
+    #    return HttpResponseBadRequest("observed parameter missing!")
     if provided_timestamp is None:
         response_dict = service.fetch_latest_predicted_precipitation(int(x), int(y))
     else:
-        timestamp = datetime.datetime.utcfromtimestamp(int(provided_timestamp))
-
-        # Converting strings too booleans is really annoying so this is the current solution
-        if observed == 'true':
-            response_dict = service.fetch_observed_precipitation(timestamp, int(x), int(y))
+        if compare == 'true':
+            times = provided_timestamp.split('c')
+            response_dict = service.fetch_compare_precipitation(datetime.datetime.utcfromtimestamp(int(times[0])), datetime.datetime.utcfromtimestamp(int(times[1])), int(x), int(y))
         else:
-            response_dict = service.fetch_predicted_precipitation(timestamp, int(x), int(y))
+            timestamp = datetime.datetime.utcfromtimestamp(int(provided_timestamp))
+            if observed == 'true':
+                response_dict = service.fetch_observed_precipitation(timestamp, int(x), int(y))
+            else:
+                response_dict = service.fetch_predicted_precipitation(timestamp, int(x), int(y))
 
     return HttpResponse(json.dumps(response_dict))
 
@@ -88,7 +91,6 @@ def fetch_urls(request):
             if not (math.isnan(float(x))) and not (math.isnan(float(y))): 
                 responsePrecipitation = service.fetch_predicted_precipitation(timestamp, int(x), int(y))
                 response_dict['precipitation']=responsePrecipitation['precipitation']
-        
 
         if observed == 'true' and compare == 'true':
             times = provided_timestamp.split('c')
@@ -120,17 +122,3 @@ def check_new_data(request):
     response_dict = service.check_new_data()
 
     return HttpResponse(json.dumps(response_dict))
-
-
-def handle_update(request):
-    """
-    Handle update
-
-    :param request: An http request
-    :return the boolean that rapresent the state of the update
-    """
-    update = request.GET.get('handle')
-    print(update);
-    result = service.handle_update(update)
-    
-    return HttpResponse(json.dumps(result))

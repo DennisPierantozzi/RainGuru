@@ -2,7 +2,7 @@ import sys
 from torch import nn
 import torch.nn.functional as F
 import torch
-from nowcasting.utils import make_layers
+from api.prediction_model.nowcasting.utils import make_layers
 
 class activation():
 

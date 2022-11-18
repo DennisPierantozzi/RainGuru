@@ -177,3 +177,33 @@
     flex-direction: row;
     align-items: center;
 }
+
+
+
+/* ++++++++++++++++++++++++++++++++ media query divider ++++++++++++++++++++++++++++++++ */
+/*Dennis Upgrade */
+@media screen and (pointer: coarse) and (orientation: portrait) and (max-width: 480px) {
+    .display-data-width, .display-predictions-width, .display-observations-width {
+        width: 100%;
+    }
+    .display-observations-width {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .pastDataSelectorContents {
+        font-size: 20px;
+    }
+}
+
+@media screen and (pointer: coarse) and (orientation: portrait) and (max-width: 1024px) {
+    /*
+     When on a tablet/ipad in portrait mode change the size of sidebar related parts
+     */
+    .display-predictions-width {
+        width: 50%;
+    }
+    .display-observations-width {
+        width: 100%;
+    }
+}

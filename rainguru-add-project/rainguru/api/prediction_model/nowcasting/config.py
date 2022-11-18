@@ -6,7 +6,7 @@ Created on Wed Nov 11 15:34:16 2020
 """
 # import sys
 
-from nowcasting.helpers.ordered_easydict import OrderedEasyDict as edict
+from api.prediction_model.nowcasting.helpers.ordered_easydict import OrderedEasyDict as edict
 import numpy as np
 import os
 import torch
@@ -92,5 +92,5 @@ __C.HKO_PD.RAINY_VALID = os.path.join(__C.ROOT_DIR, "events_valid_all_c1.pickle"
 
 __C.MODEL = edict()
 
-from nowcasting.models.model import activation
+from api.prediction_model.nowcasting.models.model import activation
 __C.MODEL.RNN_ACT_TYPE = activation('leaky', negative_slope=0.2, inplace=True)

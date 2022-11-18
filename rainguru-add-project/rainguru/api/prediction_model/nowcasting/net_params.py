@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, '..')
 # from nowcasting.hko.dataloader import HKOIterator
-from nowcasting.config import cfg
+from api.prediction_model.nowcasting.config import cfg
 # import torch
 # from nowcasting.config import cfg
 # from nowcasting.models.forecaster import Forecaster
@@ -11,7 +11,7 @@ from collections import OrderedDict
 # from torch.optim import lr_scheduler
 # from nowcasting.models.loss import Weighted_mse_mae
 # MH: outcomment next 2 lines
-from nowcasting.models.trajGRU import TrajGRU
+from api.prediction_model.nowcasting.models.trajGRU import TrajGRU
 # from nowcasting.train_and_test import train_and_test
 # import numpy as np
 # MH: outcomment next 1 line

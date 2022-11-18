@@ -7,11 +7,14 @@ import AnimationBar from "./AnimationBar";
 export default class Slider {
 
     // stores the latest predictions, slider state (0 to 19), and latitude and longitude of the selected location
-    static predictions;
+    static predictionsShowing;
     static sliderValue;
     static lastLat;
     static lastLong;
-    static precipitation = [];
+    static precipitationShowing = [];
+
+    static precipitationCompared = [];
+    static visualizing = false;
 
     // calculate the corresponding rain value stored in the data matrix for the given latitude and longitude
     static getMatrixCoordinates(latitude, longitude) {
@@ -40,9 +43,23 @@ export default class Slider {
 
                 // calculate the corresponding rain value stored in the data matrix for the given latitude and longitude
                 const coord = Slider.getMatrixCoordinates(latitude, longitude);
+
+                // Loading data
+                const currentlyShowing = document.getElementById("currently-showing");
+                console.log(currentlyShowing);
+                currentlyShowing.innerHTML = "Loading";
+
+                let precipitation = await Communication.fetchPrecipitation(699 - coord["y"], coord["x"], pred);
+
+                currentlyShowing.innerHTML = "Fatto";
                 
-                const precipitation = await Communication.fetchPrecipitation(699 - coord["y"], coord["x"], pred);
-                Slider.precipitation = precipitation;
+                if(pred == -1) {
+                    Slider.precipitationShowing = precipitation[0];
+                    Slider.precipitationCompared = precipitation[1];
+                    console.log(Slider.precipitationShowing)
+                    console.log(Slider.precipitationCompared)
+                }
+                else {Slider.precipitationShowing = precipitation;}
                 Slider.showPredictionData();
             } catch (e) {
                 console.log(e);
@@ -52,7 +69,7 @@ export default class Slider {
 
 
     static showPredictionData() {
-        const precipitation = Slider.precipitation;
+        const precipitation = Slider.precipitationShowing;
         // find the maximum precipitation amount for the selected location
         const predictions = [];
         let maxRain = 0, colorsArray=[];
@@ -62,20 +79,21 @@ export default class Slider {
             }
             predictions.push(precipitation[t]);
         }
+        console.log(predictions);
 
         colorsArray = Slider.createColorsArray(precipitation);
         // update the static predictions variable
-        Slider.predictions = predictions;
+        Slider.predictionsShowing = predictions;
         // dynamically update the interval information and append newly created node to "intervalInfo" div
         const intervalInfoDiv = document.getElementById("intervalInfo");
         intervalInfoDiv.innerHTML = "";
         let timeString = AnimationBar.fullMarks[Slider.sliderValue];
         let intervalInfoDivNode;
         // when precipitation amount is a whole number, add .0 to it
-        if (Slider.predictions[Slider.sliderValue] % 1 === 0) {
-            intervalInfoDivNode = document.createTextNode(timeString + " - " + Slider.predictions[Slider.sliderValue] + ".0 mm/h");
+        if (Slider.predictionsShowing[Slider.sliderValue] % 1 === 0) {
+            intervalInfoDivNode = document.createTextNode(timeString + " - " + Slider.predictionsShowing[Slider.sliderValue] + ".0 mm/h");
         } else {
-            intervalInfoDivNode = document.createTextNode(timeString + " - " + Slider.predictions[Slider.sliderValue] + " mm/h");
+            intervalInfoDivNode = document.createTextNode(timeString + " - " + Slider.predictionsShowing[Slider.sliderValue] + " mm/h");
         }
         intervalInfoDiv.appendChild(intervalInfoDivNode);
 
@@ -171,7 +189,11 @@ export default class Slider {
         Slider.createGradient(colorsArray, predictionGraph, chart);
     }
 
-
+    /**
+     * Dennis Upgrade
+     * Creates the array with the 40 precipitation values
+     * @param precipitation Array of the 20 precipitation values
+     */
     static createColorsArray(precipitation) {
         console.log(precipitation);
         const arrayColors = []
@@ -192,24 +214,23 @@ export default class Slider {
                 arrayColors.push(value);
             }
         }
-        //arrayColors.push(precipitation[19]);
         return arrayColors;
     }
 
     /**
      * Dennis Upgrade
      * Creates a gradient for the precipitation chart (filled line chart) and append it to "chart" div.
-     * @param predictions Predictions for the next 100 minutes that need to be graphed
+     * @param colorsArray predictions values
+     * @param chart the Chart library
+     * @param ctx canvas used to display the chart
      */
      static createGradient(colorsArray, chart, ctx) {
         let precipitationColors = [];
         console.log(colorsArray);
         for(let i in colorsArray) {
-            //let color = Slider.findColor(prediction[i]);
             let color = Slider.interpolateColor(colorsArray[i]);
             precipitationColors.push(color);
         }
-        //precipitationColors.push("rgba(255,255,255)");
         console.log(precipitationColors);
         let canvasGradient=ctx.createLinearGradient(chart.chartArea.left,0,chart.chartArea.right,0);
         for(let i=0.025, p=0; i<=1; i+=0.025, p++) {
@@ -219,7 +240,11 @@ export default class Slider {
         chart.update();
      }
 
-
+    /**
+     * Dennis Upgrade
+     * Interpolate colors for the given value
+     * @param predictedValue prediction value
+     */
     static interpolateColor(predictedValue) {
         const mapColors = new Map();
         mapColors.set("firstGradient", ["rgb(255,255,255)", "rgb(100,100,255)", 0.5]);
@@ -238,78 +263,4 @@ export default class Slider {
         return finalColor.display();
     }
 
-
-    /*static findColor(predictedValue) {
-        var gradient = [
-            [
-                0,
-                [255,255,255]
-            ],
-            [
-                28,
-                [0,0,255]
-            ],
-            [
-                72,
-                [255,0,0]
-            ],
-            [
-                100,
-                [255,255,0]
-            ]
-        ];
-        //get the two closest colors
-        let firstColor, secondColor;
-        if(predictedValue<1){
-            firstColor = gradient[[0]][1];
-            secondColor = gradient[[1]][1];
-        }
-        else if(predictedValue>1 && predictedValue<10) {
-            firstColor = gradient[[1]][1];
-            secondColor = gradient[[2]][1];
-        }
-        else if(predictedValue>10 && predictedValue<100) {
-            firstColor = gradient[[2]][1];
-            secondColor = gradient[[3]][1];
-        }
-
-        let sliderWidth = 500;
-        var firstcolor_x = sliderWidth*(gradient[[0]][0]/100);
-        var secondcolor_x = sliderWidth*(gradient[[1]][0]/100)-firstcolor_x;
-        var slider_x = sliderWidth*(predictedValue/100)-firstcolor_x;
-      
-        var ratio = slider_x/secondcolor_x;
-
-        var p = ratio;
-        var w = p * 2 - 1;
-        var w1 = (w/1+1) / 2;
-        var w2 = 1 - w1;
-        var rgb = [Math.round(secondColor[0] * w1 + firstColor[0] * w2),
-        Math.round(secondColor[1] * w1 + firstColor[1] * w2),
-        Math.round(secondColor[2] * w1 + firstColor[2] * w2)];
-
-        return Slider.createColorString(rgb);
-
-    }
-
-    /**
-     * Dennis Upgrade
-     * Create the color string rgb(n,n,n,n) for the given array color.
-     * @param color: array of the values for the color
-     
-    static createColorString(color){
-        let colorString = "";
-            for(let i in color) {
-                //console.log(color[i]);
-               if(i==2) {
-                colorString = colorString+color[i]+")";
-                break;
-                }
-                if(i==0) {
-                    colorString = colorString+"rgb(";
-                }
-                colorString = colorString+color[i]+", ";
-            }
-            return colorString;
-    }*/
 }

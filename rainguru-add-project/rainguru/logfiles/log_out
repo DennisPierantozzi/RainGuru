@@ -1,2 +1,206 @@
-16-Nov-22 10:29:26 - INFO - Server is starting
-16-Nov-22 10:29:34 - INFO - Server is starting
+18-Nov-22 09:51:17 - INFO - Server is starting
+18-Nov-22 09:51:32 - INFO - Server is starting
+18-Nov-22 09:51:36 - INFO - Server is starting
+18-Nov-22 09:54:25 - INFO - Update finished in 0:02:49.996498 hours
+18-Nov-22 09:55:00 - INFO - Server is starting
+18-Nov-22 09:55:48 - INFO - Server is starting
+18-Nov-22 09:55:52 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 09:55:52 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 09:55:52 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 09:55:52 - INFO - Server is starting
+18-Nov-22 09:55:52 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 09:58:31 - INFO - Update finished in 0:02:40.150023 hours
+18-Nov-22 10:02:44 - INFO - Update finished in 0:01:55.507332 hours
+18-Nov-22 10:02:45 - INFO - Update finished in 0:01:52.905414 hours
+18-Nov-22 10:05:48 - INFO - Server is starting
+18-Nov-22 10:10:55 - INFO - Server is starting
+18-Nov-22 10:10:59 - ERROR - Download url did not work: url1
+18-Nov-22 10:10:59 - WARNING - No file uploaded by knmi in previous 25 minutes
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - ERROR - Error occurred while requesting url for following file: RAD_NL25_PCP_NA_201910281050.h5
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:10:59 - ERROR - Quota of amount of downloads exceeded
+18-Nov-22 10:10:59 - INFO - not visible
+18-Nov-22 10:10:59 - WARNING - visible
+18-Nov-22 10:10:59 - INFO - test message
+18-Nov-22 10:10:59 - WARNING - please be aware
+18-Nov-22 10:10:59 - WARNING - Data download failed and update aborted
+18-Nov-22 10:10:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:11:11 - ERROR - Job "update (trigger: date[2022-11-18 10:10:58 CET], next run at: 2022-11-18 10:10:58 CET)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\lol\AppData\Local\Programs\Python\Python39\lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\Users\lol\Desktop\TU Delft\ErasmusProject\RainGuru\rainguru-add-project\rainguru\api\update_predictions\updater.py", line 46, in update
+    store_predictions_observations.store_predictions(forecast, used, latest_timestamp)
+  File "C:\Users\lol\Desktop\TU Delft\ErasmusProject\RainGuru\rainguru-add-project\rainguru\api\update_predictions\store_data\store_predictions_observations.py", line 25, in store_predictions
+    store_forecast_images(forecast, now)
+  File "C:\Users\lol\Desktop\TU Delft\ErasmusProject\RainGuru\rainguru-add-project\rainguru\api\update_predictions\store_data\store_predictions_observations.py", line 58, in store_forecast_images
+    convert_matrix_image.create_image(forecast_list[index], location)
+  File "C:\Users\lol\Desktop\TU Delft\ErasmusProject\RainGuru\rainguru-add-project\rainguru\api\update_predictions\convert_data\convert_matrix_image.py", line 30, in create_image
+    new_x, new_y = image_map[(x, y)]
+KeyError: (0, 0)
+18-Nov-22 10:18:13 - INFO - Server is starting
+18-Nov-22 10:18:39 - INFO - Server is starting
+18-Nov-22 10:18:42 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:18:45 - INFO - Server is starting
+18-Nov-22 10:21:30 - INFO - Update finished in 0:02:47.841030 hours
+18-Nov-22 10:27:58 - INFO - Server is starting
+18-Nov-22 10:28:08 - INFO - Server is starting
+18-Nov-22 10:28:12 - INFO - Server is starting
+18-Nov-22 10:31:01 - INFO - Update finished in 0:02:50.505754 hours
+18-Nov-22 10:31:02 - INFO - Update finished in 0:02:46.379212 hours
+18-Nov-22 10:33:22 - INFO - Server is starting
+18-Nov-22 10:33:27 - INFO - Server is starting
+18-Nov-22 10:36:03 - INFO - Update finished in 0:02:37.425861 hours
+18-Nov-22 10:36:26 - INFO - Server is starting
+18-Nov-22 10:39:16 - INFO - Update finished in 0:02:46.838867 hours
+18-Nov-22 10:39:27 - INFO - Server is starting
+18-Nov-22 10:40:20 - INFO - Update finished in 0:01:58.240454 hours
+18-Nov-22 10:41:38 - INFO - Update finished in 0:02:07.870494 hours
+18-Nov-22 10:54:11 - INFO - Server is starting
+18-Nov-22 10:54:14 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:54:15 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:54:15 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:54:15 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:54:17 - INFO - Server is starting
+18-Nov-22 10:54:21 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:54:22 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:54:22 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 10:54:22 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:02:35 - INFO - Server is starting
+18-Nov-22 11:02:39 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:02:39 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:02:40 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:02:40 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:05:22 - INFO - Server is starting
+18-Nov-22 11:05:26 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:05:26 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:05:26 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:05:27 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:05:29 - INFO - Server is starting
+18-Nov-22 11:05:32 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:05:33 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:05:33 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:05:33 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:09:12 - INFO - Server is starting
+18-Nov-22 11:09:16 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:09:16 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:09:16 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:09:17 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:09:30 - INFO - Server is starting
+18-Nov-22 11:09:34 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:09:35 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:09:35 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:09:35 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:09:37 - INFO - Server is starting
+18-Nov-22 11:09:41 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:09:41 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:09:41 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:09:41 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:10:18 - INFO - Server is starting
+18-Nov-22 11:10:22 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:10:22 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:10:23 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:10:23 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:11:36 - INFO - Server is starting
+18-Nov-22 11:11:40 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:11:40 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:11:40 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:11:41 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:11:43 - INFO - Server is starting
+18-Nov-22 11:11:47 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:11:48 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:11:48 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:11:48 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:13:06 - INFO - Server is starting
+18-Nov-22 11:13:10 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:13:11 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:13:11 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:13:11 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:13:13 - INFO - Server is starting
+18-Nov-22 11:13:17 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:13:17 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:13:17 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:13:17 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:13:55 - INFO - Server is starting
+18-Nov-22 11:13:58 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:13:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:13:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:13:59 - INFO - Server is starting
+18-Nov-22 11:13:59 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:19:34 - INFO - Update finished in 0:05:31.209229 hours
+18-Nov-22 11:24:44 - INFO - Server is starting
+18-Nov-22 11:24:48 - INFO - Server is starting
+18-Nov-22 11:25:39 - INFO - Server is starting
+18-Nov-22 11:25:43 - INFO - Server is starting
+18-Nov-22 11:25:43 - INFO - New file successfully downloaded from KNMI
+18-Nov-22 11:27:27 - INFO - Update finished in 0:01:44.284299 hours
+18-Nov-22 11:29:37 - INFO - Server is starting
+18-Nov-22 11:31:08 - INFO - Update finished in 0:01:28.313448 hours
+18-Nov-22 11:31:29 - INFO - Update finished in 0:00:49.740283 hours
+18-Nov-22 11:36:00 - INFO - Update finished in 0:01:23.225841 hours
+18-Nov-22 11:36:26 - INFO - Update finished in 0:00:46.493229 hours
+18-Nov-22 11:41:06 - INFO - Update finished in 0:01:28.757120 hours
+18-Nov-22 11:41:25 - INFO - Update finished in 0:00:45.810180 hours
+18-Nov-22 11:46:07 - INFO - Update finished in 0:01:29.628137 hours
+18-Nov-22 11:46:29 - INFO - Update finished in 0:00:49.762500 hours
+18-Nov-22 11:51:23 - INFO - Update finished in 0:01:45.668443 hours
+18-Nov-22 11:51:44 - INFO - Update finished in 0:01:04.776750 hours
+18-Nov-22 11:56:45 - INFO - Update finished in 0:02:07.640237 hours
+18-Nov-22 11:56:57 - INFO - Update finished in 0:01:17.820536 hours
+18-Nov-22 12:01:18 - INFO - Update finished in 0:01:41.214041 hours
+18-Nov-22 12:01:37 - INFO - Update finished in 0:00:57.506590 hours
+18-Nov-22 12:06:31 - INFO - Update finished in 0:01:54.336599 hours
+18-Nov-22 12:06:42 - INFO - Update finished in 0:01:02.565291 hours
+18-Nov-22 12:11:03 - INFO - Update finished in 0:01:25.844590 hours
+18-Nov-22 12:11:27 - INFO - Update finished in 0:00:48.073921 hours
+18-Nov-22 12:17:18 - INFO - Update finished in 0:02:40.519066 hours
+18-Nov-22 12:17:19 - INFO - Update finished in 0:01:39.284181 hours
+18-Nov-22 12:21:07 - INFO - Update finished in 0:01:30.005542 hours
+18-Nov-22 12:21:27 - INFO - Update finished in 0:00:47.991532 hours
+18-Nov-22 12:26:03 - INFO - Update finished in 0:01:25.407441 hours
+18-Nov-22 12:26:26 - INFO - Update finished in 0:00:46.550119 hours
+18-Nov-22 12:31:02 - INFO - Update finished in 0:01:24.802852 hours
+18-Nov-22 12:31:25 - INFO - Update finished in 0:00:45.679686 hours
+18-Nov-22 12:35:59 - INFO - Update finished in 0:01:22.275173 hours
+18-Nov-22 12:36:24 - INFO - Update finished in 0:00:44.878810 hours
+18-Nov-22 12:40:59 - INFO - Update finished in 0:01:21.612753 hours
+18-Nov-22 12:41:25 - INFO - Update finished in 0:00:45.741398 hours
+18-Nov-22 12:46:20 - INFO - Update finished in 0:01:43.196980 hours
+18-Nov-22 12:46:37 - INFO - Update finished in 0:00:57.489972 hours
+18-Nov-22 12:51:09 - INFO - Update finished in 0:01:31.843878 hours
+18-Nov-22 12:51:33 - INFO - Update finished in 0:00:53.283370 hours
+18-Nov-22 12:52:26 - INFO - Server is starting
+18-Nov-22 12:53:23 - INFO - Update finished in 0:00:53.586669 hours
+18-Nov-22 12:53:28 - INFO - Server is starting
+18-Nov-22 12:54:24 - INFO - Update finished in 0:00:53.211206 hours
+18-Nov-22 12:55:36 - INFO - Server is starting
+18-Nov-22 12:55:45 - INFO - Server is starting
+18-Nov-22 12:57:35 - INFO - Update finished in 0:01:47.560767 hours
+18-Nov-22 12:57:35 - INFO - Update finished in 0:01:55.908964 hours
+18-Nov-22 12:59:24 - INFO - Server is starting
+18-Nov-22 12:59:31 - INFO - Server is starting
+18-Nov-22 13:01:28 - INFO - Update finished in 0:01:54.016820 hours
+18-Nov-22 13:01:33 - INFO - Server is starting
+18-Nov-22 13:01:40 - INFO - Update finished in 0:01:00.339110 hours
+18-Nov-22 13:02:28 - INFO - Update finished in 0:00:51.405897 hours
+18-Nov-22 13:08:32 - INFO - Update finished in 0:02:52.643196 hours
+18-Nov-22 13:08:33 - INFO - Update finished in 0:01:59.455481 hours
+18-Nov-22 13:13:09 - INFO - Update finished in 0:02:29.264203 hours
+18-Nov-22 13:13:10 - INFO - Update finished in 0:01:37.126211 hours
+18-Nov-22 13:17:50 - INFO - Server is starting
+18-Nov-22 13:17:54 - INFO - Server is starting
+18-Nov-22 13:20:03 - INFO - Server is starting
+18-Nov-22 13:20:09 - INFO - Server is starting
+18-Nov-22 13:20:55 - INFO - Update finished in 0:00:43.020171 hours
