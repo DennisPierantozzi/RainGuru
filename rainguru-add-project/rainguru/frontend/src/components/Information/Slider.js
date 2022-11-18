@@ -45,21 +45,23 @@ export default class Slider {
                 const coord = Slider.getMatrixCoordinates(latitude, longitude);
 
                 // Loading data
-                const currentlyShowing = document.getElementById("currently-showing");
-                console.log(currentlyShowing);
-                currentlyShowing.innerHTML = "Loading";
+                const loader = document.getElementById("loader");
+                loader.style.display = "flex";
 
                 let precipitation = await Communication.fetchPrecipitation(699 - coord["y"], coord["x"], pred);
 
-                currentlyShowing.innerHTML = "Fatto";
+                loader.style.display = "none";
                 
                 if(pred == -1) {
+                    console.log("entrato in comparing");
                     Slider.precipitationShowing = precipitation[0];
                     Slider.precipitationCompared = precipitation[1];
-                    console.log(Slider.precipitationShowing)
-                    console.log(Slider.precipitationCompared)
+                    console.log("showing        " + Slider.precipitationShowing);
+                    console.log("comparing      "  +Slider.precipitationCompared);
                 }
-                else {Slider.precipitationShowing = precipitation;}
+                else {
+                    Slider.precipitationShowing = precipitation;
+                }
                 Slider.showPredictionData();
             } catch (e) {
                 console.log(e);
@@ -79,7 +81,6 @@ export default class Slider {
             }
             predictions.push(precipitation[t]);
         }
-        console.log(predictions);
 
         colorsArray = Slider.createColorsArray(precipitation);
         // update the static predictions variable
@@ -195,7 +196,6 @@ export default class Slider {
      * @param precipitation Array of the 20 precipitation values
      */
     static createColorsArray(precipitation) {
-        console.log(precipitation);
         const arrayColors = []
         let value = 0, difference = 0;
         for (let t = 0; t < 20; t++) {
@@ -226,12 +226,12 @@ export default class Slider {
      */
      static createGradient(colorsArray, chart, ctx) {
         let precipitationColors = [];
-        console.log(colorsArray);
+    
         for(let i in colorsArray) {
             let color = Slider.interpolateColor(colorsArray[i]);
             precipitationColors.push(color);
         }
-        console.log(precipitationColors);
+        //console.log(precipitationColors);
         let canvasGradient=ctx.createLinearGradient(chart.chartArea.left,0,chart.chartArea.right,0);
         for(let i=0.025, p=0; i<=1; i+=0.025, p++) {
             canvasGradient.addColorStop(i, precipitationColors[p]);

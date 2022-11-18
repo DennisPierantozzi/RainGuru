@@ -53,11 +53,15 @@ export default function TopBar({setShowSidebar, displayComparedData, loadingData
                         </FormGroup>
                 </div>
                 <span id="currently-showing" data-testid="currently-showing">Latest data</span>
+                <div id="loader" class="loading-bar">
+                    <div class="circle-1 circle1"></div>
+                    <div class="circle-1 circle2"></div>
+                    <div class="circle-1 circle3"></div>
+                </div>
             </div>
 
             <div className="Sidebar" data-testid="sidebar-menu">
-                <img id="img-menu" className="ratioImage" src="../../../static/images/1x1.png"/>
-                <BiFilter className="Sidebar-icon" onClick={() => setShowSidebar()} size="90%"/>
+                <span className="Menu-icon" onClick={() => setShowSidebar()}>Menu</span>
             </div>
             <div className="Location">
                 <img className="ratioImage" src="../../../static/images/1x1.png"/>

@@ -17,7 +17,7 @@ logger = mainLogger
 
 model_input_folder = os.path.join(os.path.abspath(os.curdir), 'api', 'model_input')
 
-use_latest_data = False
+use_latest_data = True
 
 def update():
     """

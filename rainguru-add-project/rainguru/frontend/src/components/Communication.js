@@ -234,8 +234,6 @@ export default class Communication {
             if(this.compare) {
                 let timeCompare=this.dataTimestampObsCompare.toString()+'c'+(this.dataTimestampPrepCompare-300).toString();
                 url += "&compare="+this.compare+"&timestamp=" + timeCompare;
-                //if(pred) {url += "&observed=false&timestamp=" + (this.dataTimestampPrepCompare-300);}
-                //else {url += "&observed=true&timestamp=" + this.dataTimestampObsCompare;}
             }
             else {url += "&observed="+this.observed+"&timestamp=" + this.requestTimestamp;}
         }
@@ -257,7 +255,7 @@ export default class Communication {
                     precipitation[1] = responseJson.precipitationPred;
                     return precipitation;
                 }
-                return responseJson.precipitation;
+                else {return responseJson.precipitation;}
             })
     }
 

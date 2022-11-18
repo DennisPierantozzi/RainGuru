@@ -23,7 +23,7 @@
     align-items: center;
 
     /*Dennis Upgrade*/
-    background-color: #22587C;
+    background-color: #0076C2;
     border-radius: 20px;
     margin-right: 20px;
     color: #fff;
@@ -74,7 +74,7 @@
     top: 100%;
     width: 100%;
     height: var(--sidebar-height);
-    background-color: #22587C;
+    background-color: #0076C2;
     /*Dennis Upgrade*/
     z-index: 2;
     top:0;
@@ -95,6 +95,10 @@
     color: white;
 }
 
+.Menu-icon {
+    padding: 0px 10px;
+}
+
 .TUDelft-logo-icon {
     width: 60%;
     height: 60%;
@@ -113,7 +117,7 @@
     position: relative;
     width: 100%;
     height: 10%;
-    background-color: #22587C;
+    background-color: #0076C2;
     list-style: none;
 
     /*Dennis Upgrade*/
@@ -369,8 +373,118 @@
 
 
 
-
-
+/* ++++++++++++++++++++++++++++++++ laoder ++++++++++++++++++++++++++++++++ */
+.loading-bar {
+    height: 30px;
+    background: none;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0px 8px;
+    display: none;
+  }
+  .circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    background-color: #fff;
+    animation: load3 5s ease infinite;
+  }
+  @keyframes load3 {
+    0% {
+      height: 10px;
+    }
+    20% {
+      height: 20px;
+    }
+    40% {
+      height: 30px;
+    }
+    60% {
+      height: 30px;
+    }
+    80% {
+      height: 20px;
+    }
+    100% {
+      height: 10px;
+    }
+  }
+  /* ------------------------------------------------------------------- */
+  .circle-0 {
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    background-color: #fff;
+    animation: load4 5s ease infinite;
+  }
+  @keyframes load4 {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  /* ------------------------------------------------------------------------ */
+  .circle-1 {
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    background-color: #fff;
+  }
+  .circle1 {
+    animation: c1 3s ease 0s infinite;
+  }
+  @keyframes c1 {
+    0% {
+      transform: scale(0);
+    }
+    35%,
+    65% {
+      transform: scale(1);
+    }
+    65%,
+    100% {
+      transform: scale(0);
+    }
+  }
+  .circle2 {
+    animation: c2 3s ease 0.2s infinite;
+  }
+  @keyframes c2 {
+    0% {
+      transform: scale(0);
+    }
+    35%,
+    65% {
+      transform: scale(1);
+    }
+    65%,
+    100% {
+      transform: scale(0);
+    }
+  }
+  .circle3 {
+    animation: c3 3s ease 0.4s infinite;
+  }
+  @keyframes c3 {
+    0% {
+      transform: scale(0);
+    }
+    35%,
+    65% {
+      transform: scale(1);
+    }
+    65%,
+    100% {
+      transform: scale(0);
+    }
+  }
 
 
 

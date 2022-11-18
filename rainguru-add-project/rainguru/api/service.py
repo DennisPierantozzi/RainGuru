@@ -35,7 +35,7 @@ def get_precipitations_array(x, y, observed):
     return precipitation
 
 
-def fetch_observed_precipitation(timestamp, passx, passy):
+def fetch_observed_precipitation(timestamp, x, y):
     """
     Fetch observed precipitation at a given point from the database
 
@@ -44,33 +44,34 @@ def fetch_observed_precipitation(timestamp, passx, passy):
     :param y: The y coordinate of the image pixel
     :return: An array of 20 observed precipitation values, starting at the given timestamp
     """
-    x, y = convert_matrix_image.image_map[(passx, passy)]
-    precipitation = []
-    precipitationOne = []
+    #precipitationOne = []
     
     #if memory_store.fetch_timestamp_obs() == timestamp:
     #    print("entrato in store observation clicked")
     #    precipitation = get_precipitations_array(x, y, True)
 
-    
+    x, y = convert_matrix_image.image_map[(x, y)]
+    precipitation = []
     for o in Observed.objects\
-                    .filter(time__gte=timestamp)\
-                    .filter(time__lt=timestamp + datetime.timedelta(minutes=100))\
-                    .order_by('time'):
+            .filter(time__gte=timestamp)\
+            .filter(time__lt=timestamp + datetime.timedelta(minutes=100))\
+            .order_by('time'):
+        if x == -1:
+            value = 0
+        else:
+            value = o.matrix_data[y][x]
+            print(f"entrato in else con value {o.matrix_data[y][x]}")
 
-            if x == -1:
-                    value = 0
-            else:
-                    value = o.matrix_data[y][x]
+        rounded = math.floor(value * 100) / 100
 
-    rounded = math.floor(value * 100) / 100
-    precipitation.append(rounded)
+        precipitation.append(rounded)
 
     response_dict = {
-        'precipitation': precipitation,
+        'precipitation': precipitation
     }
 
     return response_dict
+
 
 
 def fetch_latest_predicted_precipitation(x, y):
