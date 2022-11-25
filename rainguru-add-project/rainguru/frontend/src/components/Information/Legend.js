@@ -16,8 +16,8 @@ export default class Legend extends Component {
     render() {
         return (
             <div className="legendContents" data-testid="legend-box">
-                <div className="legendTitle">Precipitation [mm/h]</div>
                 <div className="legendContainer">
+                    <div className="legendTitle">Precipitation [mm/h]</div>
                     <div className="legend">
                         <div id="gradient1container" className="gradient-container">
                             <div id="gradient1" className="gradient-part"></div>

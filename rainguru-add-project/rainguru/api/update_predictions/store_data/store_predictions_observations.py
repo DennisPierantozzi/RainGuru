@@ -31,7 +31,7 @@ def store_predictions(forecast, used, now):
         store_forecast_database(forecast, now)
 
     print('Clean up...')
-    cleanup(now)
+    #cleanup(now)
 
 
 def store_forecast_images(forecast, now):
@@ -74,9 +74,9 @@ def store_forecast_database(forecast, now):
         # Added the + 1 since the first prediction is 5 min into the future
         p.prediction_time = (now + datetime.timedelta(minutes=(t + 1) * 5))
         # Only store in database if it does not already exist
-        print(f'{t} con prediction time {p.prediction_time}')
         if not Predicted.objects.filter(calculation_time=p.calculation_time,
                                         prediction_time=p.prediction_time).exists():
+            print(f'calculation time: {p.calculation_time} con prediction time: {p.prediction_time}')
             p.matrix_data = forecast[t].tolist()
             p.save()
         db.reset_queries()

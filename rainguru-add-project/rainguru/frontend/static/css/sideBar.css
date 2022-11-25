@@ -30,8 +30,14 @@
 }
 
 .PastData {
-    padding-right: 10px;
-    padding-left: 10px;
+    background-color: #eff8ff;
+    color: #0076C2;
+}
+.Location, .TUDelft-logo {
+    padding: 20px 20px;
+}
+.Sidebar, .PastData {
+    padding: 10px 10px;
 }
 
 .Sidebar:hover, .Location:hover, .TUDelft-logo:hover {
@@ -48,6 +54,7 @@
     align-items: center;
     font-size: 100%;
     margin-right: 20px;
+    margin-top: 10px;
 }
 
 /* Search bar button */
@@ -111,6 +118,7 @@
 .open-menu {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .Sidebar-items {
@@ -181,6 +189,28 @@
 }
 
 /* ==================== depth level divider ==================== */
+
+.info-box {
+    display: inline-flex;
+    justify-content: center;
+    height: 30%;
+}
+
+.info-text {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-text {
+    width: 80%;
+    display: inline-flex;
+    color: #ffffff;
+}
+
+.popup-text div {
+    padding: 0px 20px;
+}
 
 .popup {
     position: fixed;
@@ -342,7 +372,7 @@
 
 .menuOverlay {
     top: 0;
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
 }
@@ -351,7 +381,7 @@
     font-weight: bold;
     color: white;
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
@@ -370,21 +400,42 @@
     font-size: 12px;
     text-align: center;
 }
-
+.Menu-title img {
+    max-width: 7%;
+    max-height: 90%;
+}
+.Menu-title div {
+    display: inline-flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 20px;
+}
 
 
 /* ++++++++++++++++++++++++++++++++ laoder ++++++++++++++++++++++++++++++++ */
+.loaderContents {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+}
 .loading-bar {
-    height: 30px;
+    height: 50px;
     background: none;
     border-radius: 50px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     padding: 0px 8px;
     display: none;
-  }
-  .circle {
+    background: #0C2340;
+    margin: 10px 10px;
+    width: fit-content;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+.circle {
     width: 10px;
     height: 10px;
     border-radius: 50px;
@@ -541,6 +592,19 @@
     .Searchbar {
         transform: scale(1);
     }
+
+    .info-box {
+        display: block;
+    justify-content: left;
+    height: 35%;
+    overflow-y: scroll;
+    }
+    .info-text {
+        display: block;
+    }
+    .popup-text {
+        display: contents;
+    }
 }
 
 
@@ -568,6 +632,18 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+    .info-box {
+        display: block;
+    justify-content: left;
+    height: 35%;
+    overflow-y: scroll;
+    }
+    .info-text {
+        display: block;
+    }
+    .popup-text {
+        display: contents;
     }
 }
 

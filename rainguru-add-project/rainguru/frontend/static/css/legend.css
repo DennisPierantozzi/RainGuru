@@ -20,6 +20,9 @@
     width: 100%;
     height: calc(100% * (12 / 30));
     pointer-events: auto;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 /* ==================== depth level divider ==================== */
@@ -38,15 +41,20 @@
     height: calc(100% * (9 / 12));
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
 }
 
 /* ==================== depth level divider ==================== */
 
 .legend {
     position: relative;
-    width: 35%;
+    width: 60%;
     height: 100%;
 }
+
+
 
 /* ==================== depth level divider ==================== */
 

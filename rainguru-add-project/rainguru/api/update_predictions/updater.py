@@ -36,7 +36,7 @@ def update():
     if use_latest_data:
         forecast, used = run_model(start_timestamp, model_input_folder)
     else:
-        forecast, used = run_model('2022-11-18 11:45:00',
+        forecast, used = run_model('2022-11-23 12:00:00',
                                    model_input_folder)
         #forecast, used = run_model('2022-11-08 14:05:00',
         #                           os.path.join(os.getcwd(), 'api', 'tests', 'model_input_test_data'))

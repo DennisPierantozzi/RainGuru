@@ -1,10 +1,10 @@
 import { color } from "@mui/system";
 import { map } from "leaflet";
-import React from "react";
+import React, {Component} from "react";
 import Communication from "../Communication"
 import AnimationBar from "./AnimationBar";
 
-export default class Slider {
+export default class Slider extends Component {
 
     // stores the latest predictions, slider state (0 to 19), and latitude and longitude of the selected location
     static predictionsShowing;
@@ -12,9 +12,8 @@ export default class Slider {
     static lastLat;
     static lastLong;
     static precipitationShowing = [];
-
     static precipitationCompared = [];
-    static visualizing = false;
+
 
     // calculate the corresponding rain value stored in the data matrix for the given latitude and longitude
     static getMatrixCoordinates(latitude, longitude) {
@@ -28,13 +27,53 @@ export default class Slider {
         return coord
     }
 
+
+    static stats() {
+        let sum = 0;
+        let avgObs, avgPred = 0;
+        for(let i=0; i<Slider.precipitationShowing.length; i++) {
+            sum += Math.pow((Slider.precipitationCompared[i]-Slider.precipitationShowing[i]), 2);
+            avgObs += Slider.precipitationCompared[i];
+            avgPred += Slider.precipitationShowing[i];
+        }
+        avgObs = avgObs/Slider.precipitationCompared.length;
+        avgPred = avgPred/Slider.precipitationCompared.length;
+        console.log("avgObs" + avgObs + "   avgPred" + avgPred);
+
+        const rmse = Math.pow((sum/Slider.precipitationShowing.length), 0.5).toFixed(2);
+        document.getElementById("rmse").innerHTML = rmse.toString() + "mm/h";
+        document.getElementById("bias").innerHTML = (avgObs-avgPred).toString() + "mm/h";
+
+        document.getElementById("statistics").style.display = "flex";
+    }
+
+    // change color for the compare legend
+    // @param predictionShowing boolean: if true Im showing predictions, false for observation
+    static colorLegend(predictionShowing) {
+        console.log("entrato in color legend con   " + predictionShowing);
+        const legendPredictions = document.getElementById("labelCompared");
+        const legendObservations = document.getElementById("labelShowing");
+        console.log(predictionShowing);
+        if(predictionShowing && Communication.compare){
+            //change border and color to legend
+            legendPredictions.style.color = "#1167b1";
+            legendObservations.style.color = "#FF6384";
+        }
+        else if(!predictionShowing && Communication.compare) {
+            legendObservations.style.color = "#1167b1";
+            legendPredictions.style.color = "#FF6384";
+        }
+    }
+
+
+
     /**
      * Retrieves and displays the precipitation data at a specific location.
      * @param latitude the latitude of the specified location.
      * @param longitude the longitude of the specified location.
      * @param pred boolean value that indicate if the precipitation to show are predictions or observations
      */
-    static async getPrecipitationData(latitude, longitude, pred) {
+    static async getPrecipitationData(latitude, longitude) {
         if(latitude!==undefined && longitude!==undefined) {
             try {
                 // update the last lat long value
@@ -44,45 +83,58 @@ export default class Slider {
                 // calculate the corresponding rain value stored in the data matrix for the given latitude and longitude
                 const coord = Slider.getMatrixCoordinates(latitude, longitude);
 
-                // Loading data
+                // Set loading data visible
                 const loader = document.getElementById("loader");
+                document.getElementById("loadingString").innerHTML = "Loading data  ";
                 loader.style.display = "flex";
 
-                let precipitation = await Communication.fetchPrecipitation(699 - coord["y"], coord["x"], pred);
+                let precipitation = await Communication.fetchPrecipitation(699 - coord["y"], coord["x"]);
 
+                // hide loading data visible
                 loader.style.display = "none";
                 
-                if(pred == -1) {
-                    console.log("entrato in comparing");
-                    Slider.precipitationShowing = precipitation[0];
-                    Slider.precipitationCompared = precipitation[1];
-                    console.log("showing        " + Slider.precipitationShowing);
-                    console.log("comparing      "  +Slider.precipitationCompared);
+                if(Communication.compare) {
+                    // setting the precipitations in both cases
+                    Slider.precipitationShowing = precipitation[1]; // prediction 
+                    Slider.precipitationCompared = precipitation[0]; // observation  
+                    Slider.stats();
+                    //Slider.colorLegend(false);
                 }
                 else {
                     Slider.precipitationShowing = precipitation;
+                    Slider.precipitationCompared = [];
+                    document.getElementById("statistics").style.display = "none";
                 }
-                Slider.showPredictionData();
+                Slider.showPredictionData(false);
             } catch (e) {
+                Slider.showPredictionData(-1);
                 console.log(e);
             }
         }
     }
 
+    static switchPrediction(){
+        // the user has clicked the switch, so we need to switch the precipitation to show the current one choosed
+        let pred = Slider.precipitationShowing;
+        Slider.precipitationShowing = Slider.precipitationCompared;
+        Slider.precipitationCompared = pred;
+    }
 
-    static showPredictionData() {
+
+    static showPredictionData(predictionShowing=-1) {
         const precipitation = Slider.precipitationShowing;
+        const precipitationCompared = Slider.precipitationCompared;
         // find the maximum precipitation amount for the selected location
         const predictions = [];
-        let maxRain = 0, colorsArray=[];
+        let maxRain = Math.max(... precipitation) > Math.max(... precipitationCompared) ? Math.max(... precipitation) : Math.max(... precipitationCompared);
+        console.log(maxRain);
         for (let t = 0; t < 20; t++) {
-            if (precipitation[t] > maxRain) {
-                maxRain = precipitation[t];
-            }
             predictions.push(precipitation[t]);
         }
 
+        let colorsArray=[];
         colorsArray = Slider.createColorsArray(precipitation);
+
         // update the static predictions variable
         Slider.predictionsShowing = predictions;
         // dynamically update the interval information and append newly created node to "intervalInfo" div
@@ -127,7 +179,7 @@ export default class Slider {
         midScaleDiv.innerHTML = midScaleValue;
 
         // call a helper method to create a precipitation chart
-        Slider.makeChart(predictions, colorsArray, maxScale);
+        Slider.makeChart(predictionShowing, colorsArray, maxScale);
     }
 
     /**
@@ -135,25 +187,36 @@ export default class Slider {
      * @param predictions Predictions for the next 100 minutes that need to be graphed
      * @param maxScale Indication of the maximum y-value
      */
-    static makeChart(predictions, colorsArray, maxScale) {
+    static makeChart(predictionShowing, colorsArray, maxScale) {
         const currentTime = new Date();
         const timeStamps = [];
         for (let i = 0; i < 20; i++) {
             timeStamps.push(i);
         }
         const chart = document.getElementById("chart").getContext("2d");
-        //
+
+        // add a new line for the Slider.precipitationCompare
         const predictionGraph = new Chart(chart, {
             type: "line",
             data: {
                 labels: timeStamps,
-                datasets: [{
+                datasets: [
+                    {
                     fill: true,
-                    data: predictions,
+                    data: Slider.precipitationCompared,
+                    borderColor: "#2e2e2e",
+                    borderWidth: 3,
+                    borderDash: [2,2],
+                    backgroundColor: "transparent"
+                    },
+                    {
+                    fill: true,
+                    data: Slider.precipitationShowing,
                     borderColor: "#1167b1",
-                    borderWidth: 0.5,
+                    borderWidth: 1.5,
                     backgroundColor: "tranparent"
-                }]
+                    },
+            ]
             },
             options: {
                 elements: {
@@ -236,7 +299,7 @@ export default class Slider {
         for(let i=0.025, p=0; i<=1; i+=0.025, p++) {
             canvasGradient.addColorStop(i, precipitationColors[p]);
         }
-        chart.data.datasets[0].backgroundColor = canvasGradient;
+        chart.data.datasets[1].backgroundColor = canvasGradient;
         chart.update();
      }
 

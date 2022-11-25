@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import AnimationBar from "./AnimationBar";
 import Legend from "./Legend";
 
+
 export default class Information extends Component {
 
     /**
@@ -13,7 +14,7 @@ export default class Information extends Component {
 
         // state variables to pass along to the animation bar
         this.state = {
-            animationBarUpdateProp: this.props.animationBarUpdateProp
+            animationBarUpdateProp: this.props.animationBarUpdateProp,
         }
     }
 

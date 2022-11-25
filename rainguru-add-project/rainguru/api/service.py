@@ -1,5 +1,5 @@
 import datetime
-import json
+import time
 import math
 import os
 from datetime import timezone
@@ -110,6 +110,7 @@ def fetch_predicted_precipitation(timestamp, x, y):
     :param y: The y coordinate of the image pixel
     :return: An array of 20 predicted precipitation values which were calculated at the given timestamp
     """
+    start = time.time()
     x, y = convert_matrix_image.image_map[(x, y)]
     precipitation = []
 
@@ -117,23 +118,22 @@ def fetch_predicted_precipitation(timestamp, x, y):
     #    print("entrato in store predictions clicked")
     #    precipitation = get_precipitations_array(x, y, False)
 
-    prova = 0 ;
     print(timestamp)
     for p in Predicted.objects.filter(calculation_time=timestamp).order_by('prediction_time'):
             if x == -1:
                 value = 0
             else:
                 value = p.matrix_data[y][x]
-                prova+=1
 
             rounded = math.floor(value * 100) / 100
-            print(prova)
             precipitation.append(rounded)
 
     response_dict = {
         'precipitation': precipitation
     }
 
+    end = time.time()
+    print(f"time in service {end-start}")
     return response_dict
 
 def fetch_compare_precipitation(timestamp_obs, timestamp_pred, passx, passy):

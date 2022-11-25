@@ -93,6 +93,9 @@ export default class PastDataSelector extends Component {
         const dataAvailable = await Communication.fetchDataAvailability();
         const predicted = dataAvailable.predictedTimes;
         const observed = dataAvailable.observedTimes;
+        console.log("UPDATE TIMES ");
+        console.log(observed);
+        console.log(predicted);
         const lastTime = Math.max(predicted[predicted.length - 1], observed[observed.length - 1]);
         const fiveMinSmall = 300;
         const fiveMinBig = 300000;
@@ -104,7 +107,7 @@ export default class PastDataSelector extends Component {
         PastDataSelector.observationIntervals = [];
 
         // 36 = 3 hours * 12 5-min intervals per hour, >= 19 is since from that point there is enough time for a full interval
-        for (let i = 0, time = lastTime; i < 50; i++, time -= fiveMinSmall) {
+        for (let i = 0, time = lastTime; i < 30; i++, time -= fiveMinSmall) {
             // add the time to a list to reference later for fetching the required data
             PastDataSelector.times.push(time);
             // get the time intervals with hours:minutes time formats
@@ -209,12 +212,14 @@ export default class PastDataSelector extends Component {
         // load new data when a valid call was made that is also different from what is currently already loaded
         if (validCall && timeString !== currentlyShowing.innerHTML) {
             if(compare){     
-                this.props.compareData(-1, latest, observed, timeCompare, compare);
+                this.props.compareData(-1, latest, observed, timeCompare, timeString);
             }
             // call app to display the new data
-            else{this.props.displayData(-1, latest, observed, time);}
+            else{
+                this.props.displayData(-1, latest, observed, time, timeString);
+            }
             // display what data should be loaded now
-            currentlyShowing.innerHTML = timeString;
+            
         }
     }
 
@@ -231,17 +236,6 @@ export default class PastDataSelector extends Component {
      */
     render() {
         return (<div className="pastDataSelectorContents" data-testid="pastDataSelector">
-                <div className="past-data-menu-part display-data-width">
-                    <div className="latest-data-chooser">
-                        <p className="latest-data-text">Display the latest data:</p>
-                        <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
-                                disabled={this.state.loadingData} id="latest-data-loader" data-testid="latest-loader" onClick={() => {
-                                    this.props.setShowSidebar();
-                                    this.props.setShowCompare(false);
-                                    this.loadData(true, false, false);
-                        }}>Load</button>
-                    </div>
-                </div>
                 <div className="past-data-menu-part display-predictions-width">
                     <p>Predictions made at:</p>
                     <div className="time-interval-chooser">
@@ -282,7 +276,7 @@ export default class PastDataSelector extends Component {
                     <button className={"time-interval-loader" + (this.state.loadingData || (this.state.observedValue=="") ? " disabled-time-interval-loader" : "")}
                             disabled={this.state.loadingData || (this.state.observedValue=="")} data-testid="observed-loader" onClick={() => {
                                 this.props.setShowSidebar();
-                                this.props.setShowCompare(true);
+                                //this.props.setShowCompare(true);
                                 this.loadData(false, true, true);
                     }}>Compare</button>
                 </div>

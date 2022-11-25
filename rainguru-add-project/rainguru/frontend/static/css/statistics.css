@@ -1,0 +1,86 @@
+/*
+Statistics component css
+Dennis Upgrade
+*/
+
+
+#statistics {
+    z-index: 0;
+    justify-content: left;
+    width: 100%;
+    display: none;
+}
+
+.statisticsContents {
+    display: flex;
+    flex-direction: row;
+}
+
+.legend-Graph, .statistics-box {
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+/* ==================== depth level divider ==================== */
+.statistics-box {
+    font-size: 15px;
+    align-items: center;
+    display: inline-flex;
+    padding: 8px 8px;
+}
+#rmse {
+    font-weight: 600;
+}
+.stats-info {
+    background-color: transparent;
+    border: solid 1px #2e2e2e;
+    padding: 2px 2px;
+    margin: 0px 5px;
+    font-size: 13px;
+    color: #2e2e2e;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ==================== depth level divider ==================== */
+.legend-Graph {
+    width: auto;
+    display: inline-flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.legend-Graph-list {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: flex-start;
+    list-style: none;
+}
+
+.legend-Graph-list li {
+    color: #eee;
+    padding: 0px 8px;
+    margin: 2px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#labelPredictions {
+    color: #1167b1;
+}
+#labelObservations {
+    color: #2e2e2e;
+}
+#labelObservations hr {
+    width: 30px;
+    border-top: dotted 3px;
+    color: #2e2e2e;
+}
+#labelPredictions hr {
+    width: 30px;
+    color: #1167b1;
+    border-top: solid 2px;
+    border-radius: 5px;
+}

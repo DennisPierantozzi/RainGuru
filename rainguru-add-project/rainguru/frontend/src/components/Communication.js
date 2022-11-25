@@ -2,6 +2,7 @@ import React from "react";
 import Popup from "react-popup";
 import Map from "./Map/Map";
 import Slider from "./Information/Slider";
+import TopBar from "./TopBar/TopBar";
 
 export default class Communication {
     static useLatestData = true;
@@ -131,6 +132,8 @@ export default class Communication {
         }
 
         // make request to retrieve predictions
+
+        
         await fetch(url)
           .then(response => {
             if (response.status > 400) {
@@ -227,7 +230,7 @@ export default class Communication {
      * @param y the y coordinate of the 480x480 images
      * @returns {Promise<any>} the precipitation of the location for a selected 100 minutes.
      */
-    static async fetchPrecipitation(x, y, pred) {
+    static async fetchPrecipitation(x, y) {
         let url = "api/precipitation?x=" + x + "&y=" + y;
         // only add timestamp if not fetching latest data
         if (!this.useLatestData) {

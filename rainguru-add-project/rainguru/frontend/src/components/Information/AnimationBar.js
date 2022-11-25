@@ -7,6 +7,7 @@ import Communication from "./../Communication";
 import Map from "./../Map/Map";
 import Slider from "./Slider";
 import PastDataSelector from "../TopBar/PastDataSelector";
+import Statistics from "./Statistics";
 
 /**
  * Handles everything regarding the slider bar at the bottom of the screen.
@@ -247,7 +248,9 @@ export default class AnimationBar extends Component {
     render() {
         return (
             <div className="animationContents" data-testid="animationBarDiv">
-                <div className="animationButtonDiv" data-testid="animationButtonDiv">
+                <div class="wrap-topAnimations">
+                <div id="statistics" key="stats"><Statistics /></div>
+                <div className="animationButtonDiv" data-testid="animationButtonDiv">    
                     <button className="animationButton" id="slowDownButton" data-testid="slowDownButton" onClick={() => {
                         this.animationSpeed = Math.min(1100, this.animationSpeed + 100);
                         this.displaySpeed();
@@ -289,6 +292,7 @@ export default class AnimationBar extends Component {
                         <img className="ratioImage" src="../../../static/images/1x1.png"/>
                         <IoIosFastforward className="button-icon" size={this.buttonIconSize}/>
                     </button>
+                </div>
                 </div>
                 <div className="dataBar">
                     <div className="dataBarPart" id="speedValue" data-testid="speedValue">Animation speed: 5</div>

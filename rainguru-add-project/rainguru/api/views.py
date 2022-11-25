@@ -1,6 +1,7 @@
 import datetime
 import json
 import math
+import time
 
 from api import service
 from django.http import HttpResponse, HttpResponseBadRequest
@@ -38,7 +39,10 @@ def fetch_precipitation(request):
             if observed == 'true':
                 response_dict = service.fetch_observed_precipitation(timestamp, int(x), int(y))
             else:
+                start = time.time()
                 response_dict = service.fetch_predicted_precipitation(timestamp, int(x), int(y))
+                end = time.time()
+                print(f"{end-start}")
 
     return HttpResponse(json.dumps(response_dict))
 

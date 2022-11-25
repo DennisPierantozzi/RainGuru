@@ -32,6 +32,7 @@ export default class Map {
 
     /**
      * Preload and cache the images
+     * compareData: boolean value, false to display observations and true to display predictions
      */
     static preloadedImages(compareData=false) {
         // get the image urls

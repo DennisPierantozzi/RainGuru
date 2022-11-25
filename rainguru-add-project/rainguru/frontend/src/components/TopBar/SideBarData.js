@@ -20,7 +20,7 @@ export const SideBarData = [
         className: "SideBar-item Bottom-menu-item",
         id:"application-info",
         popupText:
-        <div data-testid="application-info-popuptext-sidebardata">
+        <div class="popup-text" data-testid="application-info-popuptext-sidebardata">
             <div id="background">
             <h3><span>Background</span></h3>
             <p>The RainGuRu is a deep-learning rainfall forecasting model developed by TU Delft researchers and HKV
@@ -56,7 +56,7 @@ export const SideBarData = [
         className: "SideBar-item Bottom-menu-item" ,
         id: "contributor",
         popupText:
-            <div data-testid="contributor-popuptext-sidebardata">
+            <div class="popup-text" data-testid="contributor-popuptext-sidebardata">
                 <div id="scientific-contributor">
                     <h3><span>Scientific contributors</span></h3>
                     <ul>
@@ -90,13 +90,15 @@ export const SideBarData = [
         className: "SideBar-item Bottom-menu-item",
         id: "disclaimer",
         popupText:
-            <div data-testid="disclaimer-popuptext-sidebardata">
-                <h3><span>Disclaimer & Liability</span></h3>
-                <p>RainGuRu is a non-profit, curiosity driven research project. None of the authors, contributors and
-            institutions behind RainGuRu can be held accountable for the decisions taken by the users on the basis of
-            the presented forecasts. This includes any direct and / or indirect damage, such as loss of profit, loss of
-            business, loss of reputation, errors or omissions in the data, non-availability of data/app, defects,
-            viruses or malfunctioning of personal devices as a result of using this software.</p>
+            <div class="popup-text" data-testid="disclaimer-popuptext-sidebardata">
+                <div id="disclaimer">        
+                        <h3><span>Disclaimer & Liability</span></h3>
+                        <p>RainGuRu is a non-profit, curiosity driven research project. None of the authors, contributors and
+                    institutions behind RainGuRu can be held accountable for the decisions taken by the users on the basis of
+                    the presented forecasts. This includes any direct and / or indirect damage, such as loss of profit, loss of
+                    business, loss of reputation, errors or omissions in the data, non-availability of data/app, defects,
+                    viruses or malfunctioning of personal devices as a result of using this software.</p>
+                </div>
             </div>
     },
     {
@@ -105,7 +107,7 @@ export const SideBarData = [
         className: "SideBar-item Bottom-menu-item",
         id:"acknowledgement",
         popupText:
-        <div data-testid="acknowledgement-popuptext-sidebardata">
+        <div class="popup-text" data-testid="acknowledgement-popuptext-sidebardata">
             <div id="acknowledgement">
                 <h3><span>Acknowledgements</span></h3>
                 <p>The team behind RainGuRu acknowledges the Dutch weather service KNMI for providing the real-time
