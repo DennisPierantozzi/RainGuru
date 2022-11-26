@@ -3,6 +3,7 @@ import moment from "moment";
 import { MenuItem, Select } from "@mui/material";
 import { FormGroup, FormControlLabel, Switch } from '@mui/material';
 import Communication from "../Communication";
+import { map } from "leaflet";
 
 export default class PastDataSelector extends Component {
     // static variables with the available times
@@ -26,6 +27,8 @@ export default class PastDataSelector extends Component {
             predictedValue: "",
             observedValue: "",
             observedTimestamp: "",
+            predictionsDen: {},
+            observationDen: {}
         }
 
         // set the available times
@@ -85,6 +88,27 @@ export default class PastDataSelector extends Component {
         }
     }
 
+
+    static addTimes(predictionInterval, store) {
+        
+
+        let startMorning = moment('06:00:00', 'HH:mm');
+        let startAfternoon = moment('13:00:00', 'HH:mm');
+        let startNight = moment('21:00:00', 'HH:mm');
+
+        if (predictionInterval.isBetween(startAfternoon, startNight)) {
+            store.afternoon.push(predictionInterval);
+        }
+        else if(predictionInterval.isBetween(startNight, startMorning)) {
+            store.night.push(predictionInterval);
+        }
+        else if(predictionInterval.isBetween(startMorning, startAfternoon)) {
+            store.morning.push(predictionInterval);
+        }
+    }
+
+    
+
     /**
      * Finds all the times/time intervals for the past data and stores them in the variables.
      */
@@ -94,8 +118,8 @@ export default class PastDataSelector extends Component {
         const predicted = dataAvailable.predictedTimes;
         const observed = dataAvailable.observedTimes;
         console.log("UPDATE TIMES ");
-        console.log(observed);
-        console.log(predicted);
+        
+
         const lastTime = Math.max(predicted[predicted.length - 1], observed[observed.length - 1]);
         const fiveMinSmall = 300;
         const fiveMinBig = 300000;
@@ -106,19 +130,47 @@ export default class PastDataSelector extends Component {
         PastDataSelector.predictionTimes = [];
         PastDataSelector.observationIntervals = [];
 
+        let yesterday = {morning: [], afternoon:[], night:[]};
+        let today = {morning: [], afternoon:[], night:[]};
+
         // 36 = 3 hours * 12 5-min intervals per hour, >= 19 is since from that point there is enough time for a full interval
-        for (let i = 0, time = lastTime; i < 30; i++, time -= fiveMinSmall) {
+        for (let i = 0, time = lastTime; i < 288; i++, time -= fiveMinSmall) {
             // add the time to a list to reference later for fetching the required data
             PastDataSelector.times.push(time);
             // get the time intervals with hours:minutes time formats
             const timeBig = time * 1000;
-            const predictionTime = moment(new Date(timeBig)).format("HH:mm");
+            const predictionTime = moment(new Date(timeBig)).format("HH:mm:ss");
             const observationInterval = moment(new Date(timeBig)).format("HH:mm") + " - " +
                 moment(new Date(timeBig + (19 * fiveMinBig))).format("HH:mm");
 
 
             // add the menu items with the time intervals
             if (predicted.includes(time)) {
+                
+                // Dennis Upgrade
+                // add predicted to map in the correct array
+                
+                
+                let predictionInterval = moment(predictionTime,"HH:mm");                
+
+                // yesterday or today
+                if(moment(new Date(timeBig)).format("DD/MM/YYYY")<moment(new Date()).format("DD/MM/YYYY")) {
+                    //yesterday
+                    // night - 21:00 -> 05:00
+                    // morning - 06:00 -> 12:00
+                    // afternoon - 13:00 -> 20:00
+                    PastDataSelector.addTimes(predictionInterval, yesterday);
+                    //predictionsDen[0][partOfDay].push(predictionTime);
+                }
+
+                else if(moment(new Date(timeBig)).format("DD/MM/YYYY")==moment(new Date()).format("DD/MM/YYYY")) {
+                    PastDataSelector.addTimes(predictionInterval, today);
+                    //predictionsDen[1][partOfDay].push(predictionTime);
+                }
+
+
+
+
                 PastDataSelector.predictionTimes.push(<MenuItem value={i} key={i}>{predictionTime}</MenuItem>);
             } else {
                 PastDataSelector.predictionTimes.push(<MenuItem disabled value={i} key={i}>{predictionTime}</MenuItem>);
@@ -138,9 +190,15 @@ export default class PastDataSelector extends Component {
                 }
             }
         }
-
-        
+        console.log(today);    
     }
+
+
+
+    
+
+
+
 
     /**
      * Updates the observation timestamp selector timestamps when the observation interval changes.

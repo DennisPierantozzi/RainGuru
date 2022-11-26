@@ -49,9 +49,17 @@ export default class Communication {
     static getImageUrls() {
         return this.imageUrls;
     }
+
+    /**
+     * Get the urls for the observation images in compare mode 
+     */
     static getImageUrlsObsCompare() {
         return this.imageUrlsObsCompare;
     }
+
+    /**
+     * Get the urls for the prediction images in compare mode 
+     */
     static getImageUrlsPrepCompare() {
         return this.imageUrlsPrepCompare;
     }
@@ -77,13 +85,23 @@ export default class Communication {
         return this.dataTimestamp;
     }
 
+    /**
+     * Get the timestamp of the observations choosed for the comparison
+     */
     static getDataTimestampObsCompare() {
         return this.dataTimestampObsCompare;
     }
+
+    /**
+     * Get the timestamp of the predictions choosed for the comparison
+     */ 
     static getDataTimestampPrepCompare() {
         return this.dataTimestampPrepCompare;
     }
 
+    /**
+     * Get the boolean value representing the compare mode
+     */
     static getCompare() {
         return this.compare;
     }

@@ -249,7 +249,7 @@ export default class AnimationBar extends Component {
         return (
             <div className="animationContents" data-testid="animationBarDiv">
                 <div class="wrap-topAnimations">
-                <div id="statistics" key="stats"><Statistics /></div>
+                
                 <div className="animationButtonDiv" data-testid="animationButtonDiv">    
                     <button className="animationButton" id="slowDownButton" data-testid="slowDownButton" onClick={() => {
                         this.animationSpeed = Math.min(1100, this.animationSpeed + 100);
@@ -293,6 +293,9 @@ export default class AnimationBar extends Component {
                         <IoIosFastforward className="button-icon" size={this.buttonIconSize}/>
                     </button>
                 </div>
+                
+                <div id="statistics" key="stats"><Statistics /></div>
+                
                 </div>
                 <div className="dataBar">
                     <div className="dataBarPart" id="speedValue" data-testid="speedValue">Animation speed: 5</div>

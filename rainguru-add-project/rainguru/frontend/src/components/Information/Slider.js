@@ -30,19 +30,21 @@ export default class Slider extends Component {
 
     static stats() {
         let sum = 0;
-        let avgObs, avgPred = 0;
+        let avgObs = 0, avgPred = 0;
         for(let i=0; i<Slider.precipitationShowing.length; i++) {
             sum += Math.pow((Slider.precipitationCompared[i]-Slider.precipitationShowing[i]), 2);
+            console.log(Slider.precipitationCompared[i]);
             avgObs += Slider.precipitationCompared[i];
             avgPred += Slider.precipitationShowing[i];
         }
         avgObs = avgObs/Slider.precipitationCompared.length;
         avgPred = avgPred/Slider.precipitationCompared.length;
-        console.log("avgObs" + avgObs + "   avgPred" + avgPred);
-
+        
         const rmse = Math.pow((sum/Slider.precipitationShowing.length), 0.5).toFixed(2);
+
+        // show statistics
         document.getElementById("rmse").innerHTML = rmse.toString() + "mm/h";
-        document.getElementById("bias").innerHTML = (avgObs-avgPred).toString() + "mm/h";
+        document.getElementById("bias").innerHTML = (avgObs-avgPred).toFixed(2).toString() + "mm/h";
 
         document.getElementById("statistics").style.display = "flex";
     }

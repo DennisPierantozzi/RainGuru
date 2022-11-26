@@ -65,7 +65,7 @@ export default function TopBar({setShowSidebar, displayComparedData, loadingData
                     </div>
 
                     <div className="Sidebar" data-testid="sidebar-menu">
-                        <span className="Menu-icon" onClick={() => setShowSidebarInfo()}><BsInfoLg /></span>
+                        <span onClick={() => setShowSidebarInfo()}><BsInfoLg /></span>
                     </div>
 
 

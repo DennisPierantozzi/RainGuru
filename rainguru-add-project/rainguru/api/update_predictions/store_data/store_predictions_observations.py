@@ -31,7 +31,7 @@ def store_predictions(forecast, used, now):
         store_forecast_database(forecast, now)
 
     print('Clean up...')
-    #cleanup(now)
+    cleanup(now)
 
 
 def store_forecast_images(forecast, now):
@@ -194,7 +194,7 @@ def cleanup_observed_images(now):
         file_path = os.path.join(observed_images_path, file_name)
         if store_data:
             if datetime.datetime.strptime(file_name[:19].replace('_', ':'), "%Y-%m-%d %H:%M:%S") < \
-                    now - datetime.timedelta(hours=3):
+                    now - datetime.timedelta(days=1):
                 os.remove(file_path)
         else:
             os.remove(file_path)
@@ -215,7 +215,7 @@ def cleanup_prediction_images(now):
         dir_path = os.path.join(predicted_images_path, dir_name)
         if store_data:
             if datetime.datetime.strptime(dir_name[:19].replace('_', ':'), "%Y-%m-%d %H:%M:%S") < \
-                    now - datetime.timedelta(hours=3):
+                    now - datetime.timedelta(days=1):
                 shutil.rmtree(dir_path)
         else:
             if datetime.datetime.strptime(dir_name[:19].replace('_', ':'), "%Y-%m-%d %H:%M:%S") < now:
@@ -229,7 +229,7 @@ def cleanup_observed_database(now):
     :param now: The timestamp of the latest observation.
     """
     if store_data:
-        Observed.objects.filter(time__lt=now - datetime.timedelta(hours=3)).delete()
+        Observed.objects.filter(time__lt=now - datetime.timedelta(days=1)).delete()
     else:
         Observed.objects.all().delete()
     db.reset_queries()
@@ -242,7 +242,7 @@ def cleanup_predictions_database(now):
     :param now: The timestamp of the latest observation.
     """
     if store_data:
-        Predicted.objects.filter(calculation_time__lt=now - datetime.timedelta(hours=3)).delete()
+        Predicted.objects.filter(calculation_time__lt=now - datetime.timedelta(days=1)).delete()
     else:
         Predicted.objects.all().delete()
     db.reset_queries()
