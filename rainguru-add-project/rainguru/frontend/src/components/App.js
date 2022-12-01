@@ -98,7 +98,8 @@ export default class App extends Component {
             <div id="information" key="information"><Information animationBarUpdateProp={this.state.animationBarUpdateProp}/></div>,
             <div id="topBar" key="topBar"><TopBar
                                      setShowSidebar = {this.setShowSidebar} displayComparedData={this.displayComparedData}
-                                     loadingData={this.state.loadingData} showCompare={this.state.compare} displayData={this.displayData} setShowSidebarInfo={this.setShowSidebarInfo}/></div>,
+                                     loadingData={this.state.loadingData} showCompare={this.state.compare} displayData={this.displayData} 
+                                     setShowSidebarInfo={this.setShowSidebarInfo}/></div>,
             <div id="menu" key="menuOverlay"  className={this.state.sidebar ? "menuOverlay" : "hideElement"}>
                 <SideBar pastDataSelectorUpdateProp={this.state.pastDataSelectorUpdateProp}
                     loadingData={this.state.loadingData} displayData={this.displayData} 
@@ -177,6 +178,7 @@ export default class App extends Component {
                     if (dataUpdated) {
                         // update the time intervals of the past data menu
                         PastDataSelector.updateTimes();
+                        displayData(-1, true, false, [], "Latest data");
                         this.setState({pastDataSelectorUpdateProp: this.state.pastDataSelectorUpdateProp + 1});
 
                         // update the rain layers and animation bar timestamps when using the latest data
@@ -222,7 +224,7 @@ export default class App extends Component {
                         if (Map.loadedImages === 20) {
 
                             // hide loading data visible
-                            loader.style.display = "none"
+                            loader.style.display = "none";
                             
                             // set the rain images
                             Map.setHeatLayers();

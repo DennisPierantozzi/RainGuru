@@ -37,7 +37,7 @@ export default class AnimationBar extends Component {
             value: 0
         };
 
-        //Dennis Upgrade Keyboard feature
+        // Keyboard feature
         window.addEventListener('keydown', (event) => {
             if (event.defaultPrevented) {
                 return;
@@ -75,6 +75,7 @@ export default class AnimationBar extends Component {
      * @param prevState the state before the component was updated.
      */
     componentDidUpdate(prevProps, prevState) {
+        //console.log(prevState);     
         // if there was a change in the update prop run this code
         if (prevState.updateProp !== this.state.updateProp) {
             // move one mark back if possible when updating on regular latest data
@@ -294,6 +295,12 @@ export default class AnimationBar extends Component {
                     </button>
                 </div>
                 
+                <div className="tooltip-stats" id="tooltip-rmse">
+                    <div>Root Mean Square Error (RMSE) is the standard deviation of the residuals (prediction errors).</div>
+                </div>
+                <div className="tooltip-stats" id="tooltip-bias">
+                    <div>The average of the difference</div>
+                </div>
                 <div id="statistics" key="stats"><Statistics /></div>
                 
                 </div>

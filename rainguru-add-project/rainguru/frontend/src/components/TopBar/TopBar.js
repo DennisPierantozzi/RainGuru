@@ -53,31 +53,23 @@ export default function TopBar({setShowSidebar, displayComparedData, loadingData
                         </div>
                         <span id="currently-showing" data-testid="currently-showing">Latest data</span>
                     </div>
-
                     <div className="Sidebar" data-testid="sidebar-menu">
                         <span className="Menu-icon" onClick={() => { 
                             setCompareDisplay(false);
                             displayData(-1, true, false, [], "Latest data")}}>Live Data</span>
                     </div>
-
                     <div className="Sidebar" data-testid="sidebar-menu">
                         <span className="Menu-icon" onClick={() => setShowSidebar()}>Menu</span>
                     </div>
-
                     <div className="Sidebar" data-testid="sidebar-menu">
                         <span onClick={() => setShowSidebarInfo()}><BsInfoLg /></span>
                     </div>
-
-
                     <div className="Location">
-                        <img className="ratioImage" src="../../../static/images/1x1.png"/>
-                        <ImLocation className="Location-icon" data-testid="user-location" onClick={showCurrentLocation} size="60%"/>
+                        <ImLocation className="Location-icon" data-testid="user-location" onClick={showCurrentLocation} size="1em"/>
                     </div>
                     <div className="TUDelft-logo">
-                        {loadingData}
-                        <img className="ratioImage" src="../../../static/images/1x1.png"/>
-                        <img src="../../../static/images/TUDELFT.png" alt="TU Delft logo"
-                            className="TUDelft-logo-icon" data-testid="tudelft-location" onClick={showTUDelftLocation}></img>
+                        <img src="../../../static/images/TUDelft_logo_white.svg" alt="TU Delft logo"
+                            data-testid="tudelft-location" size="1em" onClick={showTUDelftLocation}></img>
                     </div>
                     <div className="Searchbar" id="locationField"></div>
             </div>

@@ -1,5 +1,4 @@
 import datetime
-import time
 import math
 import os
 from datetime import timezone
@@ -14,6 +13,8 @@ from api.update_predictions.store_data import store_predictions_observations
 
 
 def get_precipitations_array(x, y, observed):
+    #should be from session data not memory store
+
     precipitation = []
     data = []
     if observed:
@@ -34,8 +35,13 @@ def get_precipitations_array(x, y, observed):
     
     return precipitation
 
+#def create_session():
+    #create   
 
-def fetch_observed_precipitation(timestamp, x, y):
+#def store_precipitation_session():
+    #store   
+
+def fetch_observed_precipitation(timestamp, x, y, request):
     """
     Fetch observed precipitation at a given point from the database
 
@@ -45,10 +51,9 @@ def fetch_observed_precipitation(timestamp, x, y):
     :return: An array of 20 observed precipitation values, starting at the given timestamp
     """
     #precipitationOne = []
-    
-    #if memory_store.fetch_timestamp_obs() == timestamp:
-    #    print("entrato in store observation clicked")
+    #if in session use the function below
     #    precipitation = get_precipitations_array(x, y, True)
+
 
     x, y = convert_matrix_image.image_map[(x, y)]
     precipitation = []
@@ -69,6 +74,9 @@ def fetch_observed_precipitation(timestamp, x, y):
     response_dict = {
         'precipitation': precipitation
     }
+
+    #store in session 
+    request.session['precipitation'] = precipitation
 
     return response_dict
 
@@ -110,15 +118,10 @@ def fetch_predicted_precipitation(timestamp, x, y):
     :param y: The y coordinate of the image pixel
     :return: An array of 20 predicted precipitation values which were calculated at the given timestamp
     """
-    start = time.time()
+
     x, y = convert_matrix_image.image_map[(x, y)]
     precipitation = []
 
-    #if memory_store.fetch_timestamp_pred() == timestamp:
-    #    print("entrato in store predictions clicked")
-    #    precipitation = get_precipitations_array(x, y, False)
-
-    print(timestamp)
     for p in Predicted.objects.filter(calculation_time=timestamp).order_by('prediction_time'):
             if x == -1:
                 value = 0
@@ -131,9 +134,6 @@ def fetch_predicted_precipitation(timestamp, x, y):
     response_dict = {
         'precipitation': precipitation
     }
-
-    end = time.time()
-    print(f"time in service {end-start}")
     return response_dict
 
 def fetch_compare_precipitation(timestamp_obs, timestamp_pred, passx, passy):
@@ -183,8 +183,6 @@ def fetch_observed_urls(timestamp):
         "exception_message": ''
     }
 
-    #store_predictions_observations.store_previous_data_clicked(timestamp, True)
-
     return response_dict
 
 
@@ -217,8 +215,6 @@ def fetch_predicted_urls(timestamp):
     """
     predicted_folder = os.path.join('media', 'predicted', str(timestamp).replace(":", "_"))
     predicted_path = os.path.join(os.getcwd(), predicted_folder)
-    
-
 
     urls = []
     try:
@@ -239,9 +235,6 @@ def fetch_predicted_urls(timestamp):
         "exception_message": ''
         }
     
-
-    #store_predictions_observations.store_previous_data_clicked(timestamp, False)
-
     return response_dict
 
 def fetch_compare_urls(timestamp_obs, timestamp_pred):

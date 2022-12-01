@@ -25,9 +25,9 @@ Dennis Upgrade
     font-size: 15px;
     align-items: center;
     display: inline-flex;
-    padding: 8px 8px;
+    padding: 8px 8px 8px 0px;
 }
-#rmse {
+.statistics-box span {
     font-weight: 600;
 }
 .stats-info {
@@ -73,12 +73,12 @@ Dennis Upgrade
     color: #2e2e2e;
 }
 #labelObservations hr {
-    width: 30px;
+    width: 20px;
     border-top: dotted 3px;
     color: #2e2e2e;
 }
 #labelPredictions hr {
-    width: 30px;
+    width: 20px;
     color: #1167b1;
     border-top: solid 2px;
     border-radius: 5px;
@@ -89,8 +89,9 @@ Dennis Upgrade
     position: absolute;
     border: 1px solid black;
     display: none;
-    top: -30%;
+    top: -40%;
     background-color: #fff;
     border-radius: 10px;
     padding: 8px;
+    font-size: 13px;
 }

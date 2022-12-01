@@ -37,7 +37,7 @@ def fetch_precipitation(request):
         else:
             timestamp = datetime.datetime.utcfromtimestamp(int(provided_timestamp))
             if observed == 'true':
-                response_dict = service.fetch_observed_precipitation(timestamp, int(x), int(y))
+                response_dict = service.fetch_observed_precipitation(timestamp, int(x), int(y), request)
             else:
                 start = time.time()
                 response_dict = service.fetch_predicted_precipitation(timestamp, int(x), int(y))
@@ -78,15 +78,17 @@ def fetch_urls(request):
             responsePrecipitation = service.fetch_latest_predicted_precipitation(int(x), int(y)) 
             response_dict['precipitation']=responsePrecipitation['precipitation']
     else:
+        #if not request.session.exists(request.session.session_key):
+        #    request.session.create()
+
         if compare == 'false':
             timestamp = datetime.datetime.utcfromtimestamp(int(provided_timestamp))
-
 
         if observed == 'true' and compare == 'false':
             response_dict = service.fetch_observed_urls(timestamp)
 
             if not (math.isnan(float(x))) and not (math.isnan(float(y))): 
-                responsePrecipitation = service.fetch_observed_precipitation(timestamp, int(x), int(y))
+                responsePrecipitation = service.fetch_observed_precipitation(timestamp, int(x), int(y), request)
                 response_dict['precipitation']=responsePrecipitation['precipitation']
              
         elif observed == 'false' and compare == 'false':
@@ -96,7 +98,7 @@ def fetch_urls(request):
                 responsePrecipitation = service.fetch_predicted_precipitation(timestamp, int(x), int(y))
                 response_dict['precipitation']=responsePrecipitation['precipitation']
 
-        if observed == 'true' and compare == 'true':
+        if compare == 'true':
             times = provided_timestamp.split('c')
             response_dict = service.fetch_compare_urls(datetime.datetime.utcfromtimestamp(int(times[0])), datetime.datetime.utcfromtimestamp(int(times[1])))
 

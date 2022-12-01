@@ -1,43 +1,39 @@
 import React, {useState, useEffect } from 'react';
-import {SideBarData} from "./SideBarData";
-import AppInfoPopup from "./AppInfoPopup";
+import {InfoMenuData} from "./InfoMenuData";
 
 function InfoMenu () {
 
     const [textToShow, setTextToShow] = useState("");
+    const [previousItem, setPreviousItem] = useState("");
 
     useEffect(() => {
-        setTextToShow(SideBarData[0].popupText);
+        setTextToShow(InfoMenuData[0].popupText);
     }, []);
+
+    const handleClickInfo = (item) => {
+        document.getElementById(item.title).style.textDecoration = "underline";
+        if(previousItem != "") {document.getElementById(previousItem).style.textDecoration = "";}
+        setPreviousItem(item.title);
+        setTextToShow(item.popupText);
+    }
 
     return(
         <div id="infoMenu" className="Sidebar-shown">
-            <div className="Menu-title">
-                    <div>RainGuru <br/> <span className="Menu-subtitle">Weather forecast app</span></div>
-                    <img src="../../static/images/TUDelft_logo_white.png" alt="TUDelft Logo" />
-            </div>
-            <div className="Sidebar-items Bottom-menu">
-                        {SideBarData.map((item, index) => {
-                            return (
-                                <div key={index} className={item.className} data-testid={item.id}
-                                    onClick={item.title === "Application information" ? (e) =>  setTextToShow(item.popupText) :
-                                        item.title === "Contributors" ? (e) => setTextToShow(item.popupText) :
-                                        item.title === "Disclaimer & Liability" ? (e) => setTextToShow(item.popupText) :
-                                        item.title === "Acknowledgement" ? (e) => setTextToShow(item.popupText) :
-                                            (e) => changePrivacyPopup(e, true)}>
-                                    <span className="item-icon">
-                                        <img className="ratioImage" src="../../../static/images/1x1.png"/>
-                                        {item.icon}
-                                    </span>
-                                    <span className="item-title">{item.title}</span>
-                                    
-                                </div>
-                            )
-                        })}
-            </div>
-            <div className="info-box">
-                <div class="info-text">
-                    {textToShow}
+            <div className='container-sidebar-menuInfo'>
+                <div className="Menu-title">
+                        <div>RainGuru <br/> <span className="Menu-subtitle">Weather forecast app</span></div>
+                        <img src="../../static/images/TUDelft_logo_white.png" alt="TUDelft Logo" />
+                </div>
+                <div className="contents-menuInfo">
+                    <ul className="list-menuInfo">
+                        {InfoMenuData.map((item,i) => <li id={item.title} className="elements-list-menuInfo" onClick={() => {handleClickInfo(item)}}>
+                        {item.icon} <span>{item.title}</span></li>)}
+                    </ul>
+                    <div className="menu-info-box">
+                        <div class="info-text">
+                            {textToShow}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className='Bottom-privacy-statement'>

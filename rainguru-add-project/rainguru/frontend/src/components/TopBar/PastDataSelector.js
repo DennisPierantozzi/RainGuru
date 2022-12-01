@@ -1,9 +1,13 @@
 import React, {Component} from "react";
 import moment from "moment";
-import { MenuItem, Select } from "@mui/material";
-import { FormGroup, FormControlLabel, Switch } from '@mui/material';
+import { MenuItem } from "@mui/material";
+import { SlGraph } from "react-icons/sl";
+import { TbChartInfographic } from "react-icons/tb";
+import { MdAutoGraph } from "react-icons/md";
+import { IoTodayOutline } from "react-icons/io5";
+import { WiSunrise, WiNightClear, WiHorizon } from "react-icons/wi";
 import Communication from "../Communication";
-import { map } from "leaflet";
+
 
 export default class PastDataSelector extends Component {
     // static variables with the available times
@@ -13,12 +17,39 @@ export default class PastDataSelector extends Component {
     static observedTimestamps = [];
     static loadTimestamp = 0;
 
+    // here I can also use a tree, but since the features are only three I used maps.
+    static predictionsIntervals = 
+    {
+        today: {morning: [], 
+                afternoon:[], 
+                night:[]
+            }, 
+        yesterday: {
+            morning: [], 
+            afternoon:[], 
+            night:[]
+            }
+    };
+    static observationsIntervals = {today: {morning: [], afternoon:[], night:[]}, yesterday: {morning: [], afternoon:[], night:[]}};
+    static compareIntervals = {today: {morning: [], afternoon:[], night:[]}, yesterday: {morning: [], afternoon:[], night:[]}};
+    //root
+    static Intervals = {
+        predictions: PastDataSelector.predictionsIntervals, 
+        observations: PastDataSelector.observationsIntervals, 
+        compare:PastDataSelector.compareIntervals
+    };
+      
     /**
      * Sets the past data selector in the starting state.
      * @param props contains optional properties of the past data selector menu.
      */
     constructor(props) {
         super(props);
+        this.selectFeature= this.selectFeature.bind(this);
+        this.selectDay= this.selectDay.bind(this);
+        this.selectPartOfDay= this.selectPartOfDay.bind(this);
+        this.selectIntervals= this.selectIntervals.bind(this);
+        this.handleClickInterval= this.handleClickInterval.bind(this);
 
         // state variables
         this.state = {
@@ -27,8 +58,14 @@ export default class PastDataSelector extends Component {
             predictedValue: "",
             observedValue: "",
             observedTimestamp: "",
-            predictionsDen: {},
-            observationDen: {}
+            compare: false,
+            observed: false,
+            selected: new Array(3), // 0 0 0
+            selectedIntervals: [],
+            previousItem: "",
+            daySection: false,
+            partOfDaySection: false,
+            intervalsSection: false
         }
 
         // set the available times
@@ -86,28 +123,54 @@ export default class PastDataSelector extends Component {
                 observedValue: newObservedValue
             });
         }
+
+
+
     }
 
 
-    static addTimes(predictionInterval, store) {
-        
+    static addTimes(time, store) {
+        let startMorning = moment('06:00:00', 'HH:mm'); // morning - 06:00 -> 12:00
+        let startAfternoon = moment('13:00:00', 'HH:mm'); // afternoon - 13:00 -> 20:00
+        let endAfternoon = moment('24:00:00', 'HH:mm');
+        let startNight = moment('00:00:00', 'HH:mm'); // night - 00:00 -> 05:00
 
-        let startMorning = moment('06:00:00', 'HH:mm');
-        let startAfternoon = moment('13:00:00', 'HH:mm');
-        let startNight = moment('21:00:00', 'HH:mm');
+        let timeToStore = moment(new Date(time*1000), "HH:mm").format("HH:mm");
+        console.log(timeToStore);
 
-        if (predictionInterval.isBetween(startAfternoon, startNight)) {
-            store.afternoon.push(predictionInterval);
+        if (timeToStore>startAfternoon._i && timeToStore<endAfternoon._i) {
+            if(!store.afternoon.includes(time)) {store.afternoon.push(time);}
         }
-        else if(predictionInterval.isBetween(startNight, startMorning)) {
-            store.night.push(predictionInterval);
+        else if(timeToStore>startNight._i && timeToStore<startMorning._i) {
+            if(!store.night.includes(time)) {store.night.push(time);}
         }
-        else if(predictionInterval.isBetween(startMorning, startAfternoon)) {
-            store.morning.push(predictionInterval);
+        else if(timeToStore>startMorning._i && timeToStore<startAfternoon._i) {
+            if(!store.morning.includes(time)) {
+                store.morning.push(time);}
         }
     }
 
     
+    static checkCompareIntervals(compareTimestampsToday, compareTimestampsYesterday) {
+        let arrayPredictionsToday = PastDataSelector.predictionsIntervals.today.morning.concat(PastDataSelector.predictionsIntervals.today.afternoon, PastDataSelector.predictionsIntervals.today.night);
+        let arrayPredictionsYesterday = PastDataSelector.predictionsIntervals.yesterday.morning.concat(PastDataSelector.predictionsIntervals.yesterday.afternoon, PastDataSelector.predictionsIntervals.yesterday.night);
+
+        for(let i=0; i<compareTimestampsToday.length; i++) {
+            let compareTime = moment(moment(new Date(compareTimestampsToday[i]*1000)).subtract(5, 'minutes').format()).unix();
+            if(arrayPredictionsToday.includes(compareTime)){
+                PastDataSelector.addTimes(compareTimestampsToday[i], PastDataSelector.compareIntervals.today);
+            }
+        }
+
+        for(let i=0; i<compareTimestampsYesterday.length; i++) {
+            let compareTime = moment(moment(new Date(compareTimestampsYesterday[i]*1000)).subtract(5, 'minutes').format()).unix();
+            if(arrayPredictionsYesterday.includes(compareTime)){
+                PastDataSelector.addTimes(compareTimestampsYesterday[i], PastDataSelector.compareIntervals.yesterday);
+            }
+        }
+
+    }
+
 
     /**
      * Finds all the times/time intervals for the past data and stores them in the variables.
@@ -117,12 +180,9 @@ export default class PastDataSelector extends Component {
         const dataAvailable = await Communication.fetchDataAvailability();
         const predicted = dataAvailable.predictedTimes;
         const observed = dataAvailable.observedTimes;
-        console.log("UPDATE TIMES ");
-        
-
         const lastTime = Math.max(predicted[predicted.length - 1], observed[observed.length - 1]);
+        console.log(lastTime);
         const fiveMinSmall = 300;
-        const fiveMinBig = 300000;
         let observationsAvailable = 0;
 
         // reset the times/time intervals variables
@@ -130,51 +190,46 @@ export default class PastDataSelector extends Component {
         PastDataSelector.predictionTimes = [];
         PastDataSelector.observationIntervals = [];
 
-        let yesterday = {morning: [], afternoon:[], night:[]};
-        let today = {morning: [], afternoon:[], night:[]};
-
+        let compareTimestampsToday = [];
+        let compareTimestampsYesterday = [];
+        let today = false;
         // 36 = 3 hours * 12 5-min intervals per hour, >= 19 is since from that point there is enough time for a full interval
+        
+        /*if(moment(new Date()).diff(new Date(lastTime*1000), 'days') > 0){
+            // day is changed
+        
+            PastDataSelector.predictionsIntervals.yesterday.morning = PastDataSelector.predictionsIntervals.today.morning;
+            PastDataSelector.predictionsIntervals.yesterday.afternoon = PastDataSelector.predictionsIntervals.today.afternoon;
+            PastDataSelector.predictionsIntervals.yesterday.night = PastDataSelector.predictionsIntervals.today.night; 
+            PastDataSelector.predictionsIntervals.today.morning = [];
+            PastDataSelector.predictionsIntervals.today.afternoon = [];
+            PastDataSelector.predictionsIntervals.today.night = [];
+
+            PastDataSelector.observationsIntervals.yesterday.morning = PastDataSelector.observationsIntervals.today.morning;
+            PastDataSelector.observationsIntervals.yesterday.afternoon = PastDataSelector.observationsIntervals.today.afternoon;
+            PastDataSelector.observationsIntervals.yesterday.night = PastDataSelector.observationsIntervals.today.night; 
+            PastDataSelector.observationsIntervals.today.morning = [];
+            PastDataSelector.observationsIntervals.today.afternoon = [];
+            PastDataSelector.observationsIntervals.today.night = [];
+        };*/
+        console.log(lastTime);
+        // 288 steps for 24hours 5-min intervals
         for (let i = 0, time = lastTime; i < 288; i++, time -= fiveMinSmall) {
             // add the time to a list to reference later for fetching the required data
             PastDataSelector.times.push(time);
-            // get the time intervals with hours:minutes time formats
-            const timeBig = time * 1000;
-            const predictionTime = moment(new Date(timeBig)).format("HH:mm:ss");
-            const observationInterval = moment(new Date(timeBig)).format("HH:mm") + " - " +
-                moment(new Date(timeBig + (19 * fiveMinBig))).format("HH:mm");
-
-
-            // add the menu items with the time intervals
-            if (predicted.includes(time)) {
-                
-                // Dennis Upgrade
-                // add predicted to map in the correct array
-                
-                
-                let predictionInterval = moment(predictionTime,"HH:mm");                
-
-                // yesterday or today
-                if(moment(new Date(timeBig)).format("DD/MM/YYYY")<moment(new Date()).format("DD/MM/YYYY")) {
-                    //yesterday
-                    // night - 21:00 -> 05:00
-                    // morning - 06:00 -> 12:00
-                    // afternoon - 13:00 -> 20:00
-                    PastDataSelector.addTimes(predictionInterval, yesterday);
-                    //predictionsDen[0][partOfDay].push(predictionTime);
-                }
-
-                else if(moment(new Date(timeBig)).format("DD/MM/YYYY")==moment(new Date()).format("DD/MM/YYYY")) {
-                    PastDataSelector.addTimes(predictionInterval, today);
-                    //predictionsDen[1][partOfDay].push(predictionTime);
-                }
-
-
-
-
-                PastDataSelector.predictionTimes.push(<MenuItem value={i} key={i}>{predictionTime}</MenuItem>);
-            } else {
-                PastDataSelector.predictionTimes.push(<MenuItem disabled value={i} key={i}>{predictionTime}</MenuItem>);
+            const timeBig = time*1000;
+            if(moment(new Date(timeBig)).format("DD/MM/YYYY")==moment(new Date()).format("DD/MM/YYYY")) {
+                today = true;
             }
+            else {today = false;}
+        
+            if (predicted.includes(time)) {
+                if(today) {
+                    console.log("entrato con today");
+                    PastDataSelector.addTimes(time, PastDataSelector.predictionsIntervals.today);}
+                else {
+                    PastDataSelector.addTimes(time, PastDataSelector.predictionsIntervals.yesterday);}
+            } 
 
             // since observed is time intervals they start later since they need to gather a full interval
             if (observed.includes(time)) {
@@ -184,20 +239,20 @@ export default class PastDataSelector extends Component {
             }
             if (i >= 19) {
                 if (observationsAvailable >= 20) {
-                    PastDataSelector.observationIntervals.push(<MenuItem value={i} key={i}>{observationInterval}</MenuItem>);
-                } else {
-                    PastDataSelector.observationIntervals.push(<MenuItem disabled value={i} key={i}>{observationInterval}</MenuItem>);
-                }
+                    if(today) {
+                        PastDataSelector.addTimes(time, PastDataSelector.observationsIntervals.today);
+                        compareTimestampsToday.push(time);
+                    }
+                    else {
+                        PastDataSelector.addTimes(time, PastDataSelector.observationsIntervals.yesterday);
+                        compareTimestampsYesterday.push(time);
+                    }
+                } 
             }
         }
-        console.log(today);    
+        PastDataSelector.checkCompareIntervals(compareTimestampsToday, compareTimestampsYesterday);
+        console.log(PastDataSelector.Intervals);
     }
-
-
-
-    
-
-
 
 
     /**
@@ -216,8 +271,8 @@ export default class PastDataSelector extends Component {
                 PastDataSelector.observedTimestamps.push(<MenuItem value={i} key={i}>{time}</MenuItem>);
             }
         }
-
     }
+
 
     /**
      * Calls App.js to load the new data with the correct parameters.
@@ -225,7 +280,7 @@ export default class PastDataSelector extends Component {
      * @param latest a boolean value representing if the latest data should be loaded.
      * @param observed a boolean value representing if observed or predicted data should be loaded.
      */
-    loadData(latest, observed, compare) {
+    loadData(item) {
         // variables for what needs to change, the values are set depending on how this method was called
         const currentlyShowing = document.getElementById("currently-showing");
         let validCall = false;
@@ -233,52 +288,102 @@ export default class PastDataSelector extends Component {
         let timeString = "";
         let timeCompare = "";
 
-        if (latest) {
-            // set it to a valid call and set the timestring
-            validCall = true;
-            timeString = "Latest data";
-
-            // update the accessible observation timestamp
-            PastDataSelector.loadTimestamp = 0;
-        } else {
-            if (observed && this.state.observedValue !== "") {
+        if (this.state.observed && item !== "") {
                 // set it to a valid call and calculate/set the timestring
                 validCall = true;
-                time = PastDataSelector.times[this.state.observedValue];
-                timeString = "Observations from: " + moment(new Date(time * 1000)).format("HH:mm") + " - " +
+                timeString = "Observations from: " + moment(new Date(item * 1000)).format("HH:mm") + " - " +
                 moment(new Date((time + 5700) * 1000)).format("HH:mm");
-
                 // update the accessible observation timestamp
-                PastDataSelector.loadTimestamp = this.state.observedTimestamp;
-            } else if (!observed && this.state.predictedValue !== "") {
+                PastDataSelector.loadTimestamp = 0;
+            } else if (!this.state.observed && item !== "") {
                 // set it to a valid call and calculate/set the timestring
                 validCall = true;
-                time = PastDataSelector.times[this.state.predictedValue];
-                timeString = "Predictions made at: " + moment(new Date(time * 1000)).format("HH:mm");
+                timeString = "Predictions made at: " + moment(new Date(item * 1000)).format("HH:mm");
                 // update the accessible observation timestamp
                 PastDataSelector.loadTimestamp = 0;
             }
-            if(compare && observed) {
-                if(this.state.observedValue !== "") {
-                    time = PastDataSelector.times[this.state.observedValue];
-                    timeString = "Observations from: " + moment(new Date(time * 1000)).format("HH:mm");
-                    timeCompare=PastDataSelector.times[this.state.observedValue].toString()+'c'+(PastDataSelector.times[this.state.observedValue]-300).toString();
+            if(this.state.compare) {
+                if(item !== "") {
+                    timeString = "Compare from: " + moment(new Date(item * 1000)).format("HH:mm");
+                    timeCompare=item.toString()+'c'+(item-300).toString();
                 }
             }
-        }
 
         // load new data when a valid call was made that is also different from what is currently already loaded
         if (validCall && timeString !== currentlyShowing.innerHTML) {
-            if(compare){     
-                this.props.compareData(-1, latest, observed, timeCompare, timeString);
+            if(this.state.compare){     
+                this.props.compareData(-1, false, this.state.observed, timeCompare, timeString);
             }
             // call app to display the new data
             else{
-                this.props.displayData(-1, latest, observed, time, timeString);
+                this.props.displayData(-1, false, this.state.observed, item, timeString);
             }
             // display what data should be loaded now
             
         }
+    }
+
+
+
+    selectFeature(feature) {
+        //toggle class feature clicked
+        if(this.state.selected[0] != undefined) {document.getElementById(this.state.selected[0]).classList.remove("previous-data-clicked");}
+        if(this.state.previousItem != "") {document.getElementById(this.state.previousItem).classList.remove("previous-data-clicked");}
+        document.getElementById(feature).classList.toggle("previous-data-clicked");
+
+        let arr = this.state.selected;
+        arr[0] = feature;
+        // set observed and compare states
+        if(feature == 'observations') {this.setState({observed: true, compare: false});}
+        if(feature == 'compare') {this.setState({compare: true, observed: false});}
+        if(feature == 'predictions') {this.setState({compare: false, observed: false});}
+        this.setState({selected: arr, daySection: true, previousItem: ""});
+
+        this.selectIntervals(arr);
+    }
+    selectDay(day) {
+        //toggle class day clicked
+        if(this.state.selected[1] != undefined) {document.getElementById(this.state.selected[1]).classList.remove("previous-data-clicked");}
+        if(this.state.previousItem != "") {document.getElementById(this.state.previousItem).classList.remove("previous-data-clicked");}
+        document.getElementById(day).classList.toggle("previous-data-clicked")
+        
+        let arr = this.state.selected;
+        arr[1] = day;
+        this.setState({selected: arr, partOfDaySection: true, previousItem: ""});
+
+        this.selectIntervals(arr);
+    }
+    selectPartOfDay(partOfDay) {
+        //toggle class partOfDay clicked
+        if(this.state.selected[2] != undefined) {document.getElementById(this.state.selected[2]).classList.remove("previous-data-clicked");}
+        if(this.state.previousItem != "") {document.getElementById(this.state.previousItem).classList.remove("previous-data-clicked");}
+        document.getElementById(partOfDay).classList.toggle("previous-data-clicked");
+
+        let arr = this.state.selected;
+        arr[2] = partOfDay;
+        this.setState({selected: arr, intervalsSection:true, previousItem: ""});
+
+        this.selectIntervals(arr);
+    }
+    selectIntervals(arr) {
+        // display intervals after the complete selection 
+        if(arr.includes(undefined)) {return}
+        else {
+            let store = PastDataSelector.Intervals;
+            for(let i=0; i<arr.length; i++){
+            store = store[arr[i]];
+            //console.log(store);
+            }
+            this.setState({selectedIntervals: store});
+        }
+    }
+    handleClickInterval(item) {
+        if(this.state.previousItem != "") 
+            {document.getElementById(this.state.previousItem).classList.remove("previous-data-clicked");} 
+        document.getElementById(item).classList.toggle("previous-data-clicked");
+        this.setState({previousItem: item});
+        this.props.setShowSidebar(); 
+        this.loadData(item);
     }
 
 
@@ -294,62 +399,45 @@ export default class PastDataSelector extends Component {
      */
     render() {
         return (<div className="pastDataSelectorContents" data-testid="pastDataSelector">
-                <div className="past-data-menu-part display-predictions-width">
-                    <p>Predictions made at:</p>
-                    <div className="time-interval-chooser">
-                        <Select className="time-interval-drop-down times-color" id="predicted-drop-down" data-testid="predicted-drop-down"
-                                variant="standard" defaultValue="" value={this.state.predictedValue}
-                                MenuProps={{ PaperProps: { sx: { maxHeight: 'calc(7 * var(--sidebar-item-height))' } } }}
-                                onChange={(e) => this.setState({predictedValue: e.target.value})}>
-                            <MenuItem value=""><em>None</em></MenuItem>
-                            {PastDataSelector.predictionTimes}
-                        </Select>
-                        <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
-                                disabled={this.state.loadingData} data-testid="predicted-loader" onClick={() => {
-                                this.props.setShowSidebar();    
-                                this.props.setShowCompare(false);
-                                this.loadData(false, false, false);
-                        }}>Load</button>
+                <div className="description-data-section"> Tap to select data to display </div>
+                <div id="past-data-feature" className="sections-previous-data">
+                    <div id="observations" className="box-previous-data" onClick={() => this.selectFeature('observations')}>
+                        <span> <SlGraph />  Observations </span>
+                    </div>
+                    <div id="predictions" className="box-previous-data" onClick={() => this.selectFeature('predictions')}>
+                        <span> <TbChartInfographic />  Predictions </span>
+                    </div>
+                    <div id="compare" className="box-previous-data" onClick={() => this.selectFeature('compare')}>
+                        <span> <MdAutoGraph />  Compare </span>
                     </div>
                 </div>
-            <div className="past-data-menu-part display-observations-width">
-                <p>Observations from:</p>
-                <div className="time-interval-chooser">
-                    <Select className="time-interval-drop-down times-color" id="observed-drop-down" data-testid="observed-drop-down"
-                            variant="standard" defaultValue="" value={this.state.observedValue}
-                            MenuProps={{ PaperProps: { sx: { maxHeight: 'calc(7 * var(--sidebar-item-height))' } } }}
-                            onChange={(e) => {
-                                this.setState({observedValue: e.target.value, observedTimestamp: 9});
-                                this.updateObservationTimestamps(e.target.value);
-                            }}>
-                        <MenuItem value=""><em>None</em></MenuItem>
-                        {PastDataSelector.observationIntervals}
-                    </Select>
-                    <button className={"time-interval-loader" + (this.state.loadingData ? " disabled-time-interval-loader" : "")}
-                            disabled={this.state.loadingData} data-testid="observed-loader" onClick={() => {
-                                this.props.setShowSidebar();
-                                this.props.setShowCompare(false);
-                                this.loadData(false, true, false);
-                    }}>Load</button>
-                    <button className={"time-interval-loader" + (this.state.loadingData || (this.state.observedValue=="") ? " disabled-time-interval-loader" : "")}
-                            disabled={this.state.loadingData || (this.state.observedValue=="")} data-testid="observed-loader" onClick={() => {
-                                this.props.setShowSidebar();
-                                //this.props.setShowCompare(true);
-                                this.loadData(false, true, true);
-                    }}>Compare</button>
-                </div>
-                <div className={(this.state.observedValue !== "") ? "timestamp-observation-chooser" : "timestamp-observation-chooser-disabled"}>
-                    <p className="load-on">Load on:</p>
-                    <div className="load-interval-chooser">
-                        <Select className="timestamp-drop-down times-color" id="timestamp-observed-drop-down" data-testid="timestamp-observed-drop-down"
-                                variant="standard" defaultValue={9} value={this.state.observedTimestamp}
-                                MenuProps={{ PaperProps: { sx: { maxHeight: 'calc(7 * var(--sidebar-item-height))' } } }}
-                                onChange={(e) => this.setState({observedTimestamp: e.target.value})}>
-                            {PastDataSelector.observedTimestamps}
-                        </Select>
+                <div id="past-data-day" className={this.state.daySection ? "sections-previous-data" : "hideElement"}>
+                    <div id="today" className="box-previous-data" onClick={() => this.selectDay('today')}>
+                        <span> <IoTodayOutline />  Today </span>
+                    </div>
+                    <div id="yesterday" className="box-previous-data" onClick={() => this.selectDay('yesterday')}>
+                        <span> <IoTodayOutline />  Yesterday </span>
                     </div>
                 </div>
-            </div>
-        </div>);
+                <div id="past-data-partOfDay" className={this.state.partOfDaySection ? "sections-previous-data" : "hideElement"}>
+                    <div id="morning" className="box-previous-data" onClick={() => this.selectPartOfDay('morning')}>
+                        <span> <WiSunrise />  Morning </span>
+                    </div>
+                    <div id="afternoon" className="box-previous-data" onClick={() => this.selectPartOfDay('afternoon')}>
+                        <span> <WiHorizon />  Afternoon </span>
+                    </div>
+                    <div id="night" className="box-previous-data" onClick={() => this.selectPartOfDay('night')}>
+                        <span> <WiNightClear />  Night </span>
+                    </div>
+                </div>
+                <div id="past-data-intervals" className={this.state.intervalsSection ? "sections-previous-intervals" : "hideElement"}>
+                    <ul className="list-intervals">
+                    {this.state.selectedIntervals.map((item,i) => <li id={item} className="single-interval" onClick={() => {
+                        this.handleClickInterval(item);
+                    }
+                    }>{moment(new Date(item * 1000)).format("HH:mm")}</li>)}
+                    </ul>
+                </div>
+            </div>);
     }
 }

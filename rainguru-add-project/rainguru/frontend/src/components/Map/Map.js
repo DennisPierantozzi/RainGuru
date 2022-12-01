@@ -84,6 +84,7 @@ export default class Map {
         }
         const zeroUrl = imageUrls[0];
         this.nextLayers.push(L.imageOverlay(zeroUrl, imageBounds, {opacity: 0}));
+        console.log("finita");
     }
 
     /**
@@ -103,18 +104,6 @@ export default class Map {
      * Renders the map and handles the event of clicking on the map and putting a marker at that location.
      */
     static render() {
-        const options = {
-            // Required: API key
-            key: 'edBkqFTbtnIHDh1gMxQ1k50PxREIG3lK',
-        
-            // Put additional console output
-            verbose: true,
-        
-            // Optional: Initial state of the map
-            lat: 52.45,
-            lon: 5.415,
-            zoom: 7,
-        };
 
         // base layer code
         const baseLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {

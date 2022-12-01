@@ -31,7 +31,7 @@ def store_predictions(forecast, used, now):
         store_forecast_database(forecast, now)
 
     print('Clean up...')
-    cleanup(now)
+    #cleanup(now)
 
 
 def store_forecast_images(forecast, now):

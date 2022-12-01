@@ -151,7 +151,6 @@ export default class Communication {
 
         // make request to retrieve predictions
 
-        
         await fetch(url)
           .then(response => {
             if (response.status > 400) {

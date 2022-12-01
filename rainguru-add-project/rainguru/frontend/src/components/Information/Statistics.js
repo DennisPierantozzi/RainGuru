@@ -12,12 +12,7 @@ function Statistics () {
             id = document.getElementById("tooltip-bias");
             document.getElementById("tooltip-rmse").style.display = "none";
         }
-        if(id.style.display == "none"){
-            id.style.display = "block";
-        }
-        else {
-            id.style.display = "none";
-        }
+        id.style.display = "block";
     }
 
     return(
@@ -29,15 +24,11 @@ function Statistics () {
                 </ul>
             </div>
             <div className='statistics-box'>
-                <div className="tooltip-stats" id="tooltip-rmse">
-                    <div>Root Mean Square Error (RMSE) is the standard deviation of the residuals (prediction errors).</div>
-                </div>
+                
                 <button id="rmse-explain" className="stats-info" onClick={() => toogleTooltip("rmse")}>?</button>
                 Rmse: <span id="rmse"></span></div>
             <div className='statistics-box'>
-                <div className="tooltip-stats" id="tooltip-bias">
-                    <div>The average of the difference</div>
-                </div>
+                
                 <button id="bias-explain" className="stats-info" onClick={() => toogleTooltip("bias")}>?</button>
                 Bias: <span id="bias"></span></div>
         </div>

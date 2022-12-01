@@ -34,12 +34,12 @@
     height: calc(100% * (8 / 12));
     display: flex;
     justify-content: center;
-    text-align: center;
+    align-items: center;
 }
 
 .legendContainer {
     position: relative;
-    height: calc(100% * (9 / 12));
+    height: calc(100% * (12 / 12));
     display: flex;
     justify-content: center;
     flex-direction: column;
