@@ -7,3 +7,4 @@
 *.h5
 *.png
 /rainguru/.env
+/rainguru/session

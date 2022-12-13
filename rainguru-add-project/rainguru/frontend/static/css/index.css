@@ -46,6 +46,10 @@ html, body, #main, #app {
     height: 100%;
 }
 
+a {
+    color: #0076C2;
+}
+
 #main {
     position: relative;
     min-width: 800px;
@@ -110,27 +114,13 @@ html, body, #main, #app {
 
 #topBar {
     position: absolute;
-    /*width: 100%;
-    height: calc(7 * var(--in-ratio-height));
-    */
-    /*Dennis Upgrade*/
     top:1%;
     width: auto;
     height: 4%;
     z-index: 9999;
 }
 
-.topBarContents {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    /*background-color: #91BAD6;*/
-    font-size: 100%;
-    /*Dennis Upgrade*/
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
+
 
 /* ==================== screen part divider ==================== */
 
@@ -153,21 +143,17 @@ html, body, #main, #app {
 #information {
     position: absolute;
     z-index: 0;
-    top: calc((70 * var(--in-ratio-height)) + var(--out-ratio-height));
+    bottom: 2%;
     width: 90%;
-    height: calc(28 * var(--in-ratio-height));
-    background-color: #fff;
+    height: auto;
     pointer-events: none;
-    border-radius: 50px;
 }
 
 .informationContents {
-    position: relative;
-    width: calc(100% - 50px);
-    height: 100%;
     font-family: Arial;
     font-size: 100%;
-    margin: 0px 25px;
+    display: grid;
+    align-items: center;
 }
 
 /* ==================== screen part divider ==================== */
@@ -245,24 +231,15 @@ html, body, #main, #app {
     }
 
     #map {
-        /*
-        top: calc(10 * var(--in-ratio-height));
-        height: calc((61 * var(--in-ratio-height)) + var(--out-ratio-height)); */
-        /*Dennis Upgrade*/
         top: 0;
         height: 100%;
     }
 
     #information {
-        height: calc(36 * var(--in-ratio-height));
-        top: calc((64 * var(--in-ratio-height)) + var(--out-ratio-height));
+        width: 95%;
+        border-radius: 15px;
     }
 
-    .informationContents {
-        width: calc(100% - 10px);
-        margin-left: 5px;
-        margin-right: 5px;
-    }
 }
 
 /* when someone want to see the site on a phone in landscape mode there are some adjustments

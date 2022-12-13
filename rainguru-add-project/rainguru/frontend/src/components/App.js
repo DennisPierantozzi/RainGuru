@@ -8,7 +8,6 @@ import Map from "./Map/Map";
 import Information from "./Information/Information";
 import AnimationBar from "./Information/AnimationBar";
 import Slider from "./Information/Slider";
-import PopupContainer from "./PopupContainer/PopupContainer";
 import SideBar from "./TopBar/SideBar";
 import InfoMenu from "./TopBar/InfoMenu";
 
@@ -31,12 +30,11 @@ export default class App extends Component {
             sidebarInfo: false,
         }
 
-        // bind this to update the state when this function is called from the past data selector
+        // bind this to update the state when this function is called from other components
         this.displayData = this.displayData.bind(this);
         this.compareData = this.compareData.bind(this);
         this.displayComparedData = this.displayComparedData.bind(this);
         this.setShowSidebar = this.setShowSidebar.bind(this);
-        this.setShowCompare = this.setShowCompare.bind(this);
         this.setShowSidebarInfo = this.setShowSidebarInfo.bind(this);
     }
 
@@ -70,6 +68,10 @@ export default class App extends Component {
         }, 50);
     }
 
+    //setters
+    /**
+     * Set the sidebar state to show or hide the main menu.
+     */
     setShowSidebar() {
         this.setState({
             sidebarInfo: false,
@@ -77,15 +79,14 @@ export default class App extends Component {
         })
     }
 
+    /**
+     * Set the sidebar state to show or hide the info menu.
+     */
     setShowSidebarInfo() {
         this.setState({ 
             sidebar: false,
             sidebarInfo: !this.state.sidebarInfo
         })
-    }
-
-    setShowCompare(compare) {
-        this.setState({compare: compare});
     }
 
 
@@ -98,13 +99,22 @@ export default class App extends Component {
             <div id="information" key="information"><Information animationBarUpdateProp={this.state.animationBarUpdateProp}/></div>,
             <div id="topBar" key="topBar"><TopBar
                                      setShowSidebar = {this.setShowSidebar} displayComparedData={this.displayComparedData}
-                                     loadingData={this.state.loadingData} showCompare={this.state.compare} displayData={this.displayData} 
-                                     setShowSidebarInfo={this.setShowSidebarInfo}/></div>,
+                                     showCompare={this.state.compare} displayData={this.displayData} 
+                                     setShowSidebarInfo={this.setShowSidebarInfo}/>
+                <div className='loaderContents'>
+                    <div id="loader" class="loading-bar">
+                        <span id="loadingString">Loading Images</span>
+                        <div class="circle-1 circle1"></div>
+                        <div class="circle-1 circle2"></div>
+                        <div class="circle-1 circle3"></div>
+                    </div>
+                </div>                     
+            </div>,
             <div id="menu" key="menuOverlay"  className={this.state.sidebar ? "menuOverlay" : "hideElement"}>
                 <SideBar pastDataSelectorUpdateProp={this.state.pastDataSelectorUpdateProp}
                     loadingData={this.state.loadingData} displayData={this.displayData} 
                     compareData={this.compareData} 
-                    displayComparedData={this.displayComparedData} setShowCompare={this.setShowCompare} setShowSidebar={this.setShowSidebar}/>
+                    displayComparedData={this.displayComparedData} setShowSidebar={this.setShowSidebar}/>
             </div>, 
             <div id="menu-info" key="menuOverlay-info" className={this.state.sidebarInfo ? "menuOverlay" : "hideElement"}>
                 <InfoMenu />
@@ -209,6 +219,9 @@ export default class App extends Component {
             Communication.setObserved(observed);
             Communication.setRequestTimestamp(timestamp);
 
+            // empty the array precipitation from the previous data
+            Slider.precipitationShowing = [];
+
             // reset the loaded images count and then fetch the new images
             Map.loadedImages = 0;
 
@@ -229,7 +242,13 @@ export default class App extends Component {
                             // set the rain images
                             Map.setHeatLayers();
                             
-                            Slider.getPrecipitationData(Slider.lastLat, Slider.lastLong);
+                            // if the request retrieve also the data to show the graph, show it
+                            if(Slider.precipitationShowing.length === 0) {
+                                Slider.getPrecipitationData(Slider.lastLat, Slider.lastLong);
+                            }  
+                            else {
+                                Slider.showPredictionData()
+                            }
 
                             // update the animation bar timestamps and past data time intervals
                             AnimationBar.updateMarks();
@@ -253,7 +272,7 @@ export default class App extends Component {
      * @param latest a boolean value representing if the latest data should be loaded.
      * @param observed a boolean value representing if observed or predicted data should be loaded.
      * @param timestamp the timestamp from which to load the data in case it isn't the latest.
-     * @param compare boolean value that indicate the start of the compare feature
+     * @param timeString the string to show in the topbar that indicate the data visible
      */
     compareData(propChange, latest, observed, timestamp, timeString) {
         // only run this code if it isn't already loading data already
@@ -324,9 +343,7 @@ export default class App extends Component {
                     // set the rain images
                     Map.setHeatLayers();
 
-                    //graph precipitation switch
-                    //Slider.switchPrediction();
-                    //Slider.colorLegend(pred);
+                    // if the user already clicked on the map, show the graph 
                     if (Slider.lastLat !== undefined) {
                        Slider.showPredictionData(pred);
                     }

@@ -58,22 +58,27 @@
 
 
 /* ==================== depth level divider ==================== */
+.gradientsLegend {
+    display: flex;
+    width: 100%;
+}
 
 /* the 30 referenced in this part was since the parent used to resemble 30vh, now it has 35
    the division however is still the same and 30 makes this a lot smoother */
 .gradient-container {
-    position: absolute;
-    height: 40%;
+    /*position: absolute;
+    height: 40%;*/
     width: calc(100% * (10 / 30));
 }
 
+/*
 #gradient1container {
-    width: calc(100% * (6 / 30));
+    width: calc(100% * (10 / 30));
 }
 
 #gradient2container {
-    left: calc(98% * (6 / 30));
-    width: calc(100% * (4 / 30));
+    left: calc(98% * (10 / 30));
+    width: calc(100% * (10 / 30));
 }
 
 #gradient3container {
@@ -81,9 +86,9 @@
 }
 
 #gradient4container {
-    left: calc(98% * (20 / 30));
+    left: calc(98% * (10 / 30));
 }
-
+*/
 /* ==================== depth level divider ==================== */
 
 .gradient-part {

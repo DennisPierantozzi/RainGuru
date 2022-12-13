@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import {ImLocation} from 'react-icons/im';
 import {BsInfoLg} from 'react-icons/Bs';
 import { FormGroup, FormControlLabel, Switch } from '@mui/material';
+import { IoIosArrowForward } from "react-icons/io";
 import Map from "../Map/Map";
 
-export default function TopBar({setShowSidebar, displayComparedData, loadingData, showCompare, displayData, setShowSidebarInfo}) {
+export default function TopBar({setShowSidebar, displayComparedData, showCompare, displayData, setShowSidebarInfo}) {
 
     /**
      * displays precipitation information over user's current location and also leave a marker at that location.
@@ -23,6 +24,7 @@ export default function TopBar({setShowSidebar, displayComparedData, loadingData
 
     const[compareDisplay, setCompareDisplay] = useState(false);
     const[compareLabel, setCompareLabel] = useState("Obs");
+    const[menuOnClick, setmenuOnClick] = useState(true);
 
     /**
      * handle click on compare switch.
@@ -37,49 +39,59 @@ export default function TopBar({setShowSidebar, displayComparedData, loadingData
         else {setCompareLabel("Obs")}
     }
 
+
+    const displayMenu = () => {
+        setmenuOnClick(!menuOnClick)
+        console.log(menuOnClick);
+        if(menuOnClick) {
+            document.getElementById("IconTopBar").style.transform = "rotate(-180deg)";
+            document.getElementById("TopBarContents").style.width = "22em";
+            document.getElementById("TopBarContents").style.pointerEvents = "auto";
+        }
+        else {
+            document.getElementById("IconTopBar").style.transform = "rotate(-360deg)";
+            document.getElementById("TopBarContents").style.width = "0em";
+            document.getElementById("TopBarContents").style.pointerEvents = "none";
+        }
+    }
+
     /**
      * Renders the content of the TopBar div at the top of the screen. This also contains sidebar.
      * @returns the rendered content of the topbar div.
      */
     return (
-        <div data-testid="topBar-container">
-            <div className="topBarContents">
-                    <div className="PastData" id="past-data-explanation">
-                        <div className={showCompare ? "SwitchCompare" : "hideElement"} id="compareField">
-                                <FormGroup>
-                                    <FormControlLabel control={<Switch size="small" checked={compareDisplay}
-                                    onChange={(e) => handleCompare(e)}/>} label={compareLabel} />
-                                </FormGroup>
-                        </div>
-                        <span id="currently-showing" data-testid="currently-showing">Latest data</span>
-                    </div>
-                    <div className="Sidebar" data-testid="sidebar-menu">
-                        <span className="Menu-icon" onClick={() => { 
-                            setCompareDisplay(false);
-                            displayData(-1, true, false, [], "Latest data")}}>Live Data</span>
-                    </div>
-                    <div className="Sidebar" data-testid="sidebar-menu">
-                        <span className="Menu-icon" onClick={() => setShowSidebar()}>Menu</span>
-                    </div>
-                    <div className="Sidebar" data-testid="sidebar-menu">
-                        <span onClick={() => setShowSidebarInfo()}><BsInfoLg /></span>
-                    </div>
-                    <div className="Location">
-                        <ImLocation className="Location-icon" data-testid="user-location" onClick={showCurrentLocation} size="1em"/>
-                    </div>
-                    <div className="TUDelft-logo">
-                        <img src="../../../static/images/TUDelft_logo_white.svg" alt="TU Delft logo"
-                            data-testid="tudelft-location" size="1em" onClick={showTUDelftLocation}></img>
-                    </div>
-                    <div className="Searchbar" id="locationField"></div>
-            </div>
-            <div className='loaderContents'>
-                <div id="loader" class="loading-bar">
-                    <span id="loadingString">Loading Images</span>
-                    <div class="circle-1 circle1"></div>
-                    <div class="circle-1 circle2"></div>
-                    <div class="circle-1 circle3"></div>
+        <div className="topBar-container" data-testid="topBar-container">
+            <div className="PastData" id="past-data-explanation" onClick={() => displayMenu()}>
+                <div className={showCompare ? "SwitchCompare" : "hideElement"} id="compareField">
+                        <FormGroup>
+                            <FormControlLabel control={<Switch size="small" checked={compareDisplay}
+                            onChange={(e) => handleCompare(e)}/>} label={compareLabel} />
+                        </FormGroup>
                 </div>
+                <span id="currently-showing" data-testid="currently-showing">Latest data </span>
+            </div>
+            <div id="IconTopBar" className='openMenu-icon' onClick={() => displayMenu()}><IoIosArrowForward /></div>
+            
+            <div id="TopBarContents" className="topBarContents">
+                <div className="Sidebar" data-testid="sidebar-menu">
+                    <span className="Menu-icon" onClick={() => { 
+                        setCompareDisplay(false);
+                        displayData(-1, true, false, [], "Latest data")}}>Live Data</span>
+                </div>
+                <div className="Sidebar" data-testid="sidebar-menu">
+                    <span className="Menu-icon" onClick={() => setShowSidebar()}>Menu</span>
+                </div>
+                <div className="Sidebar" data-testid="sidebar-menu">
+                    <span onClick={() => setShowSidebarInfo()}><BsInfoLg /></span>
+                </div>
+                <div className="Location">
+                    <ImLocation className="Location-icon" data-testid="user-location" onClick={showCurrentLocation} size="1em"/>
+                </div>
+                <div className="TUDelft-logo">
+                    <img src="../../../static/images/TUDelft_logo_white.svg" alt="TU Delft logo"
+                        data-testid="tudelft-location" size="1em" onClick={showTUDelftLocation}></img>
+                </div>
+                <div className="Searchbar" id="locationField"></div>
             </div>
         </div>
     )

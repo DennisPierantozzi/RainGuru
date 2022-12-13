@@ -1,19 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-function Statistics () {
-
-    const toogleTooltip = (stats) => {
-        let id;
-        if(stats == 'rmse') {
-            id = document.getElementById("tooltip-rmse");
-            document.getElementById("tooltip-bias").style.display = "none";
-        }
-        else if (stats == "bias") {
-            id = document.getElementById("tooltip-bias");
-            document.getElementById("tooltip-rmse").style.display = "none";
-        }
-        id.style.display = "block";
-    }
+function Statistics ({displayTooltipLegend}) {
 
     return(
         <div className='statisticsContents'>
@@ -25,11 +12,11 @@ function Statistics () {
             </div>
             <div className='statistics-box'>
                 
-                <button id="rmse-explain" className="stats-info" onClick={() => toogleTooltip("rmse")}>?</button>
+                <button id="rmse-explain" className="stats-info" onClick={() => displayTooltipLegend("rmse")}>?</button>
                 Rmse: <span id="rmse"></span></div>
             <div className='statistics-box'>
                 
-                <button id="bias-explain" className="stats-info" onClick={() => toogleTooltip("bias")}>?</button>
+                <button id="bias-explain" className="stats-info" onClick={() => displayTooltipLegend("bias")}>?</button>
                 Bias: <span id="bias"></span></div>
         </div>
     );

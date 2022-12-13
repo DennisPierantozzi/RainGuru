@@ -1,45 +1,20 @@
 import datetime
 import math
 import os
+import time
 from datetime import timezone
-from json import JSONEncoder
-from django.http import HttpResponseBadRequest
 
 import numpy as np
 from api.memory_store import memory_store
 from api.models import Observed, Predicted
 from api.update_predictions.convert_data import convert_matrix_image
 from api.update_predictions.store_data import store_predictions_observations
+from django.http import HttpResponse, HttpResponseBadRequest
+
+from django import db
+from django.db.models import F, Func
 
 
-def get_precipitations_array(x, y, observed):
-    #should be from session data not memory store
-
-    precipitation = []
-    data = []
-    if observed:
-        data = memory_store.fetch_matrices_obs()
-    else: 
-        print("entrato in get array in predictions")
-        data = memory_store.fetch_matrices_pred()
-
-    for matrix in data:
-            if x == -1:
-                value = 0
-            else:
-                value = matrix[y][x]
-
-            rounded = math.floor(value * 100) / 100
-
-            precipitation.append(rounded)
-    
-    return precipitation
-
-#def create_session():
-    #create   
-
-#def store_precipitation_session():
-    #store   
 
 def fetch_observed_precipitation(timestamp, x, y, request):
     """
@@ -50,33 +25,18 @@ def fetch_observed_precipitation(timestamp, x, y, request):
     :param y: The y coordinate of the image pixel
     :return: An array of 20 observed precipitation values, starting at the given timestamp
     """
-    #precipitationOne = []
-    #if in session use the function below
-    #    precipitation = get_precipitations_array(x, y, True)
-
 
     x, y = convert_matrix_image.image_map[(x, y)]
-    precipitation = []
-    for o in Observed.objects\
+
+    query = Observed.objects\
             .filter(time__gte=timestamp)\
             .filter(time__lt=timestamp + datetime.timedelta(minutes=100))\
-            .order_by('time'):
-        if x == -1:
-            value = 0
-        else:
-            value = o.matrix_data[y][x]
-            print(f"entrato in else con value {o.matrix_data[y][x]}")
-
-        rounded = math.floor(value * 100) / 100
-
-        precipitation.append(rounded)
+            .order_by('time').values_list(f'matrix_data_fast__{y}__{x}', flat=True)
+    precipitation = [0.0 if v is None else v for v in list(query)]
 
     response_dict = {
         'precipitation': precipitation
     }
-
-    #store in session 
-    request.session['precipitation'] = precipitation
 
     return response_dict
 
@@ -109,7 +69,7 @@ def fetch_latest_predicted_precipitation(x, y):
     return response_dict
 
 
-def fetch_predicted_precipitation(timestamp, x, y):
+def fetch_predicted_precipitation(timestamp, x, y, request):
     """
     Fetch predicted precipitation at a given point from the database
 
@@ -119,24 +79,20 @@ def fetch_predicted_precipitation(timestamp, x, y):
     :return: An array of 20 predicted precipitation values which were calculated at the given timestamp
     """
 
-    x, y = convert_matrix_image.image_map[(x, y)]
-    precipitation = []
+    coorx, coory = convert_matrix_image.image_map[(x, y)]
+    query = Predicted.objects.filter(calculation_time=timestamp).order_by('prediction_time').values_list(f'matrix_data_fast__{coory}__{coorx}', flat=True)
+    
+    precipitation = [0.0 if v is None else v for v in list(query)]
 
-    for p in Predicted.objects.filter(calculation_time=timestamp).order_by('prediction_time'):
-            if x == -1:
-                value = 0
-            else:
-                value = p.matrix_data[y][x]
-
-            rounded = math.floor(value * 100) / 100
-            precipitation.append(rounded)
-
+    start_time = time.time()
+    print("--- %s all ---" % (time.time() - start_time))
     response_dict = {
-        'precipitation': precipitation
+        'precipitation': precipitation,
     }
+
     return response_dict
 
-def fetch_compare_precipitation(timestamp_obs, timestamp_pred, passx, passy):
+def fetch_compare_precipitation(timestamp_obs, timestamp_pred, passx, passy, request):
     """
     Fetch compare precipitation at a given point from the database
 
@@ -148,8 +104,8 @@ def fetch_compare_precipitation(timestamp_obs, timestamp_pred, passx, passy):
     """
 
     print(f"entrato con x: {passx} e y: {passy}")
-    precipitationPred = fetch_predicted_precipitation(timestamp_pred, passx, passy)
-    precipitationObs = fetch_observed_precipitation(timestamp_obs, passx, passy)
+    precipitationPred = fetch_predicted_precipitation(timestamp_pred, passx, passy, request)
+    precipitationObs = fetch_observed_precipitation(timestamp_obs, passx, passy, request)
 
     response_dict = {
         'precipitationPred': precipitationPred['precipitation'],
@@ -169,6 +125,7 @@ def fetch_observed_urls(timestamp):
     observed_folder = os.path.join('media', 'observed')
     observed_path = os.path.join(os.getcwd(), observed_folder)
     urls = []
+
     for observed_name in sorted(os.listdir(observed_path)):
         if observed_name == 'placeholder.txt':
             continue

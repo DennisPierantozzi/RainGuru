@@ -20,27 +20,93 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-
-    background-color: #0076C2;
-    border-radius: 20px;
-    margin-right: 20px;
     color: #fff;
-}
-
-.PastData {
-    background-color: #eff8ff;
-    color: #0076C2;
-}
-.Location, .TUDelft-logo {
-    padding: 8px 8px;
-}
-.Sidebar, .PastData {
-    padding: 8px 8px;
+    -webkit-transition: border-bottom .1s linear;
+    -moz-transition: border-bottom .1s linear;
+    -o-transition: border-bottom .1s linear;
+    -ms-transition: border-bottom .1s linear;
+    transition: border-bottom .1s linear;
 }
 
 .Sidebar:hover, .Location:hover, .TUDelft-logo:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
+
+
+.topBar-container {
+  height: 100%;
+  background: rgb(0,118,194);
+  background: radial-gradient(circle, rgba(0,118,194,1) 0%, rgba(0,118,194,1) 34%, rgba(0,110,181,1) 77%, rgba(0,110,181,1) 100%);
+  border-radius: 20px;
+  padding: 5px 0px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.topBarContents {
+  position: relative;
+  height: 100%;
+  font-size: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  overflow: hidden;
+  width: 0em ;
+  opacity: 1;
+  -webkit-transition: width 1s ease;
+    -moz-transition: width 1s ease;
+    -o-transition: width 1s ease;
+    -ms-transition: width 1s ease;
+    transition: width 1s ease;
+}
+
+.openMenu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 1.5em;
+  -webkit-transition: all .3s ease .15s;
+  -moz-transition: all .3s ease .15s;
+  -o-transition: all .3s ease .15s;
+  -ms-transition: all .3s ease .15s;
+  transition: all .3s ease .15s;
+  cursor: pointer;
+}
+
+.openMenu-icon:hover {
+  width: 2.3em;
+}
+
+.PastData {
+  background-color: #eff8ff;
+  color: #0076C2;
+  height: 100%;
+  padding: 5px 8px;
+  border-radius: 19px;
+  cursor: pointer;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  -webkit-transition: width .3s ease .15s;
+    -moz-transition: width .3s ease .15s;
+    -o-transition: width .3s ease .15s;
+    -ms-transition: width .3s ease .15s;
+    transition: width .3s ease .15s;
+}
+
+.Location, .TUDelft-logo {
+  padding: 8px 8px;
+}
+.Sidebar {
+  padding: 5px 10px;
+}
+
+
 
 .Searchbar {
     margin-left: var(--search-bar-margin);
@@ -51,8 +117,6 @@
     justify-content: center;
     align-items: center;
     font-size: 100%;
-    margin-right: 20px;
-    margin-top: 10px;
 }
 
 /* Search bar button */
@@ -74,20 +138,20 @@
 }
 
 .Sidebar-shown {
+    color: #2e2e2e;
     position: relative;
     z-index: 1;
     top: 100%;
     width: 100%;
     height: var(--sidebar-height);
-    background-color: #0076C2;
+    background-color: #fdfdfd;
     z-index: 2;
     top:0;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    font-size: 20px;
-    opacity: 0.98;
+    opacity: 1;
 }
 
 /* ==================== depth level divider ==================== */
@@ -97,19 +161,11 @@
     color: white;
 }
 
-.Menu-icon {
-    padding: 0px 10px;
-}
-
 .TUDelft-logo-icon {
     width: 60%;
     height: 60%;
     -webkit-user-select: none !important;
     user-select: none;
-}
-
-.open-menu {
-    margin: 0% 5%;
 }
 
 .Sidebar-items {
@@ -178,6 +234,9 @@
 .container-sidebar-menu, .container-sidebar-menuInfo{
     position: relative;
     top: 10%;
+    height: 90%;
+    display: grid;
+    grid-template-rows: 0.2fr 3fr 0.3fr;
 }
 .contens-menuInfo {
     display: flex;
@@ -192,29 +251,24 @@
 .Menu-title {
     font-size: 58px;
     font-weight: bold;
-    color: white;
     display: inline-flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
 }
 .Menu-subtitle {
     font-size: 15px;
     font-weight: 400;
-    color: #ffffff;
 }
 .Bottom-privacy-statement {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     width: 100%;
-    color: white;
     font-weight: 100;
     font-size: 12px;
     text-align: center;
-    position: absolute;
-    bottom: 5%;
 }
 .Menu-title img {
     max-width: 7%;
@@ -418,9 +472,6 @@
     .info-text {
         display: block;
     }
-    .popup-text {
-        display: contents;
-    }
 }
 
 
@@ -430,8 +481,6 @@
       change the size of sidebar related parts
      */
     .Sidebar-shown {
-        /*width: 75%;*/
-        /*Dennis Upgrade*/
         width: 100%;
     }
 
@@ -439,7 +488,7 @@
      Fix the size of the searchbar by scaling it depending on the device used
      */
     .Searchbar {
-        transform: scale(1.3);
+        transform: scale(0.8);
     }
 
     /*Dennis Upgrade*/
@@ -458,9 +507,6 @@
     .info-text {
         display: block;
     }
-    .popup-text {
-        display: contents;
-    }
 }
 
 /*
@@ -468,12 +514,4 @@
  Instead of having scientific contributors and software development team next to each other, have them one
  on top of the other.
  */
-@media screen and (max-width: 1080px) {
-    #scientific-contributor {
-        width: 100%;
-    }
-
-    #development-team {
-        width: 100%;
-    }
-}
+@media screen and (max-width: 1080px) {}

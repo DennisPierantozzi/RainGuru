@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import moment from "moment";
 import MuiSlider from '@mui/material/Slider';
-import {FaAngleLeft, FaAngleRight} from 'react-icons/fa';
-import {IoIosFastforward, IoIosPause, IoIosPlay, IoIosRewind} from 'react-icons/io';
+import { SiRainmeter } from "react-icons/si";
+import { MdShutterSpeed } from "react-icons/md";
+import { IoIosPause, IoIosPlay } from 'react-icons/io';
+import { AiOutlineFieldTime } from "react-icons/ai";
+import { TbMathMax } from "react-icons/tb";
 import Communication from "./../Communication";
 import Map from "./../Map/Map";
 import Slider from "./Slider";
@@ -34,7 +37,8 @@ export default class AnimationBar extends Component {
         this.state = {
             pauseResume: <IoIosPause className="button-icon" size={this.buttonIconSize}/>,
             updateProp: 0,
-            value: 0
+            value: 0,
+            tooltipLegend: false
         };
 
         // Keyboard feature
@@ -105,15 +109,15 @@ export default class AnimationBar extends Component {
 
             // if the precipitation amount can be represented with an integer, add .0 to it. e.g. 5.0 mm/h instead of 5 mm/h
             if(Slider.predictionsShowing[Slider.sliderValue] % 1 === 0) {
-                intervalInfoDivNode = document.createTextNode(timeString + " - " + Slider.predictionsShowing[this.state.value] + ".0 mm/h");
+                intervalInfoDivNode = document.createTextNode("Time: " + timeString + " - " + Slider.predictionsShowing[this.state.value] + ".0 mm/h");
             } else {
-                intervalInfoDivNode = document.createTextNode(timeString + " - " + Slider.predictionsShowing[this.state.value] + " mm/h");
+                intervalInfoDivNode = document.createTextNode("Time: " + timeString + " - " + Slider.predictionsShowing[this.state.value] + " mm/h");
             }
             intervalInfoDiv.appendChild(intervalInfoDivNode);
         } else {
             // if location is not selected, only show the interval information
             const intervalInfoDiv = document.getElementById("intervalInfo");
-            intervalInfoDiv.innerHTML = "";
+            intervalInfoDiv.innerHTML = "Time: ";
             let timeString = AnimationBar.fullMarks[this.state.value];
             const intervalInfoDivNode = document.createTextNode(timeString);
             intervalInfoDiv.appendChild(intervalInfoDivNode);
@@ -153,7 +157,9 @@ export default class AnimationBar extends Component {
         }
     }
 
-
+    /**
+     * Handle the click on the keyboard to control the graph
+     */
     handleKeyboardPress(keyCode){
         if(keyCode=="Space") {
             this.pauseResume();
@@ -249,66 +255,20 @@ export default class AnimationBar extends Component {
     render() {
         return (
             <div className="animationContents" data-testid="animationBarDiv">
-                <div class="wrap-topAnimations">
-                
-                <div className="animationButtonDiv" data-testid="animationButtonDiv">    
-                    <button className="animationButton" id="slowDownButton" data-testid="slowDownButton" onClick={() => {
-                        this.animationSpeed = Math.min(1100, this.animationSpeed + 100);
-                        this.displaySpeed();
-                        if (this.playing) {
-                            this.stop();
-                            this.play();
-                        }
-                    }}>
-                        <img className="ratioImage" src="../../../static/images/1x1.png"/>
-                        <IoIosRewind className="button-icon" size={this.buttonIconSize}/>
-                    </button>
-                    <button className="animationButton" id="backwardButton" data-testid="backwardButton" onClick={() => {
-                        this.move(false, true);
-                    }}>
-                        <img className="ratioImage" src="../../../static/images/1x1.png"/>
-                        <FaAngleLeft className="button-icon" size={this.buttonIconSize}/>
-                    </button>
-                    <button className="animationButton" id="pauseResumeButton" data-testid="pauseResumeButton"
-                         onClick={() => {
-                             this.pauseResume();
-                     }}>
-                        <img className="ratioImage" src="../../../static/images/1x1.png"/>
-                        {this.state.pauseResume}
-                    </button>
-                    <button className="animationButton" id="forwardButton" data-testid="forwardButton" onClick={() => {
-                        this.move(true, true);
-                    }}>
-                        <img className="ratioImage" src="../../../static/images/1x1.png"/>
-                        <FaAngleRight className="button-icon" size={this.buttonIconSize}/>
-                    </button>
-                    <button className="animationButton" id="speedUpButton" data-testid="speedUpButton" onClick={() => {
-                        this.animationSpeed = Math.max(200, this.animationSpeed - 100);
-                        this.displaySpeed();
-                        if (this.playing) {
-                            this.stop();
-                            this.play();
-                        }
-                    }}>
-                        <img className="ratioImage" src="../../../static/images/1x1.png"/>
-                        <IoIosFastforward className="button-icon" size={this.buttonIconSize}/>
-                    </button>
+                <div id="stats-animation" class="wrap-topAnimations">
+
+                <div id="statistics" key="stats"><Statistics displayTooltipLegend={this.props.displayTooltipLegend}/></div>
+                <div id="no-rain" class="no-data-text">no rain! <SiRainmeter /></div>
+
                 </div>
                 
-                <div className="tooltip-stats" id="tooltip-rmse">
-                    <div>Root Mean Square Error (RMSE) is the standard deviation of the residuals (prediction errors).</div>
-                </div>
-                <div className="tooltip-stats" id="tooltip-bias">
-                    <div>The average of the difference</div>
-                </div>
-                <div id="statistics" key="stats"><Statistics /></div>
-                
-                </div>
                 <div className="dataBar">
-                    <div className="dataBarPart" id="speedValue" data-testid="speedValue">Animation speed: 5</div>
-                    <div className="dataBarPart" id="intervalInfo" data-testid="intervalInfo"></div>
-                    <div className="dataBarPart" id="maxRain" data-testid="maxRain"></div>
+                    <div className="dataBarPart" id="speedValue" data-testid="speedValue"><MdShutterSpeed /> Animation speed: 5</div>
+                    <div className="dataBarPart" id="intervalInfo" data-testid="intervalInfo"><AiOutlineFieldTime /> Time: </div>
+                    <div className="dataBarPart" id="maxRain" data-testid="maxRain"><TbMathMax /> Max: </div>
                 </div>
+
+                <div className="graph">
                 <div className="scale-container">
                     <div id="max-scale" data-testid="max-scale"></div>
                     <div id="mid-scale" data-testid="mid-scale"></div>
@@ -341,6 +301,8 @@ export default class AnimationBar extends Component {
                         <canvas id="chart"></canvas>
                     </div>
                 </div>
+                </div>
+                
             </div>
         );
     }

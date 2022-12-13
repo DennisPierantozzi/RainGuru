@@ -17,7 +17,9 @@ export default class PastDataSelector extends Component {
     static observedTimestamps = [];
     static loadTimestamp = 0;
 
-    // here I can also use a tree, but since the features are only three I used maps.
+    // the state that store the intervals for predictions.
+    // use of Maps and arrays to store data in order and without mess.
+    // The same method has been used also for compare and observation intervals.
     static predictionsIntervals = 
     {
         today: {morning: [], 
@@ -32,7 +34,8 @@ export default class PastDataSelector extends Component {
     };
     static observationsIntervals = {today: {morning: [], afternoon:[], night:[]}, yesterday: {morning: [], afternoon:[], night:[]}};
     static compareIntervals = {today: {morning: [], afternoon:[], night:[]}, yesterday: {morning: [], afternoon:[], night:[]}};
-    //root
+
+    //root of the data
     static Intervals = {
         predictions: PastDataSelector.predictionsIntervals, 
         observations: PastDataSelector.observationsIntervals, 
@@ -60,7 +63,7 @@ export default class PastDataSelector extends Component {
             observedTimestamp: "",
             compare: false,
             observed: false,
-            selected: new Array(3), // 0 0 0
+            selected: new Array(3), // array selected to show.
             selectedIntervals: [],
             previousItem: "",
             daySection: false,
@@ -128,15 +131,21 @@ export default class PastDataSelector extends Component {
 
     }
 
-
+    /**
+     * Adds the given time to the appropriate store (morning, afternoon, or night)
+     * based on the time.
+     *
+     * @param {number} time - The time to add to the store, in Unix timestamp format.
+     * @param {object} store - An object containing the three stores for morning, afternoon,
+     * and night times. Each store is an array of times.
+     */
     static addTimes(time, store) {
         let startMorning = moment('06:00:00', 'HH:mm'); // morning - 06:00 -> 12:00
-        let startAfternoon = moment('13:00:00', 'HH:mm'); // afternoon - 13:00 -> 20:00
+        let startAfternoon = moment('13:00:00', 'HH:mm'); // afternoon - 13:00 -> 00:00
         let endAfternoon = moment('24:00:00', 'HH:mm');
         let startNight = moment('00:00:00', 'HH:mm'); // night - 00:00 -> 05:00
 
         let timeToStore = moment(new Date(time*1000), "HH:mm").format("HH:mm");
-        console.log(timeToStore);
 
         if (timeToStore>startAfternoon._i && timeToStore<endAfternoon._i) {
             if(!store.afternoon.includes(time)) {store.afternoon.push(time);}
@@ -150,7 +159,14 @@ export default class PastDataSelector extends Component {
         }
     }
 
-    
+    /**
+     * Compares two arrays of timestamps (compareTimestampsToday and compareTimestampsYesterday)
+     * with two other arrays of timestamps (PastDataSelector.predictionsIntervals.today and PastDataSelector.predictionsIntervals.yesterday),
+     * and adds the matching timestamps to the PastDataSelector.compareIntervals object.
+     *
+     * @param {number[]} compareTimestampsToday An array of timestamps to compare with PastDataSelector.predictionsIntervals.today
+     * @param {number[]} compareTimestampsYesterday An array of timestamps to compare with PastDataSelector.predictionsIntervals.yesterday
+     */
     static checkCompareIntervals(compareTimestampsToday, compareTimestampsYesterday) {
         let arrayPredictionsToday = PastDataSelector.predictionsIntervals.today.morning.concat(PastDataSelector.predictionsIntervals.today.afternoon, PastDataSelector.predictionsIntervals.today.night);
         let arrayPredictionsYesterday = PastDataSelector.predictionsIntervals.yesterday.morning.concat(PastDataSelector.predictionsIntervals.yesterday.afternoon, PastDataSelector.predictionsIntervals.yesterday.night);
@@ -173,7 +189,10 @@ export default class PastDataSelector extends Component {
 
 
     /**
-     * Finds all the times/time intervals for the past data and stores them in the variables.
+     * Updates the list of available timestamps and time intervals for the current date and the previous date.
+     * The available timestamps and time intervals are fetched from the Communication module,
+     * and stored in the PastDataSelector.times, PastDataSelector.predictionTimes,
+     * PastDataSelector.predictionsIntervals, PastDataSelector.observationIntervals, and PastDataSelector.compareIntervals objects.
      */
     static async updateTimes() {
         // get the information about which timestamps are available and which aren't
@@ -195,23 +214,6 @@ export default class PastDataSelector extends Component {
         let today = false;
         // 36 = 3 hours * 12 5-min intervals per hour, >= 19 is since from that point there is enough time for a full interval
         
-        /*if(moment(new Date()).diff(new Date(lastTime*1000), 'days') > 0){
-            // day is changed
-        
-            PastDataSelector.predictionsIntervals.yesterday.morning = PastDataSelector.predictionsIntervals.today.morning;
-            PastDataSelector.predictionsIntervals.yesterday.afternoon = PastDataSelector.predictionsIntervals.today.afternoon;
-            PastDataSelector.predictionsIntervals.yesterday.night = PastDataSelector.predictionsIntervals.today.night; 
-            PastDataSelector.predictionsIntervals.today.morning = [];
-            PastDataSelector.predictionsIntervals.today.afternoon = [];
-            PastDataSelector.predictionsIntervals.today.night = [];
-
-            PastDataSelector.observationsIntervals.yesterday.morning = PastDataSelector.observationsIntervals.today.morning;
-            PastDataSelector.observationsIntervals.yesterday.afternoon = PastDataSelector.observationsIntervals.today.afternoon;
-            PastDataSelector.observationsIntervals.yesterday.night = PastDataSelector.observationsIntervals.today.night; 
-            PastDataSelector.observationsIntervals.today.morning = [];
-            PastDataSelector.observationsIntervals.today.afternoon = [];
-            PastDataSelector.observationsIntervals.today.night = [];
-        };*/
         console.log(lastTime);
         // 288 steps for 24hours 5-min intervals
         for (let i = 0, time = lastTime; i < 288; i++, time -= fiveMinSmall) {
@@ -275,10 +277,13 @@ export default class PastDataSelector extends Component {
 
 
     /**
-     * Calls App.js to load the new data with the correct parameters.
+     * Loads new data based on the selected item (timestamp or time interval) and the current state of the component.
+     * The selected item can be a timestamp or time interval for observations or predictions, or a timestamp for comparison.
+     * The current state of the component determines whether the data is observations, predictions, or comparison.
+     * The loaded data is displayed in the main component through the displayData or compareData functions,
+     * and the selected item is stored in the PastDataSelector.loadTimestamp variable.
      *
-     * @param latest a boolean value representing if the latest data should be loaded.
-     * @param observed a boolean value representing if observed or predicted data should be loaded.
+     * @param {number} item The selected timestamp or time interval in PastDataSelector.times or PastDataSelector.observationIntervals
      */
     loadData(item) {
         // variables for what needs to change, the values are set depending on how this method was called
@@ -311,20 +316,24 @@ export default class PastDataSelector extends Component {
 
         // load new data when a valid call was made that is also different from what is currently already loaded
         if (validCall && timeString !== currentlyShowing.innerHTML) {
-            if(this.state.compare){     
+            if(this.state.compare){ 
                 this.props.compareData(-1, false, this.state.observed, timeCompare, timeString);
             }
-            // call app to display the new data
             else{
                 this.props.displayData(-1, false, this.state.observed, item, timeString);
             }
-            // display what data should be loaded now
-            
         }
     }
 
 
-
+    /**
+     * Changes the selected feature (observations, predictions, or comparison) and updates the state of the component.
+     * The selected feature is highlighted by adding the "previous-data-clicked" class to its element.
+     * The state of the component is updated to reflect the selected feature,
+     * and the selected intervals are reset by calling the selectIntervals function.
+     *
+     * @param {string} feature The selected feature ("observations", "predictions", or "compare")
+     */
     selectFeature(feature) {
         //toggle class feature clicked
         if(this.state.selected[0] != undefined) {document.getElementById(this.state.selected[0]).classList.remove("previous-data-clicked");}
@@ -341,6 +350,15 @@ export default class PastDataSelector extends Component {
 
         this.selectIntervals(arr);
     }
+
+    /**
+     * Changes the selected day (today or yesterday) and updates the state of the component.
+     * The selected day is highlighted by adding the "previous-data-clicked" class to its element.
+     * The state of the component is updated to reflect the selected day,
+     * and the selected intervals are reset by calling the selectIntervals function.
+     *
+     * @param {string} day The selected day ("today" or "yesterday")
+     */
     selectDay(day) {
         //toggle class day clicked
         if(this.state.selected[1] != undefined) {document.getElementById(this.state.selected[1]).classList.remove("previous-data-clicked");}
@@ -353,6 +371,15 @@ export default class PastDataSelector extends Component {
 
         this.selectIntervals(arr);
     }
+
+    /**
+     * Changes the selected part of day (morning, afternoon, or night) and updates the state of the component.
+     * The selected part of day is highlighted by adding the "previous-data-clicked" class to its element.
+     * The state of the component is updated to reflect the selected part of day,
+     * and the selected intervals are reset by calling the selectIntervals function.
+     *
+     * @param {string} partOfDay The selected part of day ("morning", "afternoon", or "night")
+     */
     selectPartOfDay(partOfDay) {
         //toggle class partOfDay clicked
         if(this.state.selected[2] != undefined) {document.getElementById(this.state.selected[2]).classList.remove("previous-data-clicked");}
@@ -365,6 +392,15 @@ export default class PastDataSelector extends Component {
 
         this.selectIntervals(arr);
     }
+
+    /**
+     * Updates the list of selected intervals based on the previously selected features.
+     * The list of selected intervals is determined by navigating the Intervals object
+     * using the values in the arr parameter as keys.
+     * The resulting array is then reversed and stored in the state of the component.
+     *
+     * @param {string[]} arr An array containing the selected features in the order: feature, day, part of day
+     */
     selectIntervals(arr) {
         // display intervals after the complete selection 
         if(arr.includes(undefined)) {return}
@@ -374,9 +410,21 @@ export default class PastDataSelector extends Component {
             store = store[arr[i]];
             //console.log(store);
             }
-            this.setState({selectedIntervals: store});
+            this.setState({selectedIntervals: store.reverse()});
         }
     }
+
+    /**
+     * Handles the user's selection of a time interval.
+     * This function is called when the user clicks on an interval in the list of selected intervals.
+     * The clicked interval is highlighted by adding the "previous-data-clicked" class to its element.
+     * The previous selection is unhighlighted by removing the "previous-data-clicked" class from its element.
+     * The previous selection is stored in the state of the component.
+     * The setShowSidebar function from the component's props is called to hide the sidebar.
+     * The loadData function is called to load the data for the selected interval.
+     *
+     * @param {number} item The timestamp (in Unix time) of the selected interval
+     */
     handleClickInterval(item) {
         if(this.state.previousItem != "") 
             {document.getElementById(this.state.previousItem).classList.remove("previous-data-clicked");} 
@@ -422,12 +470,15 @@ export default class PastDataSelector extends Component {
                 <div id="past-data-partOfDay" className={this.state.partOfDaySection ? "sections-previous-data" : "hideElement"}>
                     <div id="morning" className="box-previous-data" onClick={() => this.selectPartOfDay('morning')}>
                         <span> <WiSunrise />  Morning </span>
+                        <div className="description-data-partOfDay"> from 06:00 to 12:00  </div>
                     </div>
                     <div id="afternoon" className="box-previous-data" onClick={() => this.selectPartOfDay('afternoon')}>
                         <span> <WiHorizon />  Afternoon </span>
+                        <div className="description-data-partOfDay"> from 12:00 to 00:00  </div>
                     </div>
                     <div id="night" className="box-previous-data" onClick={() => this.selectPartOfDay('night')}>
                         <span> <WiNightClear />  Night </span>
+                        <div className="description-data-partOfDay"> from 00:00 to 06:00  </div>
                     </div>
                 </div>
                 <div id="past-data-intervals" className={this.state.intervalsSection ? "sections-previous-intervals" : "hideElement"}>

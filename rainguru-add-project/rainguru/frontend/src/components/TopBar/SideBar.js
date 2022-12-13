@@ -9,18 +9,15 @@ export default function SideBar({pastDataSelectorUpdateProp, loadingData, displa
             <div className='container-sidebar-menu'>
                 <div className="Menu-title">
                     <div>RainGuru <br/> <span className="Menu-subtitle">Weather forecast app</span></div>
-                    <img src="../../static/images/TUDelft_logo_white.png" alt="TUDelft Logo" />
+                    <img src="../../static/images/TUDelft_logo_rgb.png" alt="TUDelft Logo" />
                 </div>
-                <div className="open-menu">
-                        <PastDataSelector updateProp={pastDataSelectorUpdateProp} loadingData={loadingData} displayData={displayData} compareData={compareData} 
-                        setShowCompare={setShowCompare} setShowSidebar={setShowSidebar}/>
+                <PastDataSelector updateProp={pastDataSelectorUpdateProp} loadingData={loadingData} displayData={displayData} compareData={compareData} 
+                setShowSidebar={setShowSidebar}/>
+
+                <div className='Bottom-privacy-statement'>
+                    <p>This website does not store privacy sensitive information, except for the location of the user during usage if permitted.</p>
                 </div>
             </div> 
-
-            <div className='Bottom-privacy-statement'>
-                <p>This website does not store privacy sensitive information, except for the location of the user during usage if permitted.</p>
-            </div>
-            
         </div>
     )
 }

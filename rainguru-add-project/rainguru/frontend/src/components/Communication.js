@@ -1,8 +1,6 @@
-import React from "react";
 import Popup from "react-popup";
 import Map from "./Map/Map";
 import Slider from "./Information/Slider";
-import TopBar from "./TopBar/TopBar";
 
 export default class Communication {
     static useLatestData = true;
@@ -150,7 +148,6 @@ export default class Communication {
         }
 
         // make request to retrieve predictions
-
         await fetch(url)
           .then(response => {
             if (response.status > 400) {
@@ -162,20 +159,23 @@ export default class Communication {
             // store predictions and create images for them
             this.imageUrls = responseJson.urls;
             this.dataTimestamp = new Date(responseJson.timestamp * 1000);
+
+            // if there are data to show the graph, store them.
             if(responseJson.hasOwnProperty("precipitation")) {Slider.precipitationShowing = responseJson.precipitation;}
             
+            // error message
             if(responseJson.exception_active) {
                 Popup.alert("Message from server:\n" + responseJson.exception_message, "Warning: Model might be using old data.");
                 console.log(responseJson.exception_message);
             }
+
             Map.preloadedImages();
             this.dataCollected = true;
           });
     }
 
     /**
-     * Dennis Upgrade
-     * Fetches new data from the back-end to compare starting from observations choosed by the user
+     * Fetches new data from the back-end to compare observations and predictions.
      */
     static async fetchUrlsToCompare() {
         let url = "api/fetch?observed=" + this.observed + "&compare=" + this.compare;
@@ -194,6 +194,7 @@ export default class Communication {
             return response.json();
           })
           .then(responseJson => {
+            //error message
             if(responseJson.exception_active_observation) {
                 Popup.alert("Message from server:\n" + 
                 responseJson.exception_message_observation, "Warning: Model might be using old data.");
@@ -202,7 +203,8 @@ export default class Communication {
             if(responseJson.urls_precipitation.length === 0) {
                 Popup.alert("Message from server:\n No predictins found for the selected interval");
             }
-            else {// store predictions and create images for them
+            else {
+                // store predictions and create images for them
                 this.imageUrlsObsCompare = responseJson.urls_observation;
                 this.imageUrlsPrepCompare = responseJson.urls_precipitation;
                 this.dataTimestampObsCompare = responseJson.timestamp_observation;
@@ -268,7 +270,7 @@ export default class Communication {
                 return response.json();
             })
             .then(responseJson => {
-                // return the fetched precipitation
+                // return the fetched precipitation distinguishing compare and normale
                 if(this.compare) {
                     let precipitation = [];
                     precipitation[0] = responseJson.precipitationObs;

@@ -1,26 +1,58 @@
-01-Dec-22 00:13:36 - INFO - Server is starting
-01-Dec-22 00:13:49 - INFO - Server is starting
-01-Dec-22 00:13:53 - INFO - New file successfully downloaded from KNMI
-01-Dec-22 00:13:53 - INFO - New file successfully downloaded from KNMI
-01-Dec-22 00:13:53 - INFO - New file successfully downloaded from KNMI
-01-Dec-22 00:13:54 - INFO - New file successfully downloaded from KNMI
-01-Dec-22 00:15:52 - INFO - Update finished in 0:02:00.163980 hours
-01-Dec-22 00:20:29 - INFO - Update finished in 0:01:39.454571 hours
-01-Dec-22 00:25:26 - INFO - Update finished in 0:01:36.705490 hours
-01-Dec-22 00:30:30 - INFO - Update finished in 0:01:40.732191 hours
-01-Dec-22 00:36:00 - INFO - Update finished in 0:02:10.600083 hours
-01-Dec-22 00:40:18 - INFO - Update finished in 0:01:28.680244 hours
-01-Dec-22 00:46:04 - INFO - Update finished in 0:02:14.649997 hours
-01-Dec-22 00:49:48 - INFO - Update finished in 0:00:59.103080 hours
-01-Dec-22 00:55:57 - INFO - Update finished in 0:02:07.582787 hours
-01-Dec-22 00:58:50 - INFO - New file successfully downloaded from KNMI
-01-Dec-22 01:01:03 - INFO - Update finished in 0:02:13.333539 hours
-01-Dec-22 01:05:00 - INFO - Update finished in 0:01:11.122340 hours
-01-Dec-22 01:10:17 - INFO - Update finished in 0:01:28.174464 hours
-01-Dec-22 01:15:36 - INFO - Update finished in 0:01:46.970366 hours
-01-Dec-22 01:20:30 - INFO - Update finished in 0:01:40.731809 hours
-01-Dec-22 01:25:55 - INFO - Update finished in 0:02:06.000011 hours
-01-Dec-22 01:33:50 - INFO - New file successfully downloaded from KNMI
-01-Dec-22 01:35:41 - INFO - Update finished in 0:01:51.733077 hours
-01-Dec-22 01:40:47 - INFO - Update finished in 0:01:58.003561 hours
-01-Dec-22 01:45:32 - INFO - Update finished in 0:01:42.272715 hours
+13-Dec-22 10:14:52 - INFO - Server is starting
+13-Dec-22 10:14:55 - INFO - New file successfully downloaded from KNMI
+13-Dec-22 10:14:55 - INFO - New file successfully downloaded from KNMI
+13-Dec-22 10:14:56 - INFO - New file successfully downloaded from KNMI
+13-Dec-22 10:14:56 - INFO - New file successfully downloaded from KNMI
+13-Dec-22 10:16:44 - INFO - Update finished in 0:01:49.789009 hours
+13-Dec-22 10:21:02 - INFO - Update finished in 0:01:10.101953 hours
+13-Dec-22 10:26:05 - INFO - Update finished in 0:01:13.764272 hours
+13-Dec-22 10:31:33 - INFO - Update finished in 0:01:41.784142 hours
+13-Dec-22 10:36:16 - INFO - Update finished in 0:01:24.262061 hours
+13-Dec-22 10:41:18 - INFO - Update finished in 0:01:26.227686 hours
+13-Dec-22 10:46:21 - INFO - Update finished in 0:01:29.085066 hours
+13-Dec-22 10:51:21 - INFO - Update finished in 0:01:29.214209 hours
+13-Dec-22 10:56:26 - INFO - Update finished in 0:01:34.371332 hours
+13-Dec-22 11:01:01 - INFO - Update finished in 0:01:09.115817 hours
+13-Dec-22 11:06:01 - INFO - Update finished in 0:01:09.302523 hours
+13-Dec-22 11:10:58 - INFO - Update finished in 0:01:06.685190 hours
+13-Dec-22 11:16:18 - INFO - Update finished in 0:01:26.364721 hours
+13-Dec-22 11:21:18 - INFO - Update finished in 0:01:26.399072 hours
+13-Dec-22 11:26:08 - INFO - Update finished in 0:01:16.736889 hours
+13-Dec-22 11:31:17 - INFO - Update finished in 0:01:25.180259 hours
+13-Dec-22 11:36:10 - INFO - Update finished in 0:01:18.598434 hours
+13-Dec-22 11:41:11 - INFO - Update finished in 0:01:19.062606 hours
+13-Dec-22 11:46:12 - INFO - Update finished in 0:01:20.040802 hours
+13-Dec-22 11:51:09 - INFO - Update finished in 0:01:17.277535 hours
+13-Dec-22 11:56:06 - INFO - Update finished in 0:01:14.289019 hours
+13-Dec-22 12:01:22 - INFO - Update finished in 0:01:30.360795 hours
+13-Dec-22 12:06:05 - INFO - Update finished in 0:01:13.468375 hours
+13-Dec-22 12:11:02 - INFO - Update finished in 0:01:10.046417 hours
+13-Dec-22 12:16:04 - INFO - Update finished in 0:01:11.873516 hours
+13-Dec-22 12:21:01 - INFO - Update finished in 0:01:09.137297 hours
+13-Dec-22 12:25:59 - INFO - Update finished in 0:01:07.441606 hours
+13-Dec-22 12:31:00 - INFO - Update finished in 0:01:08.553826 hours
+13-Dec-22 12:36:00 - INFO - Update finished in 0:01:08.616911 hours
+13-Dec-22 12:41:00 - INFO - Update finished in 0:01:08.189198 hours
+13-Dec-22 12:46:00 - INFO - Update finished in 0:01:08.490620 hours
+13-Dec-22 12:51:52 - INFO - Update finished in 0:02:00.559842 hours
+13-Dec-22 12:56:31 - INFO - Update finished in 0:01:39.044998 hours
+13-Dec-22 13:01:54 - INFO - Update finished in 0:02:02.649033 hours
+13-Dec-22 13:06:32 - INFO - Update finished in 0:01:40.145427 hours
+13-Dec-22 13:12:27 - INFO - Update finished in 0:02:35.344939 hours
+13-Dec-22 13:16:04 - INFO - Update finished in 0:01:11.984110 hours
+13-Dec-22 13:21:01 - INFO - Update finished in 0:01:09.686774 hours
+13-Dec-22 13:26:00 - INFO - Update finished in 0:01:08.039127 hours
+13-Dec-22 13:31:02 - INFO - Update finished in 0:01:10.731700 hours
+13-Dec-22 13:35:58 - INFO - Update finished in 0:01:06.099457 hours
+13-Dec-22 13:41:07 - INFO - Update finished in 0:01:15.175200 hours
+13-Dec-22 13:46:05 - INFO - Update finished in 0:01:12.968726 hours
+13-Dec-22 13:51:00 - INFO - Update finished in 0:01:08.330170 hours
+13-Dec-22 13:56:14 - INFO - Update finished in 0:01:22.616283 hours
+13-Dec-22 14:01:31 - INFO - Update finished in 0:01:38.807964 hours
+13-Dec-22 14:06:04 - INFO - Update finished in 0:01:11.965808 hours
+13-Dec-22 14:11:14 - INFO - Update finished in 0:01:22.246303 hours
+13-Dec-22 14:16:02 - INFO - Update finished in 0:01:10.672249 hours
+13-Dec-22 14:21:10 - INFO - Update finished in 0:01:18.089783 hours
+13-Dec-22 14:26:28 - INFO - Update finished in 0:01:35.851213 hours
+13-Dec-22 14:31:03 - INFO - Update finished in 0:01:11.340643 hours
+13-Dec-22 14:36:24 - INFO - Update finished in 0:01:32.469051 hours

@@ -15,12 +15,11 @@
  */
 
 .pastDataSelectorContents {
-    color: #ffffff;
     font-size: 20px;
     font-weight: 300;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    margin: 0% 5%;
+    display: grid;
+    grid-template-rows: 0.1fr 3fr 3fr 3fr 2fr;
 }
 
 /* ==================== depth level divider ==================== */
@@ -168,6 +167,19 @@
 
 
 /* ==================== Previous data sections ==================== */
+#past-data-feature, #past-data-partOfDay, #past-data-day {
+    display: grid;
+    align-items: stretch; 
+}
+#past-data-feature, #past-data-partOfDay {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+#past-data-day {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+
 #past-data-feature div {
     padding: 0.7%;
 }
@@ -178,22 +190,20 @@
     padding: 0.3% 3%;
 }
 .sections-previous-data {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
     margin-bottom: 2%;
     padding-bottom: 0.5%;
 }
 #past-data-intervals::-webkit-scrollbar {
     width: 0.1em;
-    height: 0.2em;
+    height: 0.5em;
 }
 #past-data-intervals::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 2px transparent;
+    -webkit-box-shadow: inset 0 0 2px #2e2e2e;
 }
 #past-data-intervals::-webkit-scrollbar-thumb {
-  background-color: #F5F5F5;
-  border-radius: 2px;
+  background-color: #2e2e2e!important;
+  border-radius: 10px;
+  cursor: grab!important;
 }
 .sections-previous-intervals {
     width: 100%;
@@ -201,17 +211,23 @@
     flex-flow: row;
     overflow-x: auto;
 }
-.description-data-section {
+.description-data-section, .description-data-partOfDay {
     font-size: 18px;
     opacity: 0.7;
+}
+.description-data-section{
     margin-bottom: 1%;
 }
 .box-previous-data {
-    color: #ffffff;
     border-radius: 20px;
     cursor: pointer;
-    border: solid 2px #fff;
+    border: solid 2px #2e2e2e;
+    font-weight: 400;
     margin-right: 3%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .box-previous-data span {
     display: inline-flex;
@@ -223,17 +239,18 @@
     margin-bottom: 1%;
 }
 .single-interval {
-    color: #fff;
     border-radius: 20px;
     margin-right: 1%;
     padding: 0.5em;
     font-size: 18px;
     border: solid 2px;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
 }
 .previous-data-clicked {
     background-color: #F5F5F5;
-    border: solid 2px #F5F5F5;
+    border: solid 2px #2e2e2e;
     font-weight: 400;
     color: #0e0e0e;
 }

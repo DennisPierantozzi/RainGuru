@@ -21,7 +21,7 @@ export const InfoMenuData = [
         id:"application-info",
         popupText:
         <div class="popup-text" data-testid="application-info-popuptext-sidebardata">
-            <div id="background">
+            <div id="background" className='popup-text-box'>
             <h3><span>Background</span></h3>
             <p>The RainGuRu is a deep-learning rainfall forecasting model developed by TU Delft researchers and HKV
                 (<a href="https://www.hkv.nl/">https://www.hkv.nl/</a>)  with the help of seed funding from the TU Delft
@@ -33,7 +33,7 @@ export const InfoMenuData = [
                 in times of heavy rain.
             </p>
             </div>
-            <div id="app-info">
+            <div id="app-info" className='popup-text-box'>
                 <h3><span>Application information</span></h3>
                 <p>This application was created from scratch in less than 8 weeks by 5 TU Delft Bachelor students in
                     computer science as part of the course “CSE2000 Software Project – Q4 (2021-2022)”. The application was
@@ -57,7 +57,7 @@ export const InfoMenuData = [
         id: "contributor",
         popupText:
             <div class="popup-text" data-testid="contributor-popuptext-sidebardata">
-                <div id="scientific-contributor">
+                <div id="scientific-contributor" className='popup-text-box'>
                     <h3><span>Scientific contributors</span></h3>
                     <ul>
                         <li>Dr. Marc Schleiss, TU Delft</li>
@@ -69,7 +69,7 @@ export const InfoMenuData = [
                         <li>Ir. Dorien Lugt, HKV</li>
                     </ul>
                 </div>
-                <div id="development-team">
+                <div id="development-team" className='popup-text-box'>
                     <h3><span>Software development team</span></h3>
                     <ul>
                         <li>Milan de Koning, TU Delft</li>
@@ -91,7 +91,7 @@ export const InfoMenuData = [
         id: "disclaimer",
         popupText:
             <div class="popup-text" data-testid="disclaimer-popuptext-sidebardata">
-                <div id="disclaimer">        
+                <div id="disclaimer" className='popup-text-box'>        
                         <h3><span>Disclaimer & Liability</span></h3>
                         <p>RainGuRu is a non-profit, curiosity driven research project. None of the authors, contributors and
                     institutions behind RainGuRu can be held accountable for the decisions taken by the users on the basis of
@@ -108,7 +108,7 @@ export const InfoMenuData = [
         id:"acknowledgement",
         popupText:
         <div class="popup-text" data-testid="acknowledgement-popuptext-sidebardata">
-            <div id="acknowledgement">
+            <div id="acknowledgement" className='popup-text-box'>
                 <h3><span>Acknowledgements</span></h3>
                 <p>The team behind RainGuRu acknowledges the Dutch weather service KNMI for providing the real-time
                     radar 5-minute reflectivity composites needed to generate the forecasts. These data are provided
@@ -119,7 +119,7 @@ export const InfoMenuData = [
                 <p>Finally, we would like to thank the TU Delft Safety & Security Institute for providing the
                     seed funds that helped develop and implement RainGuRu.</p>
             </div>
-            <div id="references">
+            <div id="references" className='popup-text-box'>
                 <h3><span>References</span></h3>
                 <ul>
                     <li>Link to repository: <br/> <a href="https://gitlab.ewi.tudelft.nl/cse2000-software-project/2021-2022-q4/cluster-13/tu-delft-rainguru/tu-delft-rainguru.git">

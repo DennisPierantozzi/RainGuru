@@ -1,49 +1,35 @@
-/* --------------- style menu info --------------- */ù
+/* --------------- style menu info --------------- */
 
-.contents-menuInfo {
-    position: relative;
-    width: 100%;
-    background-color: #0076C2;
-    list-style: none;
-
-    /*Dennis Upgrade*/
-    display: flex;
-    flex-direction: column;
-    font-size: 16px;
+.contentsMenuInfo {
+    display: grid;
+    justify-items: center;
 }
 .list-menuInfo {
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
     align-items: center;
-    list-style: none;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 .elements-list-menuInfo {
-    display: inline-flex;
-    justify-content: flex-start;
-    flex-direction: row;
+    display: grid;
     align-items: center;
-    padding: 1%;
-    color: #fff;
+    grid-template-rows: 0.5fr 1fr;
     cursor: pointer;
 }
 .elements-list-menuInfo span {
     padding-left: 20%;
 }
-.info-text {
+.item-list-display {
     display: inline-flex;
-    align-items: center;
     justify-content: center;
-    width: 100%;
+    align-items: center;
+    text-align: center;
 }
 
 
 /* ==================== depth level divider ==================== */
 
-
 .popup-text {
-    width: 80%;
-    display: inline-flex;
-    color: #ffffff;
+    display: grid;
 }
 
 .popup-text div {
@@ -51,24 +37,7 @@
 }
 
 
-#scientific-contributor {
-    float:left;
-    display:inline;
-    width: 45%;
-}
-
-#development-team {
-    float: left;
-    display:inline;
-    width: 45%;
-}
-
-
 /* ==================== style for content in InfoMenuData ==================== */
-
-.sidebar-element-icon {
-    position: absolute;
-}
 
 #popup-text {
     margin-bottom: 10px;
@@ -86,7 +55,6 @@
 
 #popup-text h3, h4 {
     font-weight: normal;
-    color:white;
     margin-top: 15px;
     margin-bottom: 10px;
 }

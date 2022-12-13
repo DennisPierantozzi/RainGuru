@@ -1,6 +1,4 @@
-import { color } from "@mui/system";
-import { map } from "leaflet";
-import React, {Component} from "react";
+import {Component} from "react";
 import Communication from "../Communication"
 import AnimationBar from "./AnimationBar";
 
@@ -44,7 +42,7 @@ export default class Slider extends Component {
 
         // show statistics
         document.getElementById("rmse").innerHTML = rmse.toString() + "mm/h";
-        document.getElementById("bias").innerHTML = (avgObs-avgPred).toFixed(2).toString() + "mm/h";
+        document.getElementById("bias").innerHTML = (avgPred-avgObs).toFixed(2).toString() + "mm/h";
 
         document.getElementById("statistics").style.display = "flex";
     }
@@ -52,10 +50,9 @@ export default class Slider extends Component {
     // change color for the compare legend
     // @param predictionShowing boolean: if true Im showing predictions, false for observation
     static colorLegend(predictionShowing) {
-        console.log("entrato in color legend con   " + predictionShowing);
         const legendPredictions = document.getElementById("labelCompared");
         const legendObservations = document.getElementById("labelShowing");
-        console.log(predictionShowing);
+  
         if(predictionShowing && Communication.compare){
             //change border and color to legend
             legendPredictions.style.color = "#1167b1";
@@ -100,12 +97,13 @@ export default class Slider extends Component {
                     Slider.precipitationShowing = precipitation[1]; // prediction 
                     Slider.precipitationCompared = precipitation[0]; // observation  
                     Slider.stats();
-                    //Slider.colorLegend(false);
                 }
                 else {
                     Slider.precipitationShowing = precipitation;
                     Slider.precipitationCompared = [];
                     document.getElementById("statistics").style.display = "none";
+                    document.getElementById("tooltip-rmse").style.display = "none";
+                    document.getElementById("tooltip-bias").style.display = "none";
                 }
                 Slider.showPredictionData(false);
             } catch (e) {
@@ -130,15 +128,20 @@ export default class Slider extends Component {
         const predictions = [];
         let maxRain = Math.max(... precipitation) > Math.max(... precipitationCompared) ? Math.max(... precipitation) : Math.max(... precipitationCompared);
         console.log(maxRain);
+        let noRain = true;
         for (let t = 0; t < 20; t++) {
+            if(precipitation[t]>0.00) {noRain = false} 
             predictions.push(precipitation[t]);
         }
+        if(noRain) {document.getElementById("no-rain").style.display = "flex";}
+        else {document.getElementById("no-rain").style.display = "none";}
 
         let colorsArray=[];
         colorsArray = Slider.createColorsArray(precipitation);
 
         // update the static predictions variable
         Slider.predictionsShowing = predictions;
+
         // dynamically update the interval information and append newly created node to "intervalInfo" div
         const intervalInfoDiv = document.getElementById("intervalInfo");
         intervalInfoDiv.innerHTML = "";
@@ -181,7 +184,7 @@ export default class Slider extends Component {
         midScaleDiv.innerHTML = midScaleValue;
 
         // call a helper method to create a precipitation chart
-        Slider.makeChart(predictionShowing, colorsArray, maxScale);
+        Slider.makeChart(colorsArray, maxScale);
     }
 
     /**
@@ -189,7 +192,7 @@ export default class Slider extends Component {
      * @param predictions Predictions for the next 100 minutes that need to be graphed
      * @param maxScale Indication of the maximum y-value
      */
-    static makeChart(predictionShowing, colorsArray, maxScale) {
+    static makeChart(colorsArray, maxScale) {
         const currentTime = new Date();
         const timeStamps = [];
         for (let i = 0; i < 20; i++) {

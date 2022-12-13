@@ -16,7 +16,7 @@ Dennis Upgrade
 }
 
 .legend-Graph, .statistics-box {
-    background-color: #fff;
+    background-color: #EEF8FD;
     border-radius: 20px;
 }
 
@@ -86,12 +86,7 @@ Dennis Upgrade
 
 /* ==================== tooltip level divider ==================== */
 .tooltip-stats {
-    position: absolute;
-    border: 1px solid black;
-    display: none;
-    top: -40%;
+    display: block;
     background-color: #fff;
     border-radius: 10px;
-    padding: 8px;
-    font-size: 13px;
 }
