@@ -4,6 +4,7 @@ Dennis Upgrade
 */
 
 
+
 #statistics {
     z-index: 0;
     justify-content: left;
@@ -12,12 +13,12 @@ Dennis Upgrade
 
 .statisticsContents {
     display: flex;
-    flex-direction: row;
 }
 
 .legend-Graph, .statistics-box {
     background-color: #EEF8FD;
     border-radius: 20px;
+    padding: 8px 8px 8px 0px;
 }
 
 /* ==================== box stats level divider ==================== */
@@ -25,7 +26,6 @@ Dennis Upgrade
     font-size: 15px;
     align-items: center;
     display: inline-flex;
-    padding: 8px 8px 8px 0px;
 }
 .statistics-box span {
     font-weight: 600;
@@ -86,7 +86,7 @@ Dennis Upgrade
 
 /* ==================== tooltip level divider ==================== */
 .tooltip-stats {
-    display: block;
+    display: block!important;
     background-color: #fff;
     border-radius: 10px;
 }

@@ -168,7 +168,8 @@ export default class Communication {
                 Popup.alert("Message from server:\n" + responseJson.exception_message, "Warning: Model might be using old data.");
                 console.log(responseJson.exception_message);
             }
-
+            
+            console.log("entrato e finito");
             Map.preloadedImages();
             this.dataCollected = true;
           });

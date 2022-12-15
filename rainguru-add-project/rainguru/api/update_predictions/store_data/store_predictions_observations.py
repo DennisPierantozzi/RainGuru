@@ -54,7 +54,7 @@ def store_forecast_images(forecast, now):
         os.mkdir(image_save_folder_path)
 
     for index in range(len(forecast_list)):
-        location = os.path.join(image_save_folder, 'prediction' + str(index).zfill(2) + '.png')
+        location = os.path.join(image_save_folder, 'prediction' + str(index).zfill(2) + '.webp')
         convert_matrix_image.create_image(forecast_list[index], location)
         urls.append(location)
 
@@ -84,9 +84,6 @@ def store_forecast_database(forecast, now):
             p.matrix_data_fast = clean_matrix(forecast[t])
             p.save()
         db.reset_queries()
-
-
-
 
 
 def store_observed(observed, now):
@@ -136,7 +133,7 @@ def store_observed_images(observed, now):
     start = now - datetime.timedelta(minutes=20)
 
     for t in range(len(observed)):
-        file_name = str(start + datetime.timedelta(minutes=t*5)).replace(':', '_') + '.png'
+        file_name = str(start + datetime.timedelta(minutes=t*5)).replace(':', '_') + '.webp'
 
         if file_name not in images_list:
             location = os.path.join(observed_images_path, file_name)

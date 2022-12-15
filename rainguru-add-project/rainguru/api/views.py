@@ -1,7 +1,6 @@
 import datetime
 import json
 import math
-import time
 
 from api import service
 from django.http import HttpResponse, HttpResponseBadRequest
@@ -26,23 +25,19 @@ def fetch_precipitation(request):
 
     if x is None or y is None:
         return HttpResponseBadRequest("x or y parameter missing!")
-    #if observed is None:
-    #    return HttpResponseBadRequest("observed parameter missing!")
+
     if provided_timestamp is None:
         response_dict = service.fetch_latest_predicted_precipitation(int(x), int(y))
     else:
         if compare == 'true':
             times = provided_timestamp.split('c')
-            response_dict = service.fetch_compare_precipitation(datetime.datetime.utcfromtimestamp(int(times[0])), datetime.datetime.utcfromtimestamp(int(times[1])), int(x), int(y), request)
+            response_dict = service.fetch_compare_precipitation(datetime.datetime.utcfromtimestamp(int(times[0])), datetime.datetime.utcfromtimestamp(int(times[1])), int(x), int(y))
         else:
             timestamp = datetime.datetime.utcfromtimestamp(int(provided_timestamp))
             if observed == 'true':
-                response_dict = service.fetch_observed_precipitation(timestamp, int(x), int(y), request)
+                response_dict = service.fetch_observed_precipitation(timestamp, int(x), int(y))
             else:
-                start = time.time()
-                response_dict = service.fetch_predicted_precipitation(timestamp, int(x), int(y), request)
-                end = time.time()
-                print(f"{end-start}")
+                response_dict = service.fetch_predicted_precipitation(timestamp, int(x), int(y))
 
     return HttpResponse(json.dumps(response_dict))
 
@@ -89,7 +84,7 @@ def fetch_urls(request):
             response_dict = service.fetch_observed_urls(timestamp)
 
             if not (math.isnan(float(x))) and not (math.isnan(float(y))): 
-                responsePrecipitation = service.fetch_observed_precipitation(timestamp, int(x), int(y), request)
+                responsePrecipitation = service.fetch_observed_precipitation(timestamp, int(x), int(y))
                 response_dict['precipitation']=responsePrecipitation['precipitation']
              
         elif observed == 'false' and compare == 'false':
@@ -97,7 +92,7 @@ def fetch_urls(request):
             response_dict = service.fetch_predicted_urls(timestamp)
 
             if not (math.isnan(float(x))) and not (math.isnan(float(y))): 
-                responsePrecipitation = service.fetch_predicted_precipitation(timestamp, int(x), int(y), request)
+                responsePrecipitation = service.fetch_predicted_precipitation(timestamp, int(x), int(y))
                 response_dict['precipitation']=responsePrecipitation['precipitation']
 
         if compare == 'true':

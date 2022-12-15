@@ -16,7 +16,7 @@ from django.db.models import F, Func
 
 
 
-def fetch_observed_precipitation(timestamp, x, y, request):
+def fetch_observed_precipitation(timestamp, x, y):
     """
     Fetch observed precipitation at a given point from the database
 
@@ -34,7 +34,8 @@ def fetch_observed_precipitation(timestamp, x, y, request):
             .order_by('time').values_list(f'matrix_data_fast__{y}__{x}', flat=True)
     precipitation = [0.0 if v is None else v for v in list(query)]
 
-    response_dict = {
+
+    response_dict = {   
         'precipitation': precipitation
     }
 
@@ -69,7 +70,7 @@ def fetch_latest_predicted_precipitation(x, y):
     return response_dict
 
 
-def fetch_predicted_precipitation(timestamp, x, y, request):
+def fetch_predicted_precipitation(timestamp, x, y):
     """
     Fetch predicted precipitation at a given point from the database
 
@@ -80,19 +81,17 @@ def fetch_predicted_precipitation(timestamp, x, y, request):
     """
 
     coorx, coory = convert_matrix_image.image_map[(x, y)]
+
     query = Predicted.objects.filter(calculation_time=timestamp).order_by('prediction_time').values_list(f'matrix_data_fast__{coory}__{coorx}', flat=True)
-    
     precipitation = [0.0 if v is None else v for v in list(query)]
 
-    start_time = time.time()
-    print("--- %s all ---" % (time.time() - start_time))
     response_dict = {
         'precipitation': precipitation,
     }
 
     return response_dict
 
-def fetch_compare_precipitation(timestamp_obs, timestamp_pred, passx, passy, request):
+def fetch_compare_precipitation(timestamp_obs, timestamp_pred, passx, passy):
     """
     Fetch compare precipitation at a given point from the database
 
@@ -104,8 +103,8 @@ def fetch_compare_precipitation(timestamp_obs, timestamp_pred, passx, passy, req
     """
 
     print(f"entrato con x: {passx} e y: {passy}")
-    precipitationPred = fetch_predicted_precipitation(timestamp_pred, passx, passy, request)
-    precipitationObs = fetch_observed_precipitation(timestamp_obs, passx, passy, request)
+    precipitationPred = fetch_predicted_precipitation(timestamp_pred, passx, passy)
+    precipitationObs = fetch_observed_precipitation(timestamp_obs, passx, passy)
 
     response_dict = {
         'precipitationPred': precipitationPred['precipitation'],

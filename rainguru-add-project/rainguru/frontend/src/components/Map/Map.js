@@ -52,6 +52,8 @@ export default class Map {
             newImage.src = image;
             window[image] = newImage;
         });
+
+        console.log("entrato e finito preload");
     }
 
 

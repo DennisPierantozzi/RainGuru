@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="description" content="Weather nowcasting forecast app deep learning approach">
+      <meta name="keywords" content="Weather, forecast, real-time">
+      <meta name="author" content="TU Delft University">
       <link rel="icon" href="../../static/images/favicon.ico">
       <title>RainGuRU</title>
+      
       {% load static %}
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
@@ -39,7 +43,6 @@
   <body>
       <div id="main">
           <div id="app"></div>
-          <div id="popupContainer"></div>
       </div>
       <script src="{% static 'js/main.js' %}"></script>
   </body>

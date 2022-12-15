@@ -169,15 +169,9 @@
 /* ==================== Previous data sections ==================== */
 #past-data-feature, #past-data-partOfDay, #past-data-day {
     display: grid;
-    align-items: stretch; 
+    align-items: stretch;
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
 }
-#past-data-feature, #past-data-partOfDay {
-    grid-template-columns: 1fr 1fr 1fr;
-}
-#past-data-day {
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
 
 
 #past-data-feature div {

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {createRoot} from "react-dom/client";
+
 import LoadingScreen from "./LoadingScreen";
 import Communication from "./Communication";
 import TopBar from "./TopBar/TopBar";
@@ -7,6 +8,7 @@ import PastDataSelector from "./TopBar/PastDataSelector";
 import Map from "./Map/Map";
 import Information from "./Information/Information";
 import AnimationBar from "./Information/AnimationBar";
+import PopupContainer from "./PopupContainer/PopupContainer";
 import Slider from "./Information/Slider";
 import SideBar from "./TopBar/SideBar";
 import InfoMenu from "./TopBar/InfoMenu";
@@ -40,11 +42,13 @@ export default class App extends Component {
 
     static renderSetup() {
         const waitForSetupDOM = setInterval(function() {
+            console.log("entrto in setup");
             const popupContainerDiv = document.getElementById("popupContainer");
-            if (!!popupContainerDiv) {
+            if (true) {
+                console.log("entrto in popupcontainer");
                 // render the popup container in case we need to display loading errors
-                const popupContainerRoot = createRoot(popupContainerDiv);
-                popupContainerRoot.render(<PopupContainer/>);
+                //const popupContainerRoot = createRoot(popupContainerDiv);
+                //popupContainerRoot.render(<PopupContainer/>);
 
                 // retrieve the data from the server
                 Communication.checkNewData();
