@@ -18,6 +18,18 @@ export default class Communication {
     static dataTimestampObsCompare = [];
     static dataTimestampPrepCompare = [];
 
+    constructor(props) {
+        super(props);
+
+        // state variables
+        this.state = {
+            cacheUrlsLive: [],
+            cacheTimestampLive: ""
+        }
+
+        // set the available times
+        PastDataSelector.updateTimes();
+    }
 
     // getters
     /**
@@ -143,7 +155,6 @@ export default class Communication {
         let url = "api/fetch?observed=" + this.observed + "&compare=false&x=" + (699-coord["y"]) + "&y=" + coord["x"];
         // only add timestamp if not fetching latest data
         if (!this.useLatestData) {
-            console.log("requestTimeStamp "+this.requestTimestamp);
             url += "&timestamp=" + this.requestTimestamp;
         }
 
@@ -169,7 +180,8 @@ export default class Communication {
                 console.log(responseJson.exception_message);
             }
             
-            console.log("entrato e finito");
+            //if latest data cache for 5 minutes
+
             Map.preloadedImages();
             this.dataCollected = true;
           });

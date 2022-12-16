@@ -10,17 +10,22 @@
       <title>RainGuRU</title>
       
       {% load static %}
+    
+      {% load compress %}
+      {% load cache %}
+
+      {% cache 1000 rainguruStyles %}
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet-src.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
       <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script>
-    
-      <script src="https://colorjs.io/dist/color.global.js"></script>
+
+      <script src="https://colorjs.io/dist/color.global.min.js"></script>
       <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
       />
-      <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+      <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.min.css" />
       <link
           rel="stylesheet"
           href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
@@ -39,11 +44,14 @@
       <link rel = "stylesheet" type="text/css" href="{% static "css/legend.css" %}" />
       <link rel = "stylesheet" type="text/css" href="{% static "css/statistics.css" %}" />
       <link rel = "stylesheet" type="text/css" href="{% static "css/infoMenu.css" %}" />
+      {% endcache %}
   </head>
   <body>
       <div id="main">
           <div id="app"></div>
       </div>
-      <script src="{% static 'js/main.js' %}"></script>
+      {% cache 1000 rainguruScript %}
+      <script src="{% static 'js/main.js.br' %}" type="application/javascript"></script>
+      {% endcache %}
   </body>
 </html>

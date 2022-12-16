@@ -38,7 +38,10 @@ module.exports = {
       },
     }),
     new CompressionPlugin({
-      algorithm: 'gzip',
+      algorithm: 'brotliCompress',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8,
     })
   ],
 };

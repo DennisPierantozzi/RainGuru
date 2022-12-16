@@ -3,13 +3,12 @@ import PastDataSelector from "./PastDataSelector";
 
 export default function SideBar({pastDataSelectorUpdateProp, loadingData, displayData, compareData, displayComparedData, setShowCompare, setShowSidebar}) {
 
-
     return (
         <div className="Sidebar-shown">
             <div className='container-sidebar-menu'>
                 <div className="Menu-title">
                     <div>RainGuru <br/> <span className="Menu-subtitle">Weather forecast app</span></div>
-                    <img src="../../static/images/TUDelft_logo_rgb.png" alt="TUDelft Logo" />
+                    <img src="../../static/images/TUDelft_logo_rgb.webp" width="10vw" height="13vh" alt="TUDelft Logo" />
                 </div>
                 <PastDataSelector updateProp={pastDataSelectorUpdateProp} loadingData={loadingData} displayData={displayData} compareData={compareData} 
                 setShowSidebar={setShowSidebar}/>

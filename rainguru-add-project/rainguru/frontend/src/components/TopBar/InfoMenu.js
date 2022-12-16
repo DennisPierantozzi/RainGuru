@@ -29,7 +29,7 @@ function InfoMenu () {
             <div className='container-sidebar-menuInfo'>
                 <div className="Menu-title">
                         <div>RainGuru <br/> <span className="Menu-subtitle">Weather forecast app</span></div>
-                        <img src="../../static/images/TUDelft_logo_rgb.png" alt="TUDelft Logo" />
+                        <img src="../../static/images/TUDelft_logo_rgb.webp" width="10vw" height="13vh" alt="TUDelft Logo" />
                 </div>
                 <div className="contentsMenuInfo">
                     <div className="list-menuInfo">
@@ -39,8 +39,8 @@ function InfoMenu () {
                     {textToShow}
                 </div>
                 <div className='Bottom-privacy-statement'>
-                <p>This website does not store privacy sensitive information, except for the location of the user during usage if permitted.</p>
-            </div>
+                    <p>This website does not store privacy sensitive information, except for the location of the user during usage if permitted.</p>
+                </div>
             </div>
         </div>
     );

@@ -6,7 +6,7 @@ export default class LoadingScreen extends Component {
     static loadingIntervalId;
 
     // images for the loading screen
-    loadingImages = ["../../static/images/loading1.png", "../../static/images/loading2.png", "../../static/images/loading3.png"];
+    loadingImages = ["../../static/images/loading1.webp", "../../static/images/loading2.webp", "../../static/images/loading3.webp"];
 
     /**
      * Sets the loading screen in the starting state.

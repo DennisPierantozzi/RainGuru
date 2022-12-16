@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'rest_framework',
     'frontend.apps.FrontendConfig',
-    'webpack_loader'
+    'compressor',
 ]
 
 MIDDLEWARE = [
@@ -67,8 +67,20 @@ GZIP_CONTENT_TYPES = (
     'text/javascript',
 )
 
+COMPRESS_OFFLINE = True
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.brotli.BrotliFilter']
+COMPRESS_JS_FILTERS = ['compressor.filters.brotli.BrotliFilter']
+
 
 ROOT_URLCONF = 'rainguru.urls'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': 'api/tmp/django_cache',
+    }
+}
+
 
 TEMPLATES = [
     {
@@ -85,6 +97,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'rainguru.deployment.wsgi.application'
 

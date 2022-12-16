@@ -1,18 +1,17 @@
-import React, {Component} from "react";
+import React, {Component, lazy, Suspense} from "react";
 import {createRoot} from "react-dom/client";
 
 import LoadingScreen from "./LoadingScreen";
 import Communication from "./Communication";
-import TopBar from "./TopBar/TopBar";
 import PastDataSelector from "./TopBar/PastDataSelector";
 import Map from "./Map/Map";
-import Information from "./Information/Information";
 import AnimationBar from "./Information/AnimationBar";
-import PopupContainer from "./PopupContainer/PopupContainer";
 import Slider from "./Information/Slider";
-import SideBar from "./TopBar/SideBar";
-import InfoMenu from "./TopBar/InfoMenu";
 
+const TopBar = lazy(() => import("./TopBar/TopBar"));
+const Information = lazy(() => import("./Information/Information"));
+const SideBar = lazy(() => import("./TopBar/SideBar"));
+const InfoMenu = lazy(() => import("./TopBar/InfoMenu"));
 
 export default class App extends Component {
     /**
@@ -42,18 +41,10 @@ export default class App extends Component {
 
     static renderSetup() {
         const waitForSetupDOM = setInterval(function() {
-            console.log("entrto in setup");
-            const popupContainerDiv = document.getElementById("popupContainer");
-            if (true) {
-                console.log("entrto in popupcontainer");
-                // render the popup container in case we need to display loading errors
-                //const popupContainerRoot = createRoot(popupContainerDiv);
-                //popupContainerRoot.render(<PopupContainer/>);
 
                 // retrieve the data from the server
                 Communication.checkNewData();
                 Communication.fetchUrls();
-
 
                 // wait for the map to fetch the data
                 const waitForDataLoad = setInterval(function () {
@@ -68,7 +59,7 @@ export default class App extends Component {
                 }, 50);
 
                 clearInterval(waitForSetupDOM);
-            }
+
         }, 50);
     }
 
@@ -115,13 +106,17 @@ export default class App extends Component {
                 </div>                     
             </div>,
             <div id="menu" key="menuOverlay"  className={this.state.sidebar ? "menuOverlay" : "hideElement"}>
-                <SideBar pastDataSelectorUpdateProp={this.state.pastDataSelectorUpdateProp}
-                    loadingData={this.state.loadingData} displayData={this.displayData} 
-                    compareData={this.compareData} 
-                    displayComparedData={this.displayComparedData} setShowSidebar={this.setShowSidebar}/>
+                <Suspense fallback={<h1>Loading..</h1>}>
+                    <SideBar pastDataSelectorUpdateProp={this.state.pastDataSelectorUpdateProp}
+                        loadingData={this.state.loadingData} displayData={this.displayData} 
+                        compareData={this.compareData} 
+                        displayComparedData={this.displayComparedData} setShowSidebar={this.setShowSidebar}/>
+                </Suspense>
             </div>, 
             <div id="menu-info" key="menuOverlay-info" className={this.state.sidebarInfo ? "menuOverlay" : "hideElement"}>
-                <InfoMenu />
+                <Suspense fallback={<h1>Loading..</h1>}>
+                    <InfoMenu />
+                </Suspense>
             </div>
         ];
     }

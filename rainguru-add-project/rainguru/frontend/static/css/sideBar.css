@@ -270,15 +270,15 @@
     font-size: 12px;
     text-align: center;
 }
-.Menu-title img {
-    width: 10vw;
-    height: auto;
-}
 .Menu-title div {
     display: inline-flex;
     flex-direction: column;
     text-align: center;
     margin-right: 20px;
+}
+.Menu-title img {
+  width: 10vw;
+  height: auto;
 }
 
 
