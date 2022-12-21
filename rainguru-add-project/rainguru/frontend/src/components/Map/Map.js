@@ -53,7 +53,6 @@ export default class Map {
             window[image] = newImage;
         });
 
-        console.log("entrato e finito preload");
     }
 
 
@@ -85,7 +84,6 @@ export default class Map {
         }
         const zeroUrl = imageUrls[0];
         this.nextLayers.push(L.imageOverlay(zeroUrl, imageBounds, {opacity: 0}));
-        console.log("finita");
     }
 
     /**

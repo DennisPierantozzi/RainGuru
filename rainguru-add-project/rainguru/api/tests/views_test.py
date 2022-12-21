@@ -137,7 +137,7 @@ class ViewsTestCase(TestCase):
 
             expected_response = HttpResponse(json.dumps(expected_dict))
 
-            response = client.get('/api/fetch?observed=true&timestamp=' +
+            response = client.get('/api/fetch?observed=true&compare=false&x=NaN&y=NaN&timestamp=' +
                                   str(int(timestamp.replace(tzinfo=timezone.utc).timestamp())))
 
             self.assertEqual(expected_response.status_code, response.status_code)
@@ -162,7 +162,7 @@ class ViewsTestCase(TestCase):
 
             expected_response = HttpResponse(json.dumps(expected_dict))
 
-            response = client.get('/api/fetch?observed=false&timestamp=' +
+            response = client.get('/api/fetch?observed=false&compare=false&x=NaN&y=NaN&timestamp=' +
                                   str(int(timestamp.replace(tzinfo=timezone.utc).timestamp())))
 
             self.assertEqual(expected_response.status_code, response.status_code)

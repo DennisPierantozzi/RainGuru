@@ -1,17 +1,16 @@
-import React, {Component, lazy, Suspense} from "react";
+import React, { Component } from "react";
 import {createRoot} from "react-dom/client";
 
 import LoadingScreen from "./LoadingScreen";
 import Communication from "./Communication";
+import TopBar from "./TopBar/TopBar";
 import PastDataSelector from "./TopBar/PastDataSelector";
 import Map from "./Map/Map";
+import Information from "./Information/Information";
 import AnimationBar from "./Information/AnimationBar";
 import Slider from "./Information/Slider";
-
-const TopBar = lazy(() => import("./TopBar/TopBar"));
-const Information = lazy(() => import("./Information/Information"));
-const SideBar = lazy(() => import("./TopBar/SideBar"));
-const InfoMenu = lazy(() => import("./TopBar/InfoMenu"));
+import SideBar from "./TopBar/SideBar";
+import InfoMenu from "./TopBar/InfoMenu";
 
 export default class App extends Component {
     /**
@@ -106,17 +105,13 @@ export default class App extends Component {
                 </div>                     
             </div>,
             <div id="menu" key="menuOverlay"  className={this.state.sidebar ? "menuOverlay" : "hideElement"}>
-                <Suspense fallback={<h1>Loading..</h1>}>
                     <SideBar pastDataSelectorUpdateProp={this.state.pastDataSelectorUpdateProp}
                         loadingData={this.state.loadingData} displayData={this.displayData} 
                         compareData={this.compareData} 
                         displayComparedData={this.displayComparedData} setShowSidebar={this.setShowSidebar}/>
-                </Suspense>
             </div>, 
             <div id="menu-info" key="menuOverlay-info" className={this.state.sidebarInfo ? "menuOverlay" : "hideElement"}>
-                <Suspense fallback={<h1>Loading..</h1>}>
                     <InfoMenu />
-                </Suspense>
             </div>
         ];
     }
@@ -187,12 +182,14 @@ export default class App extends Component {
                     if (dataUpdated) {
                         // update the time intervals of the past data menu
                         PastDataSelector.updateTimes();
-                        displayData(-1, true, false, [], "Latest data");
+                        console.log("entrato in runAutoUpdate");
+                        //this.displayData(-1, true, false, [], "Latest data");
                         this.setState({pastDataSelectorUpdateProp: this.state.pastDataSelectorUpdateProp + 1});
 
                         // update the rain layers and animation bar timestamps when using the latest data
                         if (Communication.getUseLatestData()) {
-                            this.displayData(1, true, false, []);
+                            console.log("entrato in runAutoUpdate double");
+                            this.displayData(1, true, false, [], "Latest data");
                         }
                     }
                 });
@@ -234,7 +231,7 @@ export default class App extends Component {
                     // wait for all new images to be preloaded and then render them and update the other parts
                     const waitForNewImages = setInterval(function () {
                         if (Map.loadedImages === 20) {
-
+                            console.log("fatto fetch");
                             // hide loading data visible
                             loader.style.display = "none";
                             

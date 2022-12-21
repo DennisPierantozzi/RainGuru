@@ -33,6 +33,7 @@ export default function TopBar({setShowSidebar, displayComparedData, showCompare
      * @returns the images requested for the comparison
      */
     const handleCompare = (e) => {
+        e.preventDefault();
         displayComparedData(e.target.checked);
         setCompareDisplay(e.target.checked);
         if(e.target.checked) {setCompareLabel("Pred")}

@@ -14,7 +14,7 @@
       {% load compress %}
       {% load cache %}
 
-      {% cache 1000 rainguruStyles %}
+      {% cache 31536000 rainguruStyles %}
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet-src.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
@@ -50,7 +50,7 @@
       <div id="main">
           <div id="app"></div>
       </div>
-      {% cache 1000 rainguruScript %}
+      {% cache 31536000 rainguruScript %}
       <script src="{% static 'js/main.js.br' %}" type="application/javascript"></script>
       {% endcache %}
   </body>

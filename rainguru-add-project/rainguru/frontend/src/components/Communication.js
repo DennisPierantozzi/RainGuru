@@ -18,19 +18,6 @@ export default class Communication {
     static dataTimestampObsCompare = [];
     static dataTimestampPrepCompare = [];
 
-    constructor(props) {
-        super(props);
-
-        // state variables
-        this.state = {
-            cacheUrlsLive: [],
-            cacheTimestampLive: ""
-        }
-
-        // set the available times
-        PastDataSelector.updateTimes();
-    }
-
     // getters
     /**
      * Get the boolean representing if we use the latest data.

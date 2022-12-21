@@ -19,12 +19,13 @@ def fetch_precipitation(request):
     """
     x = request.GET.get('x')
     y = request.GET.get('y')
-    observed = request.GET.get('observed')
-    compare = request.GET.get('compare')
-    provided_timestamp = request.GET.get('timestamp')
 
     if x is None or y is None:
         return HttpResponseBadRequest("x or y parameter missing!")
+
+    observed = request.GET.get('observed')
+    compare = request.GET.get('compare')
+    provided_timestamp = request.GET.get('timestamp')
 
     if provided_timestamp is None:
         response_dict = service.fetch_latest_predicted_precipitation(int(x), int(y))

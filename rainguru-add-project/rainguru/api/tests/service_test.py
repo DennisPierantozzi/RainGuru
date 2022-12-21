@@ -5,6 +5,7 @@ import os
 from api import service
 from api.models import Observed, Predicted
 from api.update_predictions.convert_data import convert_matrix_image
+from api.update_predictions.store_data import store_predictions_observations
 from datetime import timezone
 from django.test import TestCase
 
@@ -188,6 +189,9 @@ class ServiceTestCase(TestCase):
             o1.time = timestamp2
             o2.time = timestamp3
             o3.time = timestamp4
+            o1.matrix_data_fast = store_predictions_observations.clean_matrix(frame1)
+            o2.matrix_data_fast = store_predictions_observations.clean_matrix(frame2)
+            o3.matrix_data_fast = store_predictions_observations.clean_matrix(frame3)
             o1.matrix_data = frame1
             o2.matrix_data = frame2
             o3.matrix_data = frame3
@@ -220,6 +224,8 @@ class ServiceTestCase(TestCase):
             p2.calculation_time = timestamp
             p1.prediction_time = datetime.datetime(2019, 3, 2, 12, 20)
             p2.prediction_time = datetime.datetime(2019, 3, 2, 12, 25)
+            p1.matrix_data_fast = store_predictions_observations.clean_matrix(frame1)
+            p2.matrix_data_fast = store_predictions_observations.clean_matrix(frame1)
             p1.matrix_data = frame1
             p2.matrix_data = frame2
             p1.save()

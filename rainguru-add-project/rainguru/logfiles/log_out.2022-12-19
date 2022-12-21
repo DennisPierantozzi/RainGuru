@@ -1,0 +1,161 @@
+19-Dec-22 11:29:52 - INFO - Server is starting
+19-Dec-22 11:29:56 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 11:29:56 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 11:29:56 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 11:29:57 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 11:33:07 - INFO - Update finished in 0:03:12.356801 hours
+19-Dec-22 11:36:39 - INFO - Update finished in 0:01:46.809309 hours
+19-Dec-22 11:42:15 - INFO - Update finished in 0:02:23.394080 hours
+19-Dec-22 11:46:52 - INFO - Update finished in 0:01:59.946104 hours
+19-Dec-22 11:51:25 - INFO - Update finished in 0:01:32.609719 hours
+19-Dec-22 11:56:10 - INFO - Update finished in 0:01:17.524067 hours
+19-Dec-22 12:01:10 - INFO - Update finished in 0:01:17.844917 hours
+19-Dec-22 12:07:20 - INFO - Update finished in 0:02:28.034618 hours
+19-Dec-22 12:09:23 - ERROR - Download url did not work: url1
+19-Dec-22 12:09:23 - WARNING - No file uploaded by knmi in previous 25 minutes
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - ERROR - Error occurred while requesting url for following file: RAD_NL25_PCP_NA_201910281050.h5
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 12:09:23 - ERROR - Quota of amount of downloads exceeded
+19-Dec-22 12:09:23 - INFO - not visible
+19-Dec-22 12:09:23 - WARNING - visible
+19-Dec-22 12:09:23 - INFO - test message
+19-Dec-22 12:09:23 - WARNING - please be aware
+19-Dec-22 12:09:23 - WARNING - Data download failed and update aborted
+19-Dec-22 13:32:15 - ERROR - Download url did not work: url1
+19-Dec-22 13:32:15 - WARNING - No file uploaded by knmi in previous 25 minutes
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - ERROR - Error occurred while requesting url for following file: RAD_NL25_PCP_NA_201910281050.h5
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:32:15 - ERROR - Quota of amount of downloads exceeded
+19-Dec-22 13:32:15 - INFO - not visible
+19-Dec-22 13:32:15 - WARNING - visible
+19-Dec-22 13:32:15 - INFO - test message
+19-Dec-22 13:32:15 - WARNING - please be aware
+19-Dec-22 13:32:15 - WARNING - Data download failed and update aborted
+19-Dec-22 13:44:15 - ERROR - Download url did not work: url1
+19-Dec-22 13:44:15 - WARNING - No file uploaded by knmi in previous 25 minutes
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - ERROR - Error occurred while requesting url for following file: RAD_NL25_PCP_NA_201910281050.h5
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:44:15 - ERROR - Quota of amount of downloads exceeded
+19-Dec-22 13:44:15 - INFO - not visible
+19-Dec-22 13:44:15 - WARNING - visible
+19-Dec-22 13:44:15 - INFO - test message
+19-Dec-22 13:44:15 - WARNING - please be aware
+19-Dec-22 13:44:15 - WARNING - Data download failed and update aborted
+19-Dec-22 13:47:58 - INFO - Server is starting
+19-Dec-22 13:48:11 - ERROR - Download url did not work: url1
+19-Dec-22 13:48:11 - WARNING - No file uploaded by knmi in previous 25 minutes
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - ERROR - Error occurred while requesting url for following file: RAD_NL25_PCP_NA_201910281050.h5
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:48:11 - ERROR - Quota of amount of downloads exceeded
+19-Dec-22 13:48:11 - INFO - not visible
+19-Dec-22 13:48:11 - WARNING - visible
+19-Dec-22 13:48:11 - INFO - test message
+19-Dec-22 13:48:11 - WARNING - please be aware
+19-Dec-22 13:48:11 - WARNING - Data download failed and update aborted
+19-Dec-22 13:53:10 - ERROR - Download url did not work: url1
+19-Dec-22 13:53:10 - WARNING - No file uploaded by knmi in previous 25 minutes
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - ERROR - Error occurred while requesting url for following file: RAD_NL25_PCP_NA_201910281050.h5
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 13:53:10 - ERROR - Quota of amount of downloads exceeded
+19-Dec-22 13:53:10 - INFO - not visible
+19-Dec-22 13:53:10 - WARNING - visible
+19-Dec-22 13:53:10 - INFO - test message
+19-Dec-22 13:53:10 - WARNING - please be aware
+19-Dec-22 13:53:10 - WARNING - Data download failed and update aborted
+19-Dec-22 14:56:31 - INFO - Server is starting
+19-Dec-22 14:56:35 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 14:56:35 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 14:56:36 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 14:56:36 - INFO - New file successfully downloaded from KNMI
+19-Dec-22 14:59:10 - INFO - Update finished in 0:02:35.944708 hours
+19-Dec-22 15:03:16 - INFO - Update finished in 0:01:45.450225 hours
+19-Dec-22 15:08:48 - INFO - Update finished in 0:02:17.278108 hours
+19-Dec-22 15:13:13 - INFO - Update finished in 0:01:42.382492 hours
+19-Dec-22 15:20:28 - INFO - Update finished in 0:03:56.527733 hours
+19-Dec-22 15:22:59 - INFO - Update finished in 0:01:28.321074 hours
+19-Dec-22 15:28:08 - INFO - Update finished in 0:01:37.354816 hours
+19-Dec-22 15:33:28 - INFO - Update finished in 0:01:57.052417 hours
+19-Dec-22 15:38:17 - INFO - Update finished in 0:01:46.263832 hours
+19-Dec-22 15:43:19 - INFO - Update finished in 0:01:48.374516 hours
+19-Dec-22 15:48:39 - INFO - Update finished in 0:02:07.769922 hours
+19-Dec-22 15:52:52 - INFO - Update finished in 0:01:21.297535 hours
+19-Dec-22 15:57:52 - INFO - Update finished in 0:01:20.744971 hours
+19-Dec-22 16:02:56 - INFO - Update finished in 0:01:25.243364 hours
+19-Dec-22 16:07:55 - INFO - Update finished in 0:01:24.224437 hours
+19-Dec-22 16:13:25 - INFO - Update finished in 0:01:53.634725 hours
+19-Dec-22 16:19:04 - INFO - Update finished in 0:02:32.963045 hours
+19-Dec-22 16:23:26 - INFO - Update finished in 0:01:55.391460 hours
+19-Dec-22 16:28:14 - INFO - Update finished in 0:01:43.358401 hours
+19-Dec-22 16:33:12 - INFO - Update finished in 0:01:40.796117 hours
+19-Dec-22 16:38:35 - INFO - Update finished in 0:02:03.842257 hours
+19-Dec-22 16:42:56 - INFO - Update finished in 0:01:24.727640 hours
+19-Dec-22 16:47:59 - INFO - Update finished in 0:01:28.223869 hours
+19-Dec-22 16:52:44 - INFO - Update finished in 0:01:12.806888 hours
+19-Dec-22 16:58:40 - INFO - Update finished in 0:02:08.822988 hours
+19-Dec-22 17:03:04 - INFO - Update finished in 0:01:32.827119 hours
+19-Dec-22 17:08:09 - INFO - Update finished in 0:01:38.332039 hours
+19-Dec-22 17:13:07 - INFO - Update finished in 0:01:36.346634 hours
+19-Dec-22 17:17:52 - INFO - Update finished in 0:01:21.258742 hours
+19-Dec-22 17:22:45 - INFO - Update finished in 0:01:13.576800 hours
+19-Dec-22 17:27:52 - INFO - Update finished in 0:01:20.759721 hours
+19-Dec-22 17:33:28 - INFO - Update finished in 0:01:56.928769 hours

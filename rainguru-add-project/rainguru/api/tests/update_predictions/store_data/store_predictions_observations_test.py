@@ -184,6 +184,8 @@ class StorePredictionsObservationsTestCase(TestCase):
         observed2 = Observed()
         observed1.time = datetime.datetime(2019, 3, 2, 18, 0)
         observed2.time = datetime.datetime(2019, 3, 2, 14, 5)
+        observed1.matrix_data_fast = store_predictions_observations.clean_matrix(frame1[0][0])
+        observed2.matrix_data_fast = store_predictions_observations.clean_matrix(frame2[0][0])
         observed1.matrix_data = frame1[0][0]
         observed2.matrix_data = frame2[0][0]
 
@@ -210,6 +212,8 @@ class StorePredictionsObservationsTestCase(TestCase):
         observed2 = Observed()
         observed1.time = datetime.datetime(2019, 3, 2, 18, 0)
         observed2.time = datetime.datetime(2019, 3, 2, 14, 5)
+        observed1.matrix_data_fast = store_predictions_observations.clean_matrix(frame1[0][0])
+        observed2.matrix_data_fast = store_predictions_observations.clean_matrix(frame2[0][0])
         observed1.matrix_data = frame1[0][0]
         observed2.matrix_data = frame2[0][0]
 
@@ -241,6 +245,9 @@ class StorePredictionsObservationsTestCase(TestCase):
         predicted1.prediction_time = datetime.datetime(2019, 3, 2, 17, 15)
         predicted2.prediction_time = datetime.datetime(2019, 3, 2, 15, 20)
         predicted3.prediction_time = datetime.datetime(2019, 3, 2, 15, 25)
+        predicted1.matrix_data_fast = store_predictions_observations.clean_matrix(frame1)
+        predicted2.matrix_data_fast = store_predictions_observations.clean_matrix(frame2)
+        predicted3.matrix_data_fast = store_predictions_observations.clean_matrix(frame2)
         predicted1.matrix_data = frame1
         predicted2.matrix_data = frame2
         predicted3.matrix_data = frame2
@@ -275,6 +282,9 @@ class StorePredictionsObservationsTestCase(TestCase):
         predicted1.prediction_time = datetime.datetime(2019, 3, 2, 18, 15)
         predicted2.prediction_time = datetime.datetime(2019, 3, 2, 16, 20)
         predicted3.prediction_time = datetime.datetime(2019, 3, 2, 16, 25)
+        predicted1.matrix_data_fast = store_predictions_observations.clean_matrix(frame1)
+        predicted2.matrix_data_fast = store_predictions_observations.clean_matrix(frame2)
+        predicted3.matrix_data_fast = store_predictions_observations.clean_matrix(frame2)
         predicted1.matrix_data = frame1
         predicted2.matrix_data = frame2
         predicted3.matrix_data = frame2
