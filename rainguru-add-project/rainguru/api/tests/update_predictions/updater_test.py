@@ -55,4 +55,4 @@ class UpdaterTestCase(SimpleTestCase):
             logger = create_log(__name__)
             logger.info('not visible')
             logger.warning('visible')
-            self.assertEqual(upd.output, ['WARNING:api.tests.update_predictions.updater_test:visible'])
+            self.assertEqual(upd.output, ['INFO:api.tests.update_predictions.updater_test:not visible','WARNING:api.tests.update_predictions.updater_test:visible'])

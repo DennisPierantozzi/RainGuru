@@ -24,3 +24,4 @@ function Statistics ({displayTooltipLegend}) {
 
 
 export default Statistics;
+

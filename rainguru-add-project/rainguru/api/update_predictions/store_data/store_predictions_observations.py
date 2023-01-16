@@ -60,7 +60,7 @@ def store_forecast_images(forecast, now):
 
     memory_store.store_predictions(urls, forecast_list, now + datetime.timedelta(minutes=5))
 
-
+    
 def store_forecast_database(forecast, now):
     """
     Stores the forecast in the database
@@ -198,6 +198,7 @@ def cleanup_observed_images(now):
             continue
         file_path = os.path.join(observed_images_path, file_name)
         if store_data:
+            print(file_name[:19].replace('_', ':'))
             if datetime.datetime.strptime(file_name[:19].replace('_', ':'), "%Y-%m-%d %H:%M:%S") < \
                     now - datetime.timedelta(days=1):
                 os.remove(file_path)

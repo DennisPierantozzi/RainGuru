@@ -231,9 +231,10 @@ export default class App extends Component {
                     // wait for all new images to be preloaded and then render them and update the other parts
                     const waitForNewImages = setInterval(function () {
                         if (Map.loadedImages === 20) {
-                            console.log("fatto fetch");
                             // hide loading data visible
                             loader.style.display = "none";
+
+                            //
                             
                             // set the rain images
                             Map.setHeatLayers();

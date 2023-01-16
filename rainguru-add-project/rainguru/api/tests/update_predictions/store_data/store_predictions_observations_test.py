@@ -26,7 +26,7 @@ class StorePredictionsObservationsTestCase(TestCase):
             image_save_folder = join('media', 'predicted', '2019-03-02 18_05_00')
             image_save_folder_path = join('testroot', image_save_folder)
 
-            urls = [join(image_save_folder, 'prediction00.png'), join(image_save_folder, 'prediction01.png')]
+            urls = [join(image_save_folder, 'prediction00.webp'), join(image_save_folder, 'prediction01.webp')]
 
             mock_getcwd.return_value = test_root
             mock_path_exists.return_value = False
@@ -85,10 +85,10 @@ class StorePredictionsObservationsTestCase(TestCase):
             image_save_folder_path = join('testroot', image_save_folder)
 
             mock_getcwd.return_value = test_root
-            mock_listdir.return_value = ['2019-03-02 17_45_00.png']
+            mock_listdir.return_value = ['2019-03-02 17_45_00.webp']
 
             store_predictions_observations.store_observed_images(observed_array, now)
-            self.assertEqual(mock_create_image.call_args[0][1], join(image_save_folder_path, '2019-03-02 17_50_00.png'))
+            self.assertEqual(mock_create_image.call_args[0][1], join(image_save_folder_path, '2019-03-02 17_50_00.webp'))
 
     def test_cleanup_observed_images_store_data_true(self):
         with mock.patch('os.getcwd') as mock_getcwd, mock.patch('os.listdir') as mock_listdir, \
@@ -96,18 +96,18 @@ class StorePredictionsObservationsTestCase(TestCase):
 
             store_predictions_observations.store_data = True
 
-            now = datetime.datetime(2019, 3, 2, 18, 5)
+            now = datetime.datetime(2019, 4, 2, 18, 5)
 
             test_root = 'testroot'
             image_save_folder = join('media', 'observed')
             image_save_folder_path = join('testroot', image_save_folder)
 
             mock_getcwd.return_value = test_root
-            mock_listdir.return_value = ['2019-03-02 14_50_00.png', '2019-03-02 17_50_00.png']
+            mock_listdir.return_value = ['2019-03-01 14_50_00.png']
 
             store_predictions_observations.cleanup_observed_images(now)
 
-            mock_remove.assert_has_calls([mock.call(join(image_save_folder_path, '2019-03-02 14_50_00.png'))])
+            mock_remove.assert_has_calls([mock.call(join(image_save_folder_path, '2019-03-01 14_50_00.png'))])
 
 
     def test_cleanup_observed_images_store_data_false(self):
@@ -137,18 +137,18 @@ class StorePredictionsObservationsTestCase(TestCase):
 
             store_predictions_observations.store_data = True
 
-            now = datetime.datetime(2019, 3, 2, 18, 5)
+            now = datetime.datetime(2019, 4, 2, 18, 5)
 
             test_root = 'testroot'
             image_save_folder = join('media', 'predicted')
             image_save_folder_path = join('testroot', image_save_folder)
 
             mock_getcwd.return_value = test_root
-            mock_listdir.return_value = ['2019-03-02 14_50_00', '2019-03-02 17_50_00']
+            mock_listdir.return_value = ['2019-03-02 14_50_00.png', '2019-03-02 17_50_00.png']
 
             store_predictions_observations.cleanup_prediction_images(now)
 
-            mock_remove.assert_has_calls([mock.call(join(image_save_folder_path, '2019-03-02 14_50_00'))])
+            mock_remove.assert_has_calls([mock.call(join(image_save_folder_path, '2019-03-02 14_50_00.png'))])
 
     def test_cleanup_prediction_images_store_data_false(self):
         with mock.patch('os.getcwd') as mock_getcwd, mock.patch('os.listdir') as mock_listdir, \
@@ -178,12 +178,12 @@ class StorePredictionsObservationsTestCase(TestCase):
         frame1 = [[[[1, 2], [3, 4]]]]
         frame2 = [[[[5, 6], [7, 8]]]]
 
-        now = datetime.datetime(2019, 3, 2, 18, 5)
+        now = datetime.datetime(2019, 4, 2, 18, 5)
 
         observed1 = Observed()
         observed2 = Observed()
-        observed1.time = datetime.datetime(2019, 3, 2, 18, 0)
-        observed2.time = datetime.datetime(2019, 3, 2, 14, 5)
+        observed1.time = datetime.datetime(2019, 4, 2, 18, 0)
+        observed2.time = datetime.datetime(2019, 3, 31, 14, 5)
         observed1.matrix_data_fast = store_predictions_observations.clean_matrix(frame1[0][0])
         observed2.matrix_data_fast = store_predictions_observations.clean_matrix(frame2[0][0])
         observed1.matrix_data = frame1[0][0]
@@ -234,17 +234,17 @@ class StorePredictionsObservationsTestCase(TestCase):
         frame1 = [[1, 2], [3, 4]]
         frame2 = [[5, 6], [7, 8]]
 
-        now = datetime.datetime(2019, 3, 2, 18, 5)
+        now = datetime.datetime(2019, 4, 2, 18, 5)
 
         predicted1 = Predicted()
         predicted2 = Predicted()
         predicted3 = Predicted()
-        predicted1.calculation_time = datetime.datetime(2019, 3, 2, 17, 0)
-        predicted2.calculation_time = datetime.datetime(2019, 3, 2, 15, 0)
-        predicted3.calculation_time = datetime.datetime(2019, 3, 2, 15, 5)
-        predicted1.prediction_time = datetime.datetime(2019, 3, 2, 17, 15)
-        predicted2.prediction_time = datetime.datetime(2019, 3, 2, 15, 20)
-        predicted3.prediction_time = datetime.datetime(2019, 3, 2, 15, 25)
+        predicted1.calculation_time = datetime.datetime(2019, 4, 2, 17, 0)
+        predicted2.calculation_time = datetime.datetime(2019, 3, 31, 15, 0)
+        predicted3.calculation_time = datetime.datetime(2019, 4, 2, 15, 5)
+        predicted1.prediction_time = datetime.datetime(2019, 4, 2, 17, 15)
+        predicted2.prediction_time = datetime.datetime(2019, 3, 31, 15, 20)
+        predicted3.prediction_time = datetime.datetime(2019, 4, 2, 15, 25)
         predicted1.matrix_data_fast = store_predictions_observations.clean_matrix(frame1)
         predicted2.matrix_data_fast = store_predictions_observations.clean_matrix(frame2)
         predicted3.matrix_data_fast = store_predictions_observations.clean_matrix(frame2)

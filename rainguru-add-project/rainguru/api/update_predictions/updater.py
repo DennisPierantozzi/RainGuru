@@ -28,7 +28,6 @@ def update():
     utc_now = datetime.datetime.utcnow()
 
     start_timestamp, latest_timestamp, successful = try_download(utc_now)
-
     if not successful:
         return
 

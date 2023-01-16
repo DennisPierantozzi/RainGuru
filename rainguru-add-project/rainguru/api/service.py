@@ -27,7 +27,7 @@ def fetch_observed_precipitation(timestamp, x, y):
     """
 
     x, y = convert_matrix_image.image_map[(x, y)]
-
+    
     query = Observed.objects\
             .filter(time__gte=timestamp)\
             .filter(time__lt=timestamp + datetime.timedelta(minutes=100))\

@@ -168,8 +168,12 @@ export default class PastDataSelector extends Component {
      * @param {number[]} compareTimestampsYesterday An array of timestamps to compare with PastDataSelector.predictionsIntervals.yesterday
      */
     static checkCompareIntervals(compareTimestampsToday, compareTimestampsYesterday) {
-        let arrayPredictionsToday = PastDataSelector.predictionsIntervals.today.morning.concat(PastDataSelector.predictionsIntervals.today.afternoon, PastDataSelector.predictionsIntervals.today.night);
-        let arrayPredictionsYesterday = PastDataSelector.predictionsIntervals.yesterday.morning.concat(PastDataSelector.predictionsIntervals.yesterday.afternoon, PastDataSelector.predictionsIntervals.yesterday.night);
+        let arrayPredictionsToday = PastDataSelector.predictionsIntervals.today.morning.concat(
+            PastDataSelector.predictionsIntervals.today.afternoon, 
+            PastDataSelector.predictionsIntervals.today.night);
+        let arrayPredictionsYesterday = PastDataSelector.predictionsIntervals.yesterday.morning.concat(
+            PastDataSelector.predictionsIntervals.yesterday.afternoon, 
+            PastDataSelector.predictionsIntervals.yesterday.night);
 
         for(let i=0; i<compareTimestampsToday.length; i++) {
             let compareTime = moment(moment(new Date(compareTimestampsToday[i]*1000)).subtract(5, 'minutes').format()).unix();
@@ -214,7 +218,6 @@ export default class PastDataSelector extends Component {
         let today = false;
         // 36 = 3 hours * 12 5-min intervals per hour, >= 19 is since from that point there is enough time for a full interval
         
-        console.log(lastTime);
         // 288 steps for 24hours 5-min intervals
         for (let i = 0, time = lastTime; i < 288; i++, time -= fiveMinSmall) {
             // add the time to a list to reference later for fetching the required data
@@ -227,7 +230,6 @@ export default class PastDataSelector extends Component {
         
             if (predicted.includes(time)) {
                 if(today) {
-                    console.log("entrato con today");
                     PastDataSelector.addTimes(time, PastDataSelector.predictionsIntervals.today);}
                 else {
                     PastDataSelector.addTimes(time, PastDataSelector.predictionsIntervals.yesterday);}
@@ -447,7 +449,7 @@ export default class PastDataSelector extends Component {
      */
     render() {
         return (<div className="pastDataSelectorContents" data-testid="pastDataSelector">
-                <div className="description-data-section"> Tap to select data to display </div>
+                <div className="description-data-section"> Select data to display </div>
                 <div id="past-data-feature" className="sections-previous-data">
                     <div id="observations" className="box-previous-data" onClick={() => this.selectFeature('observations')}>
                         <span> <SlGraph />  Observations </span>

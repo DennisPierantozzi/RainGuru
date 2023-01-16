@@ -14,6 +14,8 @@
  color(-*), opacity, box-sizing, border-radius, border(-*), border-color (when separate from border), font(-*), *
  */
 
+/* Top and Main menu styles */
+
 .Sidebar, .Location, .TUDelft-logo, .PastData {
     position: relative;
     float: left;
@@ -137,14 +139,17 @@
     font-size: 16px;
 }
 
+
+/* ==================== depth level divider ==================== */
+
 .Sidebar-shown {
-    color: #2e2e2e;
+    color: #000000;
     position: relative;
     z-index: 1;
     top: 100%;
     width: 100%;
     height: var(--sidebar-height);
-    background-color: #fdfdfd;
+    background-color: #ffffff;
     z-index: 2;
     top:0;
     height: 100%;
@@ -153,8 +158,6 @@
     justify-content: flex-start;
     opacity: 1;
 }
-
-/* ==================== depth level divider ==================== */
 
 .Sidebar-icon {
     position: absolute;

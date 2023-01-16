@@ -77,7 +77,7 @@ ROOT_URLCONF = 'rainguru.urls'
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': 'api/tmp/django_cache',
+        'LOCATION': 'C:/Users/lol/Desktop/TU Delft/ErasmusProject/RainGuru/rainguru-add-project/rainguru/api/tmp/django_cache',
     }
 }
 

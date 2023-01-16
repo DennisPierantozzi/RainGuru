@@ -16,7 +16,6 @@ class Predicted(models.Model):
     calculation_time = models.DateTimeField()
     prediction_time = models.DateTimeField()
     matrix_data = ArrayField(ArrayField(models.DecimalField(max_digits=5, decimal_places=2), blank=True), default=list)
-    
     matrix_data_fast = JSONField()
     
     class Meta:

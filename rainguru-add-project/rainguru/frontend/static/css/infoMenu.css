@@ -60,10 +60,9 @@
 }
 
 #popup-text h3 span, h4 span{
-    background-color: #3A9BDC;
+    background-color: rgb(242, 101, 34);
     padding: 2px 5px;
     border-style: solid;
-    border-width: 2px;
-    border-color: #AAAAAA;
-    border-radius: 2px;
+    border-width: 1px;
+    border-radius: 5px;
 }

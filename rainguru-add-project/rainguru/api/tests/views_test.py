@@ -114,7 +114,7 @@ class ViewsTestCase(TestCase):
 
             expected_response = HttpResponse(json.dumps(expected_dict))
 
-            response = client.get('/api/fetch?observed=false')
+            response = client.get('/api/fetch?observed=false&x=NaN&y=Nan')
 
             self.assertEqual(expected_response.status_code, response.status_code)
             self.assertEqual(expected_response.content, response.content)

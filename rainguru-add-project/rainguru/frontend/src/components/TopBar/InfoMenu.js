@@ -18,7 +18,7 @@ function InfoMenu () {
      * @param item the item clicked by the user
      */
     const handleClickInfo = (item) => {
-        document.getElementById(item.title).style.textDecoration = "underline";
+        document.getElementById(item.title).style.color = "#0076C2";
         if(previousItem != "") {document.getElementById(previousItem).style.textDecoration = "";}
         setPreviousItem(item.title);
         setTextToShow(item.popupText);

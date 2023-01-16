@@ -225,7 +225,7 @@ class ServiceTestCase(TestCase):
             p1.prediction_time = datetime.datetime(2019, 3, 2, 12, 20)
             p2.prediction_time = datetime.datetime(2019, 3, 2, 12, 25)
             p1.matrix_data_fast = store_predictions_observations.clean_matrix(frame1)
-            p2.matrix_data_fast = store_predictions_observations.clean_matrix(frame1)
+            p2.matrix_data_fast = store_predictions_observations.clean_matrix(frame2)
             p1.matrix_data = frame1
             p2.matrix_data = frame2
             p1.save()

@@ -43,7 +43,6 @@ export default function TopBar({setShowSidebar, displayComparedData, showCompare
 
     const displayMenu = () => {
         setmenuOnClick(!menuOnClick)
-        console.log(menuOnClick);
         if(menuOnClick) {
             document.getElementById("IconTopBar").style.transform = "rotate(-180deg)";
             document.getElementById("TopBarContents").style.width = "22em";
