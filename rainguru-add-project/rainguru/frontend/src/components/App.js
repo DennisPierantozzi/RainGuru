@@ -233,8 +233,6 @@ export default class App extends Component {
                         if (Map.loadedImages === 20) {
                             // hide loading data visible
                             loader.style.display = "none";
-
-                            //
                             
                             // set the rain images
                             Map.setHeatLayers();
@@ -242,9 +240,13 @@ export default class App extends Component {
                             // if the request retrieve also the data to show the graph, show it
                             if(Slider.precipitationShowing.length === 0) {
                                 Slider.getPrecipitationData(Slider.lastLat, Slider.lastLong);
-                            }  
+                            }
                             else {
-                                Slider.showPredictionData()
+                                document.getElementById("statistics").style.display = "none";
+                                document.getElementById("tooltip-rmse").style.display = "none !important";
+                                document.getElementById("tooltip-bias").style.display = "none !important";
+                                Slider.precipitationCompared = [];
+                                Slider.showPredictionData();
                             }
 
                             // update the animation bar timestamps and past data time intervals
@@ -342,7 +344,8 @@ export default class App extends Component {
 
                     // if the user already clicked on the map, show the graph 
                     if (Slider.lastLat !== undefined) {
-                       Slider.showPredictionData(pred);
+                        Slider.switchPrediction();
+                       Slider.showPredictionData();
                     }
 
                     // update the animation bar timestamps and past data time intervals

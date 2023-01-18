@@ -6,8 +6,8 @@ function Statistics ({displayTooltipLegend}) {
         <div className='statisticsContents'>
             <div className="legend-Graph">
                 <ul className="legend-Graph-list">
-                    <li id="labelObservations"> <hr></hr>  Observations</li>
-                    <li id="labelPredictions"> <hr></hr>  Predictions</li>
+                    <li id="labelObservations"> <hr></hr>Observations</li>
+                    <li id="labelPredictions"> <hr></hr>Predictions</li>
                 </ul>
             </div>
             <div className='statistics-box'>

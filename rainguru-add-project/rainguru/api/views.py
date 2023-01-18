@@ -23,7 +23,7 @@ def fetch_precipitation(request):
     compare = request.GET.get('compare')
     provided_timestamp = request.GET.get('timestamp')
 
-    if x is None or y is None or observed is None:
+    if x is None or y is None:
         return HttpResponseBadRequest("x or y parameter missing!")
 
     if provided_timestamp is None:

@@ -19,7 +19,7 @@ function InfoMenu () {
      */
     const handleClickInfo = (item) => {
         document.getElementById(item.title).style.color = "#0076C2";
-        if(previousItem != "") {document.getElementById(previousItem).style.textDecoration = "";}
+        if(previousItem != "") {document.getElementById(previousItem).style.color = "#000";}
         setPreviousItem(item.title);
         setTextToShow(item.popupText);
     }

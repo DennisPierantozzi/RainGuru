@@ -16,12 +16,13 @@ class ViewsTestCase(TestCase):
 
         self.assertEqual(400, response.status_code)
 
-    def test_fetch_precipitation_observed_none(self):
-        client = Client()
+    # Now we introduced the compare mode, observed could be None
+    #def test_fetch_precipitation_observed_none(self):
+        #client = Client()
 
-        response = client.get('/api/precipitation?x=1&y=2')
+        #response = client.get('/api/precipitation?x=1&y=2')
 
-        self.assertEqual(400, response.status_code)
+        #self.assertEqual(400, response.status_code)
 
     def test_fetch_precipitation_timestamp_none(self):
         with mock.patch('api.service.fetch_latest_predicted_precipitation') as mock_fetch_latest:

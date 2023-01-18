@@ -62,17 +62,17 @@ export default function TopBar({setShowSidebar, displayComparedData, showCompare
     return (
         <div className="topBar-container" data-testid="topBar-container">
             <div className="PastData" id="past-data-explanation" onClick={() => displayMenu()}>
-                <div className={showCompare ? "SwitchCompare" : "hideElement"} id="compareField">
-                        <FormGroup>
-                            <FormControlLabel control={<Switch size="small" checked={compareDisplay}
-                            onChange={(e) => handleCompare(e)}/>} label={compareLabel} />
-                        </FormGroup>
-                </div>
                 <span id="currently-showing" data-testid="currently-showing">Latest data </span>
             </div>
             <div id="IconTopBar" className='openMenu-icon' onClick={() => displayMenu()}><IoIosArrowForward /></div>
             
             <div id="TopBarContents" className="topBarContents">
+                <div className={showCompare ? "SwitchCompare" : "hideElement"} id="compareField">
+                        <FormGroup>
+                            <FormControlLabel control={<Switch size="small" color="warning" checked={compareDisplay}
+                            onChange={(e) => handleCompare(e)}/>} label={compareLabel} />
+                        </FormGroup>
+                </div>
                 <div className="Sidebar" data-testid="sidebar-menu">
                     <span className="Menu-icon" onClick={() => { 
                         setCompareDisplay(false);

@@ -79,7 +79,6 @@ def store_forecast_database(forecast, now):
         
         if not Predicted.objects.filter(calculation_time=p.calculation_time,
                                         prediction_time=p.prediction_time).exists():
-            print(f'calculation time: {p.calculation_time} con prediction time: {p.prediction_time}')
             p.matrix_data = forecast[t].tolist()
             p.matrix_data_fast = clean_matrix(forecast[t])
             p.save()
@@ -111,7 +110,6 @@ def store_observed_database(observed, now):
         
         o.time = (start + datetime.timedelta(minutes=t * 5))
         # Only store it if no other object with the same time exists
-        print(f'{t} con observed time {o.time}')
         if not Observed.objects.filter(time=o.time).exists():
             # Add [0][0] because the shape was (1, 1, 480, 480) for some reason
             o.matrix_data = observed[t][0][0].tolist()
@@ -156,13 +154,14 @@ def clean_matrix(f):
         ydecimal = np.round(np.array(y), 2)
         #get the non zero values for the row 
         x = np.nonzero(ydecimal)
-        if x[0].size:
+
+        if x[0].size: # if there are nozero values
             
             jsonMatrix[yindex] = {}
-            # list of x values to store
-            xlist = x[0].tolist()
-            # values to store
-            values_non_zero = [round(elem, 3) for elem in ydecimal[np.nonzero(ydecimal)].tolist()]
+            
+            xlist = x[0].tolist() # list of x values to store
+            
+            values_non_zero = [round(elem, 3) for elem in ydecimal[np.nonzero(ydecimal)].tolist()] # the actual values to store
             
             # append values to the index 
             for xvalue in range(len(xlist)):

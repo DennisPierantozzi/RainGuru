@@ -105,9 +105,9 @@ export default class Slider extends Component {
                     document.getElementById("tooltip-rmse").style.display = "none";
                     document.getElementById("tooltip-bias").style.display = "none";
                 }
-                Slider.showPredictionData(false);
+                Slider.showPredictionData();
             } catch (e) {
-                Slider.showPredictionData(-1);
+                Slider.showPredictionData();
                 console.log(e);
             }
         }
@@ -121,7 +121,7 @@ export default class Slider extends Component {
     }
 
 
-    static showPredictionData(predictionShowing=-1) {
+    static showPredictionData() {
         const precipitation = Slider.precipitationShowing;
         const precipitationCompared = Slider.precipitationCompared;
         // find the maximum precipitation amount for the selected location

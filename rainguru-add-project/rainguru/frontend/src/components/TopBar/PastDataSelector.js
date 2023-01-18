@@ -298,7 +298,7 @@ export default class PastDataSelector extends Component {
         if (this.state.observed && item !== "") {
                 // set it to a valid call and calculate/set the timestring
                 validCall = true;
-                timeString = "Observations from: " + moment(new Date(item * 1000)).format("HH:mm") + " - " +
+                timeString = "Observations: " + moment(new Date(item * 1000)).format("HH:mm") + " - " +
                 moment(new Date((time + 5700) * 1000)).format("HH:mm");
                 // update the accessible observation timestamp
                 PastDataSelector.loadTimestamp = 0;
@@ -322,6 +322,7 @@ export default class PastDataSelector extends Component {
                 this.props.compareData(-1, false, this.state.observed, timeCompare, timeString);
             }
             else{
+                //statistics are not visible anymore
                 this.props.displayData(-1, false, this.state.observed, item, timeString);
             }
         }
