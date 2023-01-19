@@ -17,6 +17,7 @@ mock = "*"
 psutil = "*"
 python-decouple = "*"
 pyproj = "*"
+django-environ = "*"
 
 [dev-packages]
 
