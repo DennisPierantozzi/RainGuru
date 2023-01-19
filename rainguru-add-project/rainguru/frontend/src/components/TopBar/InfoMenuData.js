@@ -42,7 +42,11 @@ export const InfoMenuData = [
                     for back-end and front-end respectively.
                     Furthermore, Leaflet <a href="https://leafletjs.com/">(https://leafletjs.com)</a> library has been used to
                     achieve interactivity of the map and finally the application
-                    is currently running on the TU Delft virtual servers. </p>
+                    is currently running on the TU Delft virtual servers. </p><br/>
+                <p>The new version of RainGuru, developed by Dennis Pierantozzi during his Erasmus+ Traineeship experience at TU Delft University, 
+                    features a complete redesign and new functionality to display data through the use of a graph and map. 
+                    The overall performance of the application has also been improved through changes made to the database and backend.
+                </p>
                 <h4><span>Interested in learning more?</span></h4>
                 <p>RainGuRu is still in development and we hope to be able to provide newer, better versions soon.
                     If you are interested in contributing or want to learn more, please contact the principal investigator: <br/>
@@ -70,17 +74,24 @@ export const InfoMenuData = [
                     </ul>
                 </div>
                 <div id="development-team" className='popup-text-box'>
-                    <h3><span>Software development team</span></h3>
-                    <ul>
-                        <li>Milan de Koning, TU Delft</li>
-                        <li>Nikola Nachev, TU Delft</li>
-                        <li>Thijs Penning, TU Delft</li>
-                        <li>Kanta Tanahashi, TU Delft</li>
-                        <li>Mike Raave, TU Delft</li>
-                        <li>Dr.Elvin Isufi, TU Delft</li>
-                        <li>Radu Gaghi, TU Delft</li>
-                        <li>Dennis Pierantozzi, TU Delft</li>
-                    </ul>
+                    <div>
+                        <h3><span>Initial software development team</span></h3>
+                        <ul>
+                            <li>Milan de Koning, TU Delft</li>
+                            <li>Nikola Nachev, TU Delft</li>
+                            <li>Thijs Penning, TU Delft</li>
+                            <li>Kanta Tanahashi, TU Delft</li>
+                            <li>Mike Raave, TU Delft</li>
+                            <li>Dr.Elvin Isufi, TU Delft</li>
+                            <li>Radu Gaghi, TU Delft</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3><span>Version 2.0 full-stack developer</span></h3>
+                        <ul>
+                            <li>Dennis Pierantozzi, Erasmus+ Traineeship at TU Delft</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
     },

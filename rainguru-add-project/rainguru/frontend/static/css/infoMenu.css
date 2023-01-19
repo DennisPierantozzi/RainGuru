@@ -46,7 +46,7 @@
 }
 
 #popup-text ul{
-    list-style-type: none;
+    list-style: none;
 }
 
 #popup-text li{
@@ -60,9 +60,15 @@
 }
 
 #popup-text h3 span, h4 span{
-    background-color: rgb(242, 101, 34);
+    background-color: #0076C2;
+    color: #fff;
     padding: 2px 5px;
     border-style: solid;
     border-width: 1px;
     border-radius: 5px;
+}
+
+#development-team {
+    display: flex;
+    padding: 0px;
 }

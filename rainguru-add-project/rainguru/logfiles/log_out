@@ -1,106 +1,78 @@
-18-Jan-23 09:35:27 - INFO - Server is starting
-18-Jan-23 09:35:31 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 09:35:31 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 09:35:31 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 09:35:31 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 09:37:48 - INFO - Update finished in 0:02:18.256112 hours
-18-Jan-23 09:41:39 - INFO - Update finished in 0:01:12.382720 hours
-18-Jan-23 09:46:50 - INFO - Update finished in 0:01:23.395944 hours
-18-Jan-23 09:51:02 - INFO - Update finished in 0:00:35.294271 hours
-18-Jan-23 09:56:49 - INFO - Update finished in 0:01:22.394770 hours
-18-Jan-23 10:00:28 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 10:01:50 - INFO - Update finished in 0:01:23.145125 hours
-18-Jan-23 10:06:05 - INFO - Update finished in 0:00:37.958842 hours
-18-Jan-23 10:10:28 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 10:11:53 - INFO - Update finished in 0:01:26.323226 hours
-18-Jan-23 10:16:45 - INFO - Update finished in 0:01:18.296128 hours
-18-Jan-23 10:21:39 - INFO - Update finished in 0:01:11.749237 hours
-18-Jan-23 10:26:03 - INFO - Update finished in 0:00:35.939682 hours
-18-Jan-23 10:30:28 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 10:31:47 - INFO - Update finished in 0:01:20.007256 hours
-18-Jan-23 10:36:37 - INFO - Update finished in 0:01:10.207475 hours
-18-Jan-23 10:41:46 - INFO - Update finished in 0:01:19.001029 hours
-18-Jan-23 10:47:29 - INFO - Update finished in 0:02:02.048434 hours
-18-Jan-23 10:51:42 - INFO - Update finished in 0:01:15.313796 hours
-18-Jan-23 10:56:40 - INFO - Update finished in 0:01:12.671201 hours
-18-Jan-23 11:01:45 - INFO - Update finished in 0:01:18.443932 hours
-18-Jan-23 11:06:41 - INFO - Update finished in 0:01:13.523386 hours
-18-Jan-23 11:11:39 - INFO - Update finished in 0:01:12.467662 hours
-18-Jan-23 11:16:43 - INFO - Update finished in 0:01:16.134966 hours
-18-Jan-23 11:21:37 - INFO - Update finished in 0:01:10.468635 hours
-18-Jan-23 11:26:05 - INFO - Update finished in 0:00:38.445264 hours
-18-Jan-23 11:30:28 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 11:31:50 - INFO - Update finished in 0:01:22.850875 hours
-18-Jan-23 11:36:41 - INFO - Update finished in 0:01:14.316002 hours
-18-Jan-23 11:41:40 - INFO - Update finished in 0:01:12.873968 hours
-18-Jan-23 11:46:08 - INFO - Update finished in 0:00:41.318853 hours
-18-Jan-23 11:50:28 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 11:51:55 - INFO - Update finished in 0:01:28.138534 hours
-18-Jan-23 11:56:54 - INFO - Update finished in 0:01:27.269898 hours
-18-Jan-23 12:01:17 - INFO - Server is starting
-18-Jan-23 12:02:41 - INFO - Update finished in 0:01:20.428537 hours
-18-Jan-23 12:03:59 - ERROR - Download url did not work: url1
-18-Jan-23 12:03:59 - WARNING - No file uploaded by knmi in previous 25 minutes
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - ERROR - Error occurred while requesting url for following file: RAD_NL25_PCP_NA_201910281050.h5
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:03:59 - ERROR - Quota of amount of downloads exceeded
-18-Jan-23 12:03:59 - INFO - not visible
-18-Jan-23 12:03:59 - WARNING - visible
-18-Jan-23 12:03:59 - INFO - test message
-18-Jan-23 12:03:59 - WARNING - please be aware
-18-Jan-23 12:03:59 - WARNING - Data download failed and update aborted
-18-Jan-23 12:05:24 - ERROR - Download url did not work: url1
-18-Jan-23 12:05:24 - WARNING - No file uploaded by knmi in previous 25 minutes
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - ERROR - Error occurred while requesting url for following file: RAD_NL25_PCP_NA_201910281050.h5
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:05:24 - ERROR - Quota of amount of downloads exceeded
-18-Jan-23 12:05:24 - INFO - not visible
-18-Jan-23 12:05:24 - WARNING - visible
-18-Jan-23 12:05:24 - INFO - test message
-18-Jan-23 12:05:24 - WARNING - please be aware
-18-Jan-23 12:05:24 - WARNING - Data download failed and update aborted
-18-Jan-23 12:05:41 - INFO - Server is starting
-18-Jan-23 12:07:02 - INFO - Update finished in 0:01:18.282051 hours
-18-Jan-23 12:12:25 - INFO - Update finished in 0:01:43.524412 hours
-18-Jan-23 12:17:03 - INFO - Update finished in 0:01:22.302404 hours
-18-Jan-23 12:22:04 - INFO - Update finished in 0:01:22.431231 hours
-18-Jan-23 12:26:58 - INFO - Update finished in 0:01:17.078265 hours
-18-Jan-23 12:31:55 - INFO - Update finished in 0:01:14.159719 hours
-18-Jan-23 12:38:23 - INFO - Update finished in 0:02:41.378802 hours
-18-Jan-23 12:41:59 - INFO - Update finished in 0:01:17.955052 hours
-18-Jan-23 12:46:55 - INFO - Update finished in 0:01:13.519237 hours
-18-Jan-23 12:51:21 - INFO - Update finished in 0:00:39.462904 hours
-18-Jan-23 12:55:42 - INFO - New file successfully downloaded from KNMI
-18-Jan-23 12:57:19 - INFO - Update finished in 0:01:37.674121 hours
-18-Jan-23 13:02:24 - INFO - Update finished in 0:01:42.966212 hours
-18-Jan-23 13:07:35 - INFO - Update finished in 0:01:53.432430 hours
-18-Jan-23 13:12:54 - INFO - Update finished in 0:02:12.620416 hours
-18-Jan-23 13:17:04 - INFO - Update finished in 0:01:22.646853 hours
-18-Jan-23 13:22:33 - INFO - Update finished in 0:01:51.936636 hours
-18-Jan-23 13:27:44 - INFO - Update finished in 0:02:03.197998 hours
-18-Jan-23 13:32:29 - INFO - Update finished in 0:01:48.020021 hours
-18-Jan-23 13:37:44 - INFO - Update finished in 0:02:03.282509 hours
+19-Jan-23 09:47:27 - INFO - Server is starting
+19-Jan-23 09:47:31 - INFO - New file successfully downloaded from KNMI
+19-Jan-23 09:47:31 - INFO - New file successfully downloaded from KNMI
+19-Jan-23 09:47:32 - INFO - New file successfully downloaded from KNMI
+19-Jan-23 09:47:32 - INFO - New file successfully downloaded from KNMI
+19-Jan-23 09:51:15 - INFO - Update finished in 0:03:45.028059 hours
+19-Jan-23 09:54:42 - INFO - Update finished in 0:02:14.970589 hours
+19-Jan-23 09:59:43 - INFO - Update finished in 0:02:15.946839 hours
+19-Jan-23 10:05:08 - INFO - Update finished in 0:02:40.428498 hours
+19-Jan-23 10:09:44 - INFO - Update finished in 0:02:16.761783 hours
+19-Jan-23 10:14:42 - INFO - Update finished in 0:02:14.826433 hours
+19-Jan-23 10:19:44 - INFO - Update finished in 0:02:16.549089 hours
+19-Jan-23 10:24:42 - INFO - Update finished in 0:02:14.704288 hours
+19-Jan-23 10:29:10 - INFO - Update finished in 0:01:42.626391 hours
+19-Jan-23 10:34:42 - INFO - Update finished in 0:02:15.151664 hours
+19-Jan-23 10:39:45 - INFO - Update finished in 0:02:17.757648 hours
+19-Jan-23 10:44:42 - INFO - Update finished in 0:02:14.413770 hours
+19-Jan-23 10:49:34 - INFO - Update finished in 0:02:07.288274 hours
+19-Jan-23 10:57:28 - INFO - New file successfully downloaded from KNMI
+19-Jan-23 10:59:49 - INFO - Update finished in 0:02:21.841321 hours
+19-Jan-23 11:03:41 - INFO - Update finished in 0:01:13.593479 hours
+19-Jan-23 11:09:12 - INFO - Update finished in 0:01:44.528281 hours
+19-Jan-23 11:13:44 - INFO - Update finished in 0:01:16.749287 hours
+19-Jan-23 11:19:14 - INFO - Update finished in 0:01:46.497838 hours
+19-Jan-23 11:24:11 - INFO - Update finished in 0:01:43.638008 hours
+19-Jan-23 11:28:44 - INFO - Update finished in 0:01:16.924500 hours
+19-Jan-23 11:33:51 - INFO - Update finished in 0:01:23.470067 hours
+19-Jan-23 11:38:41 - INFO - Update finished in 0:01:13.706908 hours
+19-Jan-23 11:43:38 - INFO - Update finished in 0:01:11.171719 hours
+19-Jan-23 11:48:40 - INFO - Update finished in 0:01:12.453031 hours
+19-Jan-23 11:53:36 - INFO - Update finished in 0:01:08.614173 hours
+19-Jan-23 12:00:08 - INFO - Update finished in 0:02:40.991716 hours
+19-Jan-23 12:03:41 - INFO - Update finished in 0:01:14.078880 hours
+19-Jan-23 12:09:24 - INFO - Update finished in 0:01:57.057741 hours
+19-Jan-23 12:13:53 - INFO - Update finished in 0:01:25.678426 hours
+19-Jan-23 12:18:36 - INFO - Update finished in 0:01:08.674801 hours
+19-Jan-23 12:23:37 - INFO - Update finished in 0:01:09.557533 hours
+19-Jan-23 12:28:35 - INFO - Update finished in 0:01:08.254761 hours
+19-Jan-23 12:33:35 - INFO - Update finished in 0:01:08.267874 hours
+19-Jan-23 12:38:36 - INFO - Update finished in 0:01:08.576337 hours
+19-Jan-23 12:43:35 - INFO - Update finished in 0:01:08.347602 hours
+19-Jan-23 12:48:37 - INFO - Update finished in 0:01:09.412990 hours
+19-Jan-23 12:53:49 - INFO - Update finished in 0:01:22.277002 hours
+19-Jan-23 12:58:51 - INFO - Update finished in 0:01:23.588592 hours
+19-Jan-23 13:03:51 - INFO - Update finished in 0:01:24.280272 hours
+19-Jan-23 13:08:50 - INFO - Update finished in 0:01:23.252348 hours
+19-Jan-23 13:13:49 - INFO - Update finished in 0:01:21.977009 hours
+19-Jan-23 13:18:40 - INFO - Update finished in 0:01:13.257588 hours
+19-Jan-23 13:23:42 - INFO - Update finished in 0:01:14.649294 hours
+19-Jan-23 13:28:40 - INFO - Update finished in 0:01:13.273503 hours
+19-Jan-23 13:33:39 - INFO - Update finished in 0:01:12.350690 hours
+19-Jan-23 13:38:49 - INFO - Update finished in 0:01:22.281443 hours
+19-Jan-23 13:43:38 - INFO - Update finished in 0:01:11.158053 hours
+19-Jan-23 13:48:44 - INFO - Update finished in 0:01:16.421227 hours
+19-Jan-23 13:53:44 - INFO - Update finished in 0:01:16.404160 hours
+19-Jan-23 13:58:36 - INFO - Update finished in 0:01:08.543819 hours
+19-Jan-23 14:03:35 - INFO - Update finished in 0:01:07.926014 hours
+19-Jan-23 14:08:35 - INFO - Update finished in 0:01:08.136208 hours
+19-Jan-23 14:13:36 - INFO - Update finished in 0:01:08.735842 hours
+19-Jan-23 14:18:35 - INFO - Update finished in 0:01:08.061950 hours
+19-Jan-23 14:23:35 - INFO - Update finished in 0:01:08.368427 hours
+19-Jan-23 14:28:35 - INFO - Update finished in 0:01:08.081689 hours
+19-Jan-23 14:33:35 - INFO - Update finished in 0:01:07.724685 hours
+19-Jan-23 14:38:35 - INFO - Update finished in 0:01:07.961971 hours
+19-Jan-23 14:43:35 - INFO - Update finished in 0:01:08.239687 hours
+19-Jan-23 14:48:35 - INFO - Update finished in 0:01:08.213589 hours
+19-Jan-23 14:53:35 - INFO - Update finished in 0:01:08.266230 hours
+19-Jan-23 14:58:36 - INFO - Update finished in 0:01:09.156002 hours
+19-Jan-23 15:03:36 - INFO - Update finished in 0:01:09.285126 hours
+19-Jan-23 15:08:36 - INFO - Update finished in 0:01:08.467268 hours
+19-Jan-23 15:13:35 - INFO - Update finished in 0:01:07.765478 hours
+19-Jan-23 15:18:36 - INFO - Update finished in 0:01:09.136480 hours
+19-Jan-23 15:23:36 - INFO - Update finished in 0:01:08.574464 hours
+19-Jan-23 15:28:46 - INFO - Update finished in 0:01:18.873630 hours
+19-Jan-23 15:33:44 - INFO - Update finished in 0:01:16.892782 hours
+19-Jan-23 15:38:48 - INFO - Update finished in 0:01:21.112919 hours
+19-Jan-23 15:43:43 - INFO - Update finished in 0:01:15.454155 hours
+19-Jan-23 15:48:46 - INFO - Update finished in 0:01:18.887277 hours
