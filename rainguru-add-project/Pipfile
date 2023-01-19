@@ -18,6 +18,7 @@ psutil = "*"
 python-decouple = "*"
 pyproj = "*"
 django-environ = "*"
+django-compressor = "*"
 
 [dev-packages]
 
